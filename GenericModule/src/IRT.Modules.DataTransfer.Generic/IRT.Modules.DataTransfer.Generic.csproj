@@ -1,0 +1,327 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <CodeAnalysisRuleSet>..\..\IRT.Modules.DataTransfer.Generic.ruleset</CodeAnalysisRuleSet>
+    <Configurations>Debug;Release;DebugGenerateAPI</Configurations>
+    <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
+  </PropertyGroup>
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Message Text="Running on '$(OS)' operating system." Importance="high">
+    </Message>
+    <Warning Condition=" '$(OS)' != 'Windows_NT' " Text="Setty.Runner.exe. will not be executed.">
+    </Warning>
+    <Exec Condition=" '$(OS)' == 'Windows_NT' " Command="&quot;$(MSBuildProjectDirectory)\..\..\tools\setty\Setty.Runner.exe&quot; -q" />
+  </Target>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugGenerateAPI|AnyCPU'">
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningsAsErrors />
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="api\.config\dotnet-tools.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Html.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.2.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis" Version="4.8.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Scripting" Version="4.8.0" />
+    <PackageReference Include="MimeTypeMapOfficial" Version="1.0.17" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+	<PackageReference Include="Frameworks.Workflows" Version="8.4.1" />
+	<PackageReference Include="Frameworks.ExtendedProperties" Version="8.4.1" />
+    <PackageReference Include="Api.Irt.Shared" Version="2025.2.2" />
+    <PackageReference Include="IRT.Domain" Version="2025.2.2" />
+    <PackageReference Include="IRT.Shared" Version="2025.2.2" />
+    <PackageReference Include="Kernel.EntityFramework" Version="8.4.1" />
+    <PackageReference Include="Kernel.Packaging.Boilerplates.Module" Version="8.4.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.13" />
+	  <PackageReference Include="IRT.Modules.UserManagement.Contracts" Version="8.4.1" />
+    <PackageReference Include="IRT.Modules.DrugManagement.Contracts" Version="8.3.1" />
+    <PackageReference Include="IRT.Modules.DrugManagement" Version="8.3.1" />
+	<Reference Include="IRT.Modules.DrugManagement">
+		<HintPath>bin\$(ConfigurationName)\net8.0\Modules\IRT.Modules.DrugManagement.dll</HintPath>
+	</Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Areas\StudyAdministration\Controllers\Resources\ManageDynamicSettingsController.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ManageDynamicSettingsController.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Areas\StudyAdministration\Controllers\Resources\ManageGenericNotificationDefinitionsController.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ManageGenericNotificationDefinitionsController.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Areas\StudyAdministration\Controllers\Resources\GenericNotificationsController.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>GenericNotificationsController.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Areas\StudyAdministration\Controllers\Resources\ClientNotificationController.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ClientNotificationController.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Areas\StudyAdministration\Models\Resources\DynamicSettingCreateViewModel.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DynamicSettingCreateViewModel.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Areas\StudyAdministration\Models\Resources\GenericNotificationDefinitionViewModel.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>GenericNotificationDefinitionViewModel.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Areas\StudyAdministration\Models\Resources\GenericNotificationViewModel.Designer.cs">
+      <DependentUpon>GenericNotificationDefinitionViewModel.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Areas\StudyAdministration\Models\Resources\ClientNotificationViewModel.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ClientNotificationViewModel.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Areas\StudyAdministration\Models\Resources\GenericNotificationViewModel.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>GenericNotificationViewModel.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Areas\StudyAdministration\Views\ClientNotifications\Resources\Create.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Create.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Areas\StudyAdministration\Views\ClientNotifications\Resources\Details.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Details.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Areas\StudyAdministration\Views\ClientNotifications\Resources\Index.Designer.cs">
+      <DependentUpon>Index.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Areas\StudyAdministration\Views\ClientNotifications\Resources\MarkNotifications.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>MarkNotifications.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Areas\StudyAdministration\Views\ClientNotifications\Resources\Update.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Update.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Areas\StudyAdministration\Views\ManageDynamicSettings\Resources\Create.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Create.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Areas\StudyAdministration\Views\ManageDynamicSettings\Resources\Index.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Index.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Areas\StudyAdministration\Views\Shared\Resources\ElectronicSignature.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ElectronicSignature.resx</DependentUpon>
+      <Generator></Generator>
+    </Compile>
+    <Compile Update="Domain\Aggregates\ClientNotifications\Validators\Resources\ValidationResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ValidationResources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Domain\Aggregates\DynamicSetting\Validations\Resources\ValidationResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ValidationResources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Domain\DynamicFields\Resources\GenericIntegrationFields.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>GenericIntegrationFields.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Domain\Resources\DynamicExtendedPropertiesResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DynamicExtendedPropertiesResources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Domain\Resources\FunctionOperationResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>FunctionOperationResources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Domain\Resources\NotificationGenerationGrid.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>NotificationGenerationGrid.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Domain\SqlViews\Resources\GenericNotificationDefinition.Designer.cs">
+      <DependentUpon>GenericNotificationDefinition.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Domain\ValueObjects\Resource\DynamicResourceIWR.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DynamicResourceIWR.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Domain\ValueObjects\Resource\DynamicResourceColumns.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DynamicResourceColumns.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Domain\ValueObjects\StudySettings\GenericDataTransferStudySettings.cs">
+      <Generator></Generator>
+    </Compile>
+    <Compile Update="Domain\ValueObjects\StudySettings\Resources\DynamicStudySettings.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DynamicStudySettings.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Domain\ValueObjects\StudySettings\Resources\GenericStudySettings.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>GenericStudySettings.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Domain\ValueObjects\StudySettings\Resources\NotificationGenerationSettings.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>NotificationGenerationSettings.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Areas\StudyAdministration\Controllers\Resources\ManageDynamicSettingsController.resx">
+      <Generator>ResXFileCodeGeneratorEx</Generator>
+      <LastGenOutput>ManageDynamicSettingsController.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Areas\StudyAdministration\Controllers\Resources\ManageGenericNotificationDefinitionsController.resx">
+      <Generator>ResXFileCodeGeneratorEx</Generator>
+      <LastGenOutput>ManageGenericNotificationDefinitionsController.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Areas\StudyAdministration\Controllers\Resources\GenericNotificationsController.resx">
+      <Generator>ResXFileCodeGeneratorEx</Generator>
+      <LastGenOutput>GenericNotificationsController.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Areas\StudyAdministration\Controllers\Resources\ClientNotificationController.resx">
+      <Generator>ResXFileCodeGeneratorEx</Generator>
+      <LastGenOutput>ClientNotificationController.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Areas\StudyAdministration\Models\Resources\DynamicSettingCreateViewModel.resx">
+      <Generator>ResXFileCodeGeneratorEx</Generator>
+      <LastGenOutput>DynamicSettingCreateViewModel.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Areas\StudyAdministration\Models\Resources\GenericNotificationDefinitionViewModel.resx">
+      <LastGenOutput>GenericNotificationDefinitionViewModel.Designer.cs</LastGenOutput>
+      <Generator>ResXFileCodeGeneratorEx</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Areas\StudyAdministration\Models\Resources\ClientNotificationViewModel.resx">
+      <Generator>ResXFileCodeGeneratorEx</Generator>
+      <LastGenOutput>ClientNotificationViewModel.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Areas\StudyAdministration\Models\Resources\GenericNotificationViewModel.resx">
+      <Generator>ResXFileCodeGeneratorEx</Generator>
+      <LastGenOutput>GenericNotificationViewModel.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Areas\StudyAdministration\Views\ClientNotifications\Resources\Create.resx">
+      <Generator>ResXFileCodeGeneratorEx</Generator>
+      <LastGenOutput>Create.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Areas\StudyAdministration\Views\ClientNotifications\Resources\Details.resx">
+      <Generator>ResXFileCodeGeneratorEx</Generator>
+      <LastGenOutput>Details.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Areas\StudyAdministration\Views\ClientNotifications\Resources\Index.resx">
+      <LastGenOutput>Index.Designer.cs</LastGenOutput>
+      <Generator>ResXFileCodeGeneratorEx</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Areas\StudyAdministration\Views\ClientNotifications\Resources\MarkNotifications.resx">
+      <Generator>ResXFileCodeGeneratorEx</Generator>
+      <LastGenOutput>MarkNotifications.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Areas\StudyAdministration\Views\ClientNotifications\Resources\Update.resx">
+      <Generator>ResXFileCodeGeneratorEx</Generator>
+      <LastGenOutput>Update.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Areas\StudyAdministration\Views\ManageDynamicSettings\Resources\Create.resx">
+      <Generator>ResXFileCodeGeneratorEx</Generator>
+      <LastGenOutput>Create.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Areas\StudyAdministration\Views\ManageDynamicSettings\Resources\Index.resx">
+      <Generator>ResXFileCodeGeneratorEx</Generator>
+      <LastGenOutput>Index.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Areas\StudyAdministration\Views\Shared\Resources\ElectronicSignature.resx">
+      <Generator>ResXFileCodeGeneratorEx</Generator>
+      <LastGenOutput>ElectronicSignature.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Domain\Aggregates\ClientNotifications\Validators\Resources\ValidationResources.resx">
+      <Generator>ResXFileCodeGeneratorEx</Generator>
+      <LastGenOutput>ValidationResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Domain\Aggregates\DynamicSetting\Validations\Resources\ValidationResources.resx">
+      <Generator>ResXFileCodeGeneratorEx</Generator>
+      <LastGenOutput>ValidationResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Domain\DynamicFields\Resources\GenericIntegrationFields.resx">
+      <Generator>ResXFileCodeGeneratorEx</Generator>
+      <LastGenOutput>GenericIntegrationFields.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Domain\Resources\DynamicExtendedPropertiesResources.resx">
+      <Generator>ResXFileCodeGeneratorEx</Generator>
+      <LastGenOutput>DynamicExtendedPropertiesResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Domain\Resources\FunctionOperationResources.resx">
+      <Generator>ResXFileCodeGeneratorEx</Generator>
+      <LastGenOutput>FunctionOperationResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Domain\Resources\NotificationGenerationGrid.resx">
+      <Generator>ResXFileCodeGeneratorEx</Generator>
+      <LastGenOutput>NotificationGenerationGrid.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Domain\SqlViews\Resources\GenericNotificationDefinition.resx">
+      <LastGenOutput>GenericNotificationDefinition.Designer.cs</LastGenOutput>
+      <Generator>ResXFileCodeGeneratorEx</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Domain\ValueObjects\Resource\DynamicResourceIWR.resx">
+      <Generator>ResXFileCodeGeneratorEx</Generator>
+      <LastGenOutput>DynamicResourceIWR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Domain\ValueObjects\Resource\DynamicResourceColumns.resx">
+      <Generator>ResXFileCodeGeneratorEx</Generator>
+      <LastGenOutput>DynamicResourceColumns.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Domain\ValueObjects\StudySettings\Resources\DynamicStudySettings.resx">
+      <Generator>ResXFileCodeGeneratorEx</Generator>
+      <LastGenOutput>DynamicStudySettings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Domain\ValueObjects\StudySettings\Resources\GenericStudySettings.resx">
+      <Generator>ResXFileCodeGeneratorEx</Generator>
+      <LastGenOutput>GenericStudySettings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Domain\ValueObjects\StudySettings\Resources\NotificationGenerationSettings.resx">
+      <Generator>ResXFileCodeGeneratorEx</Generator>
+      <LastGenOutput>NotificationGenerationSettings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGeneratorEx</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Gotenberg.Sharp.API.Client">
+      <HintPath>..\..\..\installed_packages\gotenberg.sharp.api.client\2.1.1\lib\net6.0\Gotenberg.Sharp.API.Client.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+</Project>

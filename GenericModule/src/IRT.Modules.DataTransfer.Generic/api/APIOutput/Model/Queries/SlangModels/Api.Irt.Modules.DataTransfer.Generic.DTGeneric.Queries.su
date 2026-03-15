@@ -1,0 +1,46 @@
+namespace Api.Irt.Modules.DataTransfer.Generic.Queries {
+
+	// entities
+
+	entity ReceivedNotification {
+
+		feature Realm: DTGeneric, Queries
+
+		feature UseNewRoutes: True
+
+		feature DataService: IRT_Modules_DataTransfer_Generic_Domain_Notifications_DataServices_ReceivedNotificationDataService
+
+		command CountryName {
+
+			feature Route: "irt/v1/data-transfer-generic/queries/received-notification/country-name", "IRT", "Data-transfer-generic"
+
+			feature Query: CountryName
+
+			feature ResultType: string
+
+			string countryCode
+		}
+
+		command DepotCountryName {
+
+			feature Route: "irt/v1/data-transfer-generic/queries/received-notification/depot-country-name", "IRT", "Data-transfer-generic"
+
+			feature Query: DepotCountryName
+
+			feature ResultType: string
+
+			string depotId
+		}
+
+		command DepotName {
+
+			feature Route: "irt/v1/data-transfer-generic/queries/received-notification/depot-name", "IRT", "Data-transfer-generic"
+
+			feature Query: DepotName
+
+			feature ResultType: string
+
+			string depotId
+		}
+	}
+}

@@ -1,0 +1,28 @@
+[
+  {
+    "DataService": "IRT.Modules.DataTransfer.Generic.Domain.Notifications.DataServices.ReceivedNotificationDataService",
+    "QueryTypeName": [
+      "DepotName",
+      "DepotCountryName",
+      "CountryName"
+    ],
+    "Aggregate": "DTGeneric",
+    "IsExcluded": false,
+    "Name": "ReceivedNotification",
+    "Namespace": "Queries.DTGeneric",
+    "OpTypeName": [
+      "DepotName",
+      "DepotCountryName",
+      "CountryName"
+    ],
+    "Realm": "DTGeneric.Queries",
+    "Part": null,
+    "Layer": 3,
+    "SlangEntityName": "ReceivedNotification",
+    "Subfolder": null,
+    "TypeName": "ReceivedNotificationDataService",
+    "TypeFullName": "IRT.Modules.DataTransfer.Generic.Domain.Notifications.DataServices.ReceivedNotificationDataService",
+    "SkipProperties": [],
+    "GenericTypes": []
+  }
+]

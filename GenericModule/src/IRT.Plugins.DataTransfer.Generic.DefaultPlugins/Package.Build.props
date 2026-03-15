@@ -1,0 +1,65 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <!--NOTE: please, note that properties won't be imported automatically if you rename this file.-->
+  <PropertyGroup>
+    <Title>DT Generic Default Plugin</Title>
+    <!-- A human-friendly title of the package, typically used in UI displays as on nuget.org and the Package Manager in Visual Studio. If not specified, the package ID is used. -->
+    <VersionMajor>8</VersionMajor>
+    <VersionMinor>1</VersionMinor>
+    <VersionPatch>1</VersionPatch>
+    <VersionSuffix></VersionSuffix>
+    <!-- The version of the package, following the major.minor.patch pattern. Version numbers may include a pre-release suffix as described in Package versioning. -->
+    <Description>A set of default providers</Description>
+    <!-- A long description of the package for UI display. -->
+    <ReleaseNotes>
+		8.1.1
+		- Service Pack
+		- IRT 2025.2.2
+		8.1.0
+		- IRT 2025.2.1
+		8.0.0
+		- Initial build with default providers
+		- Should Generate on Visit
+		- Should Generate on Visit and Self Support
+	</ReleaseNotes>
+    <!-- A description of the changes made in this release of the package, often used in UI like the Updates tab of the Visual Studio Package Manager in place of the package description. -->
+      <Tags>IRT_2025.2.0</Tags>
+    <!-- A space-delimited list of tags and keywords that describe the package and aid discoverability of packages through search and filtering. -->
+    <!-- ========================================================================================================================================================================================== -->
+    <Files>
+      <file src="package\build\$id$.targets" target="build" />
+      <file src="package\build\Logo.png" target="build" />
+      <file src="bin\$configuration$\net8.0\$id$.dll" target="build\Plugins\$id$.dll" />
+      <file src="bin\$configuration$\net8.0\$id$.pdb" target="build\Plugins\$id$.pdb" />
+    </Files>
+    <!-- The <package> node may contain a <files> node as a sibling to <metadata> to specify which assembly and content files to include in the package. -->
+    <!-- ========================================================================================================================================================================================== -->
+    <Dependencies>
+        <dependency id="Kernel.Packaging.Boilerplates.Plugin" version="8.0.0" />
+    </Dependencies>
+    <!-- A collection of zero or more <dependency> elements specifying the dependencies for the package. Each dependency has attributes of id, version, include, and exclude. -->
+    <!-- ========================================================================================================================================================================================== -->
+    <Authors>AAA</Authors>
+    <!-- A comma-separated list of packages authors, matching the profile names on nuget.org. These are displayed in the NuGet Gallery on nuget.org and are used to cross-reference packages by the same authors. -->
+    <Owners>AAA</Owners>
+    <!-- A comma-separated list of the package creators using profile names on nuget.org. This is often the same list as in authors, and is ignored when uploading the package to nuget.org. -->
+    <Copyright>© AAA. All rights reserved.</Copyright>
+    <!-- Copyright details for the package. -->
+    <ProjectUrl>https://www.AAA.com</ProjectUrl>
+    <!-- A URL for the package's home page, often shown in UI displays as well as nuget.org. -->
+    <LicenseUrl>
+    </LicenseUrl>
+    <!-- A URL for the package's license, often shown in UI displays as well as nuget.org. -->
+    <Icon>build\Logo.png</Icon>
+    <!-- A a path to an image file within the package, shown in UIs as the package icon. -->
+    <RequireLicenseAcceptance>false</RequireLicenseAcceptance>
+    <!-- A Boolean value specifying whether the client must prompt the consumer to accept the package license before installing the package. -->
+    <DevelopmentDependency>false</DevelopmentDependency>
+    <!-- A Boolean value specifying whether the package is be marked as a development-only-dependency, which prevents the package from being included as a dependency in other packages. -->
+    <Summary>
+    </Summary>
+    <!-- A short description of the package for UI display. If omitted, a truncated version of description is used. -->
+    <PackageLanguage>
+    </PackageLanguage>
+    <!-- The locale ID for the package. -->
+  </PropertyGroup>
+</Project>

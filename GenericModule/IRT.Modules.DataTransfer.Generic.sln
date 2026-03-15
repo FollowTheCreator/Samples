@@ -1,0 +1,71 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34511.84
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{96424F27-10C1-44ED-94DA-68BB8AF00886}"
+	ProjectSection(SolutionItems) = preProject
+		doc\Changelog.txt = doc\Changelog.txt
+		doc\Readme.txt = doc\Readme.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{E06104F7-29C3-4791-93EF-CE5E8356B64B}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IRT.Modules.DataTransfer.Generic", "src\IRT.Modules.DataTransfer.Generic\IRT.Modules.DataTransfer.Generic.csproj", "{6DD1468C-96F1-41FA-A150-5DB15207D489}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C8873DB8-4FDF-4D06-B9FF-5170C61FA331}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		IRT.Modules.DataTransfer.Generic.ruleset = IRT.Modules.DataTransfer.Generic.ruleset
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IRT.Plugins.DataTransfer.Generic.DefaultPlugins", "src\IRT.Plugins.DataTransfer.Generic.DefaultPlugins\IRT.Plugins.DataTransfer.Generic.DefaultPlugins.csproj", "{BB3BF855-C542-4208-814F-6A605E3923F1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IRT.Modules.DataTransfer.Generic.Edc", "src\IRT.Modules.DataTransfer.Generic.Edc\IRT.Modules.DataTransfer.Generic.Edc.csproj", "{7848BDC7-7165-4702-AC75-990DF1846BF9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IRT.Plugins.DataTransfer.Generic.EdcPlugins", "src\IRT.Plugins.DataTransfer.Generic.EdcPlugins\IRT.Plugins.DataTransfer.Generic.EdcPlugins.csproj", "{7F5DB715-33D2-4745-A2C9-830AA246AA31}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		DebugGenerateAPI|Any CPU = DebugGenerateAPI|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6DD1468C-96F1-41FA-A150-5DB15207D489}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DD1468C-96F1-41FA-A150-5DB15207D489}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DD1468C-96F1-41FA-A150-5DB15207D489}.DebugGenerateAPI|Any CPU.ActiveCfg = DebugGenerateAPI|Any CPU
+		{6DD1468C-96F1-41FA-A150-5DB15207D489}.DebugGenerateAPI|Any CPU.Build.0 = DebugGenerateAPI|Any CPU
+		{6DD1468C-96F1-41FA-A150-5DB15207D489}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DD1468C-96F1-41FA-A150-5DB15207D489}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB3BF855-C542-4208-814F-6A605E3923F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB3BF855-C542-4208-814F-6A605E3923F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB3BF855-C542-4208-814F-6A605E3923F1}.DebugGenerateAPI|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB3BF855-C542-4208-814F-6A605E3923F1}.DebugGenerateAPI|Any CPU.Build.0 = Debug|Any CPU
+		{BB3BF855-C542-4208-814F-6A605E3923F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB3BF855-C542-4208-814F-6A605E3923F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7848BDC7-7165-4702-AC75-990DF1846BF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7848BDC7-7165-4702-AC75-990DF1846BF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7848BDC7-7165-4702-AC75-990DF1846BF9}.DebugGenerateAPI|Any CPU.ActiveCfg = DebugGenerateAPI|Any CPU
+		{7848BDC7-7165-4702-AC75-990DF1846BF9}.DebugGenerateAPI|Any CPU.Build.0 = DebugGenerateAPI|Any CPU
+		{7848BDC7-7165-4702-AC75-990DF1846BF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7848BDC7-7165-4702-AC75-990DF1846BF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F5DB715-33D2-4745-A2C9-830AA246AA31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F5DB715-33D2-4745-A2C9-830AA246AA31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F5DB715-33D2-4745-A2C9-830AA246AA31}.DebugGenerateAPI|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F5DB715-33D2-4745-A2C9-830AA246AA31}.DebugGenerateAPI|Any CPU.Build.0 = Debug|Any CPU
+		{7F5DB715-33D2-4745-A2C9-830AA246AA31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F5DB715-33D2-4745-A2C9-830AA246AA31}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2CA94C02-32EC-474A-9805-2874D150673A}
+	EndGlobalSection
+EndGlobal

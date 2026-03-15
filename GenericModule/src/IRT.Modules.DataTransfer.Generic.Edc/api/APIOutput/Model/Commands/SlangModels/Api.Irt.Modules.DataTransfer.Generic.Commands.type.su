@@ -1,0 +1,15 @@
+namespace Api.Irt.Modules.DataTransfer.Generic.Commands {
+
+	// external enums
+
+	type MailPriority {
+	}
+
+	// property types
+
+	type Frameworks_Notifications_NotificationDefinition {
+	}
+
+	type IRT_Modules_DataTransfer_Generic_Edc_Domain_ValueObjects_Errors_ErrorListData {
+	}
+}

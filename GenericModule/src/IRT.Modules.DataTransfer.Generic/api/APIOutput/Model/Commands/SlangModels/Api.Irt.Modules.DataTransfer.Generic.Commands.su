@@ -1,0 +1,4 @@
+project Api.Irt.Modules.DataTransfer.Generic.Commands
+
+include "Api.Irt.Modules.DataTransfer.Generic.Commands.type.su"
+include "Api.Irt.Modules.DataTransfer.Generic.DTGeneric.Commands.su"

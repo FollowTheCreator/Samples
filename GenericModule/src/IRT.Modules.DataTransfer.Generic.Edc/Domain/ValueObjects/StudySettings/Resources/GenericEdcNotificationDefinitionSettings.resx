@@ -1,0 +1,303 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AllowItemGroupRepeatKeyReuse" xml:space="preserve">
+    <value>Allow ItemGroup Repeat Keys reuse?</value>
+  </data>
+  <data name="AllowItemGroupRepeatKeyReuseDescription" xml:space="preserve">
+    <value>Yes – will reuse the first available ItemGroup Repeat Key even if it was inserted and removed before, No – will continue from the last existing ItemGroup Repeat Key at the moment</value>
+  </data>
+  <data name="AllowStudyEventRepeatKeyReuse" xml:space="preserve">
+    <value>Allow StudyEvent Repeat Keys reuse?</value>
+  </data>
+  <data name="AllowStudyEventRepeatKeyReuseDescription" xml:space="preserve">
+    <value>Yes – will reuse the first available StudyEvent Repeat Key even if it was inserted and removed before, No – will continue from the last existing StudyEvent Repeat Key at the moment</value>
+  </data>
+  <data name="DataTransferFormRepeatKeyCategory" xml:space="preserve">
+    <value>Data Transfer Generic Form Repeat Key</value>
+  </data>
+  <data name="DataTransferItemGroupRepeatKeyCategory" xml:space="preserve">
+    <value>Data Transfer Generic ItemGroup Repeat Key</value>
+  </data>
+  <data name="DataTransferStudyEventRepeatKeyCategory" xml:space="preserve">
+    <value>Data Transfer Generic StudyEvent Repeat Key</value>
+  </data>
+  <data name="ExistingItemGroupRepeatKeys" xml:space="preserve">
+    <value>Existing ItemGroup Repeat Keys</value>
+  </data>
+  <data name="ExistingItemGroupRepeatKeysDescription" xml:space="preserve">
+    <value>The list of the ItemGroup Repeat Keys that already exist in the client’s system, and should be updated, rather than inserted (comma separated list of existing RepeatKeys)</value>
+  </data>
+  <data name="FirstItemGroupRepeatKeyFormat" xml:space="preserve">
+    <value>First Generic ItemGroup Repeat Key Format</value>
+  </data>
+  <data name="FirstItemGroupRepeatKeyFormatDescription" xml:space="preserve">
+    <value>Will be applied to the first ItemGroup Repeat Key in the folder (they are different in some studies). Can be empty, which means there is no different First ItemGroup Repeat Key format (ex. "RK{0}"). Note: will be overwritten by the same Visit setting</value>
+  </data>
+  <data name="FirstStudyEventRepeatKeyFormat" xml:space="preserve">
+    <value>First Generic StudyEvent Repeat Key Format</value>
+  </data>
+  <data name="FirstStudyEventRepeatKeyFormatDescription" xml:space="preserve">
+    <value>Will be applied to the first StudyEvent Repeat Key in the folder (they are different in some studies). Can be empty, which means there is no different First StudyEvent Repeat Key format. {0} - RepeatKey, {1} - Scheduled RepeatKey, {2} - Unscheduled RepeatKey, {3} – ReplacementRepeatKey, {4} – ScreenFailRepeatKey, {5} – InformedConsentRepeatKey (ex. "P{0}[1]/DAYN6N1P{0}[1]"). Note: will be overwritten by the same Visit setting</value>
+  </data>
+  <data name="FormRepeatKeyFormat" xml:space="preserve">
+    <value>Generic Form Repeat Key Format</value>
+  </data>
+  <data name="FormRepeatKeyFormatDescription" xml:space="preserve">
+    <value>Free text constant string. Note: will be overwritten by the same Visit setting</value>
+  </data>
+  <data name="FormRepeatKeysEnabled" xml:space="preserve">
+    <value>Generic Form Repeat Keys Enabled</value>
+  </data>
+  <data name="FormRepeatKeysEnabledDescription" xml:space="preserve">
+    <value>Indicates if the Form RepeatKey attributes should be generated and included in the output</value>
+  </data>
+  <data name="ItemGroupRepeatKeyBasis" xml:space="preserve">
+    <value>ItemGroup Repeat Key Basis</value>
+  </data>
+  <data name="ItemGroupRepeatKeyBasisDescription" xml:space="preserve">
+    <value>Study - will be started from the initial value once in the Study, Site - will be started from the initial value for every Site, Subject - will be started from the initial value for every Subject, SubjectVisit - will be started from the initial value for every SubjectVisit</value>
+  </data>
+  <data name="ItemGroupRepeatKeyCounterBasis" xml:space="preserve">
+    <value>ItemGroup Repeat Key Counter Basis</value>
+  </data>
+  <data name="ItemGroupRepeatKeyCounterBasisDescription" xml:space="preserve">
+    <value>Drug Unit Id – assigned drugs will be counted, SubjectVisit – every SubjectVisit trigger performed will be counted (helpful for Informed Consent Repeat Key, Unblinding Repeat Key, Non-serialized Drug Repeat Key, constant Repeat Key), Screen Fail Reason – every SF reason will be counted (helpful for SF Reason Repeat Key), Dose – every captured Dose will be counted</value>
+  </data>
+  <data name="ItemGroupRepeatKeyCounterInitialValue" xml:space="preserve">
+    <value>ItemGroup Repeat Key Counter Initial Value</value>
+  </data>
+  <data name="ItemGroupRepeatKeyCounterInitialValueDescription" xml:space="preserve">
+    <value>The number that is used as the ItemGroup Repeat Key Counter start value</value>
+  </data>
+  <data name="ItemGroupRepeatKeyCountSkippedVisits" xml:space="preserve">
+    <value>Count Skipped Visits for ItemGroup Repeat Key</value>
+  </data>
+  <data name="ItemGroupRepeatKeyCountSkippedVisitsDescription" xml:space="preserve">
+    <value>Indicates if SubjectVisits with VisitDate = null should be processed by ItemGroup Repeat Key counter</value>
+  </data>
+  <data name="ItemGroupRepeatKeyFormat" xml:space="preserve">
+    <value>Generic ItemGroup Repeat Key Format</value>
+  </data>
+  <data name="ItemGroupRepeatKeyFormatDescription" xml:space="preserve">
+    <value>Generic ItemGroup Repeat Key Format (ex. "RK{0}"). Note: will be overwritten by the same Visit setting</value>
+  </data>
+  <data name="ItemGroupRepeatKeyInsertTransactionType" xml:space="preserve">
+    <value>ItemGroup Repeat Key Insert TransactionType</value>
+  </data>
+  <data name="ItemGroupRepeatKeyInsertTransactionTypeDescription" xml:space="preserve">
+    <value>Used to add new Repeat Key information in the client’s system</value>
+  </data>
+  <data name="ItemGroupRepeatKeyOverwriteManuallyReplacedDrug" xml:space="preserve">
+    <value>Overwrite the manually replaced Drug Unit for the ItemGroup Repeat Key?</value>
+  </data>
+  <data name="ItemGroupRepeatKeyOverwriteManuallyReplacedDrugDescription" xml:space="preserve">
+    <value>Yes - will take the ItemGroup Repeat Key of the Replaced Drug Unit (will overwrite the drug info in the client’s system, TransactionType will be forced to be set to Update). No – will increment the ItemGroup Repeat Key value of the replaced drug to the first available ItemGroup Repeat Key (inserts a separate drug info row in the client’s system)</value>
+  </data>
+  <data name="ItemGroupRepeatKeyOverwriteReplacedDrug" xml:space="preserve">
+    <value>Overwrite the replaced Drug Unit for the ItemGroup Repeat Key?</value>
+  </data>
+  <data name="ItemGroupRepeatKeyOverwriteReplacedDrugDescription" xml:space="preserve">
+    <value>Yes – will use the ItemGroup Repeat Key value of the replaced drug (will overwrite the drug info in the client’s system), TransactionType will be forced to be set to Update. No – will increment the ItemGroup Repeat Key value of the replaced drug to the first available ItemGroup Repeat Key (inserts a separate drug info row in the client’s system). Note: applicable only if Replacement Visits Strategy is Replaced Drug Unit Id</value>
+  </data>
+  <data name="ItemGroupRepeatKeyRemoveTransactionType" xml:space="preserve">
+    <value>ItemGroup Repeat Key Remove TransactionType</value>
+  </data>
+  <data name="ItemGroupRepeatKeyRemoveTransactionTypeDescription" xml:space="preserve">
+    <value>Used for backouts/manual unassignment/manual replacement removals to remove the Repeat Key information from the client's system</value>
+  </data>
+  <data name="ItemGroupRepeatKeyReplacementVisitsStrategy" xml:space="preserve">
+    <value>ItemGroup Repeat Key Replacement Visits Strategy</value>
+  </data>
+  <data name="ItemGroupRepeatKeyReplacementVisitsStrategyDescription" xml:space="preserve">
+    <value>Independent – increments the ItemGroup Repeat Key value for the Replacement visits independently (V1 – RK1, V2 – RK1, RK2, RV1 – RK1), Parent Subject Visit Id – increments the ItemGroup Repeat Key value of the first DrugUnit from the Parent Subject Visit (V1 – RK1, V2 – RK1, RK2, RV1 – RK3), Replaced Drug Unit Id (Has no affect on the self-support actions) – takes (increments/replaces) the ItemGroup Repeat Key value of the replaced DrugUnitId (V1 – RK1, V2 – RK1, RK2, RV1 – RK{ReplacedDrugUnit_RK})</value>
+  </data>
+  <data name="ItemGroupRepeatKeyResendManuallyReplacedDrugOnDelete" xml:space="preserve">
+    <value>Resend the replaced Drug information on the Manual Drug Replacement removal?</value>
+  </data>
+  <data name="ItemGroupRepeatKeyResendManuallyReplacedDrugOnDeleteDescription" xml:space="preserve">
+    <value>Yes – will resend the information of the overwritten drug with the same Repeat Key, TransactionType will be forced to be set to Update. No – will send empty information, TransactionType will be forced to be set to Remove</value>
+  </data>
+  <data name="ItemGroupRepeatKeyResendReplacedDrugOnBackout" xml:space="preserve">
+    <value>Resend the replaced Drug Information on the Replacement visit backout?</value>
+  </data>
+  <data name="ItemGroupRepeatKeyResendReplacedDrugOnBackoutDescription" xml:space="preserve">
+    <value>Yes – will resend the information of the overwritten Drug with the same ItemGroup Repeat Key, TransactionType will be forced to be set to Update. No – will send empty information as for the other visit backouts, TransactionType will be forced to be set to Remove. Note: applicable only if Replacement Visits Strategy is Replaced Drug Unit Id</value>
+  </data>
+  <data name="ItemGroupRepeatKeysDrugCodesToExclude" xml:space="preserve">
+    <value>Drug Codes To Exclude from ItemGroup Repeat Keys</value>
+  </data>
+  <data name="ItemGroupRepeatKeysDrugCodesToExcludeDescription" xml:space="preserve">
+    <value>The list of the drug codes that should not be processed by ItemGroup Repeat Keys counter</value>
+  </data>
+  <data name="ItemGroupRepeatKeysEnabled" xml:space="preserve">
+    <value>Generic ItemGroup Repeat Keys Enabled</value>
+  </data>
+  <data name="ItemGroupRepeatKeysEnabledDescription" xml:space="preserve">
+    <value>Indicates if the ItemGroup RepeatKey attributes should be generated and included in the output</value>
+  </data>
+  <data name="ItemGroupRepeatKeysVisitsToExclude" xml:space="preserve">
+    <value>Visits To Exclude from the ItemGroup Repeat Keys</value>
+  </data>
+  <data name="ItemGroupRepeatKeysVisitsToExcludeDescription" xml:space="preserve">
+    <value>The list of the visit ids that should be excluded for the ItemGroup Repeat Keys counter</value>
+  </data>
+  <data name="ItemGroupRepeatKeysVisitsToInclude" xml:space="preserve">
+    <value>Visits To Include to the ItemGroup Repeat Keys</value>
+  </data>
+  <data name="ItemGroupRepeatKeysVisitsToIncludeDescription" xml:space="preserve">
+    <value>The list of the visit ids that should be included for the ItemGroup Repeat Keys counter (all visits are included if empty)</value>
+  </data>
+  <data name="ItemGroupRepeatKeyUnscheduledVisitsStrategy" xml:space="preserve">
+    <value>ItemGroup Repeat Key Unscheduled Visits Strategy</value>
+  </data>
+  <data name="ItemGroupRepeatKeyUnscheduledVisitsStrategyDescription" xml:space="preserve">
+    <value>Independent – increments the ItemGroup Repeat Key value for the Unscheduled visits independently (V1 – RK1, V2 – RK1, RK2, UV1 – RK1), Parent Subject Visit Id – Unscheduled visits will be incrementing the ItemGroup Repeat Key value of the Parent Subject Visit (V1 – RK1, V2 – RK1, RK2, UV1 – RK3)</value>
+  </data>
+  <data name="ItemGroupRepeatKeyUpdateTransactionType" xml:space="preserve">
+    <value>ItemGroup Repeat Key Update TransactionType</value>
+  </data>
+  <data name="ItemGroupRepeatKeyUpdateTransactionTypeDescription" xml:space="preserve">
+    <value>Used to overwrite the existing Repeat Key information in the client’s system</value>
+  </data>
+  <data name="StudyEventRepeatKeyBasis" xml:space="preserve">
+    <value>StudyEvent Repeat Key Basis</value>
+  </data>
+  <data name="StudyEventRepeatKeyBasisDescription" xml:space="preserve">
+    <value>Study - will be started from the initial value once in the Study, Site - will be started from the initial value for every Site, Subject - will be started from the initial value for every Subject, SubjectVisit - will be started from the initial value for every SubjectVisit</value>
+  </data>
+  <data name="StudyEventRepeatKeyCounterInitialValue" xml:space="preserve">
+    <value>StudyEvent Repeat Key Counter Initial Value</value>
+  </data>
+  <data name="StudyEventRepeatKeyCounterInitialValueDescription" xml:space="preserve">
+    <value>The number that is used as the StudyEvent Repeat Key Counter start value</value>
+  </data>
+  <data name="StudyEventRepeatKeyFormat" xml:space="preserve">
+    <value>Generic StudyEvent Repeat Key Format</value>
+  </data>
+  <data name="StudyEventRepeatKeyFormatDescription" xml:space="preserve">
+    <value>{0} - RepeatKey, {1} - Scheduled RepeatKey, {2} - Unscheduled RepeatKey, {3} – ReplacementRepeatKey, {4} – ScreenFailRepeatKey, {5} – InformedConsentRepeatKey (ex. "P{0}[1]/DAYN6N1[1]"). Note: will be overwritten by the same Visit setting</value>
+  </data>
+  <data name="StudyEventRepeatKeysEnabled" xml:space="preserve">
+    <value>Generic StudyEvent Repeat Keys Enabled</value>
+  </data>
+  <data name="StudyEventRepeatKeysEnabledDescription" xml:space="preserve">
+    <value>Indicates if the StudyEvent RepeatKey attributes should be generated and included in the output</value>
+  </data>
+</root>

@@ -1,0 +1,11 @@
+﻿@using IRT.Shared.Models
+
+@model EntityCrudViewModel
+
+@{
+    this.ViewBag.Title = this.Model.FunctionTitle;
+}
+
+<h2>@this.Model.FunctionTitle</h2>
+
+@await Html.PartialAsync("~/Views/EntityCrud/Index.cshtml", this.Model)

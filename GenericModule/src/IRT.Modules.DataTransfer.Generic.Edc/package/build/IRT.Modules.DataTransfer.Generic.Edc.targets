@@ -1,0 +1,60 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<ItemGroup>
+		<Content Include="$(MSBuildThisFileDirectory)..\build\Modules\$(MSBuildThisFileName).dll">
+			<Link>Modules\$(MSBuildThisFileName).dll</Link>
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Condition="'$(Configuration)' != 'Release'" Include="$(MSBuildThisFileDirectory)..\build\Modules\$(MSBuildThisFileName).pdb">
+			<Link>Modules\$(MSBuildThisFileName).pdb</Link>
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
+
+	<UsingTask TaskName="AppendSettingsSection" TaskFactory="RoslynCodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll">
+		<ParameterGroup>
+			<ConfigFilePath ParameterType="System.String" Required="true" />
+			<Identifier ParameterType="System.String" Required="true" />
+			<Code ParameterType="System.String" Required="true" />
+			<Namespaces ParameterType="System.String[]" Required="false" />
+		</ParameterGroup>
+		<Task>
+			<Using Namespace="System.Linq" />
+			<Using Namespace="System.Text" />
+			<Code Type="Fragment" Language="cs">
+				<![CDATA[
+          var content = File.ReadAllText(ConfigFilePath);
+          var identifier = string.Format("@{{ /*{0}*/ }}", Identifier);
+                    
+          if (!content.Contains(identifier))
+          {
+            var lastIndexOf = content.LastIndexOfAny("}".ToCharArray());
+            content = content.Insert(lastIndexOf, string.Format(",{0}{1}",identifier, Code));
+            
+            File.WriteAllText(ConfigFilePath, content);
+          }
+        ]]>
+			</Code>
+		</Task>
+	</UsingTask>
+
+	<Target Name="AddDTGenericSettingsBeforeBuild" BeforeTargets="BeforeBuild" DependsOnTargets="WarnIfLegacyModulesInstalled">
+		<PropertyGroup>
+			<CodeBlock>
+				<![CDATA[
+				"DTGenericConfigManager" : {
+					"ApacheHopUsername": "@(Model.ContainsKey("ApacheHopUsername") ? Model["ApacheHopUsername"] : "usr")",
+					"ApacheHopPassword": "@(Model.ContainsKey("ApacheHopPassword") ? Model["ApacheHopPassword"] : "pwd")",
+					"ApacheHopBaseUrl": "@(Model.ContainsKey("ApacheHopBaseUrl") ? Model["ApacheHopBaseUrl"] : "https://server-irt.cloud")"
+				}
+        ]]>
+			</CodeBlock>
+		</PropertyGroup>
+		<AppendSettingsSection
+          ConfigFilePath="appsettings.json.cshtml"
+          Identifier="$(MSBuildThisFileName)"
+          Code="$(CodeBlock)"
+          Namespaces=""/>
+	</Target>
+</Project>
+
+

@@ -1,0 +1,71 @@
+﻿@using System.Text
+@using IRT.Domain
+@using IRT.Modules.DataTransfer.Generic.Areas.StudyAdministration.Models
+@using IRT.Modules.DataTransfer.Generic.Areas.StudyAdministration.Views.ClientNotifications.Resources
+@using IRT.Modules.DataTransfer.Generic.Domain.Notifications
+@using Kernel.Globalization.Providers
+@using Kernel.Utilities.Extensions
+
+@model IRT.Modules.DataTransfer.Generic.Areas.StudyAdministration.Models.ClientNotificationDetailsViewModel
+
+@{
+    this.ViewBag.Title = Details.Title;
+}
+
+<span class="breadcrumbs-back">
+    @Html.ActionLink(IRT.Modules.DataTransfer.Generic.Properties.Resources.ViewClientNotifications_MenuItemText, "Index", null, new { @class = "breadcrumb-link" })
+</span>
+
+<span class="breadcrumbs-round-box">
+    @Details.Breadcrumbs
+</span>
+
+<div class="box-container">
+    <div class="row">
+        <div class="span12">
+            <p>
+                @Details.ContainerTitle.F(Model.NotificationContent.Title)
+            </p>
+            <p>
+                @Details.ContainerDateTime.F(Model.NotificationContent.GeneratedUtcDateTime.ToString(DateTimeFormatProvider.DateTimeDisplayFormatString))
+            </p>
+        </div>
+    </div>
+
+    @if (!string.IsNullOrEmpty(Model.NotificationContent.Body))
+    {
+        <p>@Details.Content</p>
+
+        <div class="row">
+            <div class="span11">
+                <pre>@this.Model.NotificationContent.Body</pre>
+            </div>
+        </div>
+    }
+
+    @if (this.Model.NotificationContent.Attachment != null)
+    {
+        <p>@Details.AttachedFile.F(Model.NotificationContent.AttachmentName)</p>
+        <div class="row">
+            <div class="span11">
+                <div class="well well-small">
+                    <pre>@Encoding.UTF8.GetString(this.Model.NotificationContent.Attachment)</pre>
+                </div>
+            </div>
+        </div>
+    }
+
+    @if (ViewBag.IsVeevaNotification == true)
+    {
+        <p>@Details.DependentNotification</p>
+        <div class="row">
+            <div class="span11">
+                <pre>@this.Model.DependentNotification</pre>
+            </div>
+        </div>
+    }
+
+    <hr />
+
+    @Html.ActionLink(Details.Close, "Index", null, htmlAttributes: new { @class = "k-button" })
+</div>

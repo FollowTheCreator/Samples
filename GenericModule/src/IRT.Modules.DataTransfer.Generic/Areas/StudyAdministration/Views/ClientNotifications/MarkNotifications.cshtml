@@ -1,0 +1,12 @@
+﻿<div class="box-unityContainer">
+    @using (Html.BeginForm("MarkNotificationsPost", "ClientNotifications", FormMethod.Post))
+    {
+        <p>Do you want to mark all the notifications as sent?</p>
+        <div class="control-group">
+            <div class="controls">
+                <button type="submit" class="btn btn-primary" id="SubmitForm">Submit</button>
+                @Html.ActionLink("Close", "Index", null, new { @class = "btn" })
+            </div>
+        </div>
+    }
+</div>

@@ -1,0 +1,8 @@
+namespace Api.Irt.Modules.DataTransfer.Generic.EntityReads {
+
+	type optional_guid {
+	}
+
+	type Frameworks_Notifications_Entities_NotificationSqlView {
+	}
+}

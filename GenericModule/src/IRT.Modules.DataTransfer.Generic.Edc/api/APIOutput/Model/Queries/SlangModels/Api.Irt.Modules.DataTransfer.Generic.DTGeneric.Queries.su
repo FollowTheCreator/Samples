@@ -1,0 +1,472 @@
+namespace Api.Irt.Modules.DataTransfer.Generic.Queries {
+
+	// entities
+
+	entity ClientDataTransferErrorNotification {
+
+		feature Realm: DTGeneric, Queries
+
+		feature UseNewRoutes: True
+
+		feature DataService: IRT_Modules_DataTransfer_Generic_Edc_Domain_Notifications_DataServices_Errors_ClientDataTransferErrorNotificationDataService
+	}
+
+	entity ClientDataTransferErrorSummaryNotification {
+
+		feature Realm: DTGeneric, Queries
+
+		feature UseNewRoutes: True
+
+		feature DataService: IRT_Modules_DataTransfer_Generic_Edc_Domain_Notifications_DataServices_Errors_ClientDataTransferErrorSummaryNotificationDataService
+	}
+
+	entity GenericDemographicsNotification {
+
+		feature Realm: DTGeneric, Queries
+
+		feature UseNewRoutes: True
+
+		feature DataService: IRT_Modules_DataTransfer_Generic_Edc_Domain_Notifications_DataServices_GenericDemographicsNotificationDataService
+
+		command CountryName {
+
+			feature Route: "irt/v1/data-transfer-generic/queries/generic-demographics-notification/country-name", "IRT", "Data-transfer-generic"
+
+			feature Query: CountryName
+
+			feature ResultType: string
+
+			string countryCode
+		}
+
+		command DepotCountryName {
+
+			feature Route: "irt/v1/data-transfer-generic/queries/generic-demographics-notification/depot-country-name", "IRT", "Data-transfer-generic"
+
+			feature Query: DepotCountryName
+
+			feature ResultType: string
+
+			string depotId
+		}
+
+		command DepotName {
+
+			feature Route: "irt/v1/data-transfer-generic/queries/generic-demographics-notification/depot-name", "IRT", "Data-transfer-generic"
+
+			feature Query: DepotName
+
+			feature ResultType: string
+
+			string depotId
+		}
+
+		command PILastName {
+
+			feature Route: "irt/v1/data-transfer-generic/queries/generic-demographics-notification/p-i-last-name", "IRT", "Data-transfer-generic"
+
+			feature Query: PILastName
+
+			feature ResultType: string
+
+			string siteId
+		}
+
+		command SiteCountryName {
+
+			feature Route: "irt/v1/data-transfer-generic/queries/generic-demographics-notification/site-country-name", "IRT", "Data-transfer-generic"
+
+			feature Query: SiteCountryName
+
+			feature ResultType: string
+
+			string siteId
+		}
+
+		command SiteName {
+
+			feature Route: "irt/v1/data-transfer-generic/queries/generic-demographics-notification/site-name", "IRT", "Data-transfer-generic"
+
+			feature Query: SiteName
+
+			feature ResultType: string
+
+			string siteId
+		}
+	}
+
+	entity GenericDrugDispensationNotification {
+
+		feature Realm: DTGeneric, Queries
+
+		feature UseNewRoutes: True
+
+		feature DataService: IRT_Modules_DataTransfer_Generic_Edc_Domain_Notifications_DataServices_GenericDrugDispensationNotificationDataService
+
+		command CountryName {
+
+			feature Route: "irt/v1/data-transfer-generic/queries/generic-drug-dispensation-notification/country-name", "IRT", "Data-transfer-generic"
+
+			feature Query: CountryName
+
+			feature ResultType: string
+
+			string countryCode
+		}
+
+		command DepotCountryName {
+
+			feature Route: "irt/v1/data-transfer-generic/queries/generic-drug-dispensation-notification/depot-country-name", "IRT", "Data-transfer-generic"
+
+			feature Query: DepotCountryName
+
+			feature ResultType: string
+
+			string depotId
+		}
+
+		command DepotName {
+
+			feature Route: "irt/v1/data-transfer-generic/queries/generic-drug-dispensation-notification/depot-name", "IRT", "Data-transfer-generic"
+
+			feature Query: DepotName
+
+			feature ResultType: string
+
+			string depotId
+		}
+
+		command PILastName {
+
+			feature Route: "irt/v1/data-transfer-generic/queries/generic-drug-dispensation-notification/p-i-last-name", "IRT", "Data-transfer-generic"
+
+			feature Query: PILastName
+
+			feature ResultType: string
+
+			string siteId
+		}
+
+		command SiteCountryName {
+
+			feature Route: "irt/v1/data-transfer-generic/queries/generic-drug-dispensation-notification/site-country-name", "IRT", "Data-transfer-generic"
+
+			feature Query: SiteCountryName
+
+			feature ResultType: string
+
+			string siteId
+		}
+
+		command SiteName {
+
+			feature Route: "irt/v1/data-transfer-generic/queries/generic-drug-dispensation-notification/site-name", "IRT", "Data-transfer-generic"
+
+			feature Query: SiteName
+
+			feature ResultType: string
+
+			string siteId
+		}
+	}
+
+	entity GenericEnrollmentNotification {
+
+		feature Realm: DTGeneric, Queries
+
+		feature UseNewRoutes: True
+
+		feature DataService: IRT_Modules_DataTransfer_Generic_Edc_Domain_Notifications_DataServices_GenericEnrollmentNotificationDataService
+
+		command CountryName {
+
+			feature Route: "irt/v1/data-transfer-generic/queries/generic-enrollment-notification/country-name", "IRT", "Data-transfer-generic"
+
+			feature Query: CountryName
+
+			feature ResultType: string
+
+			string countryCode
+		}
+
+		command DepotCountryName {
+
+			feature Route: "irt/v1/data-transfer-generic/queries/generic-enrollment-notification/depot-country-name", "IRT", "Data-transfer-generic"
+
+			feature Query: DepotCountryName
+
+			feature ResultType: string
+
+			string depotId
+		}
+
+		command DepotName {
+
+			feature Route: "irt/v1/data-transfer-generic/queries/generic-enrollment-notification/depot-name", "IRT", "Data-transfer-generic"
+
+			feature Query: DepotName
+
+			feature ResultType: string
+
+			string depotId
+		}
+
+		command PILastName {
+
+			feature Route: "irt/v1/data-transfer-generic/queries/generic-enrollment-notification/p-i-last-name", "IRT", "Data-transfer-generic"
+
+			feature Query: PILastName
+
+			feature ResultType: string
+
+			string siteId
+		}
+
+		command SiteCountryName {
+
+			feature Route: "irt/v1/data-transfer-generic/queries/generic-enrollment-notification/site-country-name", "IRT", "Data-transfer-generic"
+
+			feature Query: SiteCountryName
+
+			feature ResultType: string
+
+			string siteId
+		}
+
+		command SiteName {
+
+			feature Route: "irt/v1/data-transfer-generic/queries/generic-enrollment-notification/site-name", "IRT", "Data-transfer-generic"
+
+			feature Query: SiteName
+
+			feature ResultType: string
+
+			string siteId
+		}
+	}
+
+	entity GenericScreenFailedNotification {
+
+		feature Realm: DTGeneric, Queries
+
+		feature UseNewRoutes: True
+
+		feature DataService: IRT_Modules_DataTransfer_Generic_Edc_Domain_Notifications_DataServices_GenericScreenFailedNotificationDataService
+
+		command CountryName {
+
+			feature Route: "irt/v1/data-transfer-generic/queries/generic-screen-failed-notification/country-name", "IRT", "Data-transfer-generic"
+
+			feature Query: CountryName
+
+			feature ResultType: string
+
+			string countryCode
+		}
+
+		command DepotCountryName {
+
+			feature Route: "irt/v1/data-transfer-generic/queries/generic-screen-failed-notification/depot-country-name", "IRT", "Data-transfer-generic"
+
+			feature Query: DepotCountryName
+
+			feature ResultType: string
+
+			string depotId
+		}
+
+		command DepotName {
+
+			feature Route: "irt/v1/data-transfer-generic/queries/generic-screen-failed-notification/depot-name", "IRT", "Data-transfer-generic"
+
+			feature Query: DepotName
+
+			feature ResultType: string
+
+			string depotId
+		}
+
+		command PILastName {
+
+			feature Route: "irt/v1/data-transfer-generic/queries/generic-screen-failed-notification/p-i-last-name", "IRT", "Data-transfer-generic"
+
+			feature Query: PILastName
+
+			feature ResultType: string
+
+			string siteId
+		}
+
+		command SiteCountryName {
+
+			feature Route: "irt/v1/data-transfer-generic/queries/generic-screen-failed-notification/site-country-name", "IRT", "Data-transfer-generic"
+
+			feature Query: SiteCountryName
+
+			feature ResultType: string
+
+			string siteId
+		}
+
+		command SiteName {
+
+			feature Route: "irt/v1/data-transfer-generic/queries/generic-screen-failed-notification/site-name", "IRT", "Data-transfer-generic"
+
+			feature Query: SiteName
+
+			feature ResultType: string
+
+			string siteId
+		}
+	}
+
+	entity GenericScreeningNotification {
+
+		feature Realm: DTGeneric, Queries
+
+		feature UseNewRoutes: True
+
+		feature DataService: IRT_Modules_DataTransfer_Generic_Edc_Domain_Notifications_DataServices_GenericScreeningNotificationDataService
+
+		command CountryName {
+
+			feature Route: "irt/v1/data-transfer-generic/queries/generic-screening-notification/country-name", "IRT", "Data-transfer-generic"
+
+			feature Query: CountryName
+
+			feature ResultType: string
+
+			string countryCode
+		}
+
+		command DepotCountryName {
+
+			feature Route: "irt/v1/data-transfer-generic/queries/generic-screening-notification/depot-country-name", "IRT", "Data-transfer-generic"
+
+			feature Query: DepotCountryName
+
+			feature ResultType: string
+
+			string depotId
+		}
+
+		command DepotName {
+
+			feature Route: "irt/v1/data-transfer-generic/queries/generic-screening-notification/depot-name", "IRT", "Data-transfer-generic"
+
+			feature Query: DepotName
+
+			feature ResultType: string
+
+			string depotId
+		}
+
+		command PILastName {
+
+			feature Route: "irt/v1/data-transfer-generic/queries/generic-screening-notification/p-i-last-name", "IRT", "Data-transfer-generic"
+
+			feature Query: PILastName
+
+			feature ResultType: string
+
+			string siteId
+		}
+
+		command SiteCountryName {
+
+			feature Route: "irt/v1/data-transfer-generic/queries/generic-screening-notification/site-country-name", "IRT", "Data-transfer-generic"
+
+			feature Query: SiteCountryName
+
+			feature ResultType: string
+
+			string siteId
+		}
+
+		command SiteName {
+
+			feature Route: "irt/v1/data-transfer-generic/queries/generic-screening-notification/site-name", "IRT", "Data-transfer-generic"
+
+			feature Query: SiteName
+
+			feature ResultType: string
+
+			string siteId
+		}
+	}
+
+	entity GenericSubjectNotification {
+
+		feature Realm: DTGeneric, Queries
+
+		feature UseNewRoutes: True
+
+		feature DataService: IRT_Modules_DataTransfer_Generic_Edc_Domain_Notifications_DataServices_GenericSubjectNotificationDataService
+
+		command CountryName {
+
+			feature Route: "irt/v1/data-transfer-generic/queries/generic-subject-notification/country-name", "IRT", "Data-transfer-generic"
+
+			feature Query: CountryName
+
+			feature ResultType: string
+
+			string countryCode
+		}
+
+		command DepotCountryName {
+
+			feature Route: "irt/v1/data-transfer-generic/queries/generic-subject-notification/depot-country-name", "IRT", "Data-transfer-generic"
+
+			feature Query: DepotCountryName
+
+			feature ResultType: string
+
+			string depotId
+		}
+
+		command DepotName {
+
+			feature Route: "irt/v1/data-transfer-generic/queries/generic-subject-notification/depot-name", "IRT", "Data-transfer-generic"
+
+			feature Query: DepotName
+
+			feature ResultType: string
+
+			string depotId
+		}
+
+		command PILastName {
+
+			feature Route: "irt/v1/data-transfer-generic/queries/generic-subject-notification/p-i-last-name", "IRT", "Data-transfer-generic"
+
+			feature Query: PILastName
+
+			feature ResultType: string
+
+			string siteId
+		}
+
+		command SiteCountryName {
+
+			feature Route: "irt/v1/data-transfer-generic/queries/generic-subject-notification/site-country-name", "IRT", "Data-transfer-generic"
+
+			feature Query: SiteCountryName
+
+			feature ResultType: string
+
+			string siteId
+		}
+
+		command SiteName {
+
+			feature Route: "irt/v1/data-transfer-generic/queries/generic-subject-notification/site-name", "IRT", "Data-transfer-generic"
+
+			feature Query: SiteName
+
+			feature ResultType: string
+
+			string siteId
+		}
+	}
+}

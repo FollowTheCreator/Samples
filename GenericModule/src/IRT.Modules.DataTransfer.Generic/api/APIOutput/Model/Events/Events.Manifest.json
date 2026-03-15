@@ -1,0 +1,39 @@
+[
+  {
+    "EventTypeName": [
+      "IRT.Modules.DataTransfer.Generic.Domain.Aggregates.GenericDataGeneration.Events.GenericIntegrationDataEvent",
+      "IRT.Modules.DataTransfer.Generic.Domain.Aggregates.DynamicSetting.Events.DynamicSettingCreated",
+      "IRT.Modules.DataTransfer.Generic.Domain.Aggregates.DynamicSetting.Events.DynamicSettingDllCreated",
+      "IRT.Modules.DataTransfer.Generic.Domain.Aggregates.ClientNotifications.Events.ClientNotificationAdditionalInfoUpdated",
+      "IRT.Modules.DataTransfer.Generic.Domain.Aggregates.ClientNotifications.Events.ClientNotificationCreated",
+      "IRT.Modules.DataTransfer.Generic.Domain.Aggregates.ClientNotifications.Events.ClientNotificationReceived",
+      "IRT.Modules.DataTransfer.Generic.Domain.Aggregates.ClientNotifications.Events.ClientNotificationSent",
+      "IRT.Modules.DataTransfer.Generic.Domain.Aggregates.ClientNotifications.Events.ClientNotificationUpdated",
+      "IRT.Modules.DataTransfer.Generic.Domain.Aggregates.ClientNotifications.Events.NotificationMarkedAsSent"
+    ],
+    "Aggregate": "DTGeneric",
+    "IsExcluded": false,
+    "Name": "DTGeneric",
+    "Namespace": "Events.DTGeneric",
+    "OpTypeName": [
+      "IRT.Modules.DataTransfer.Generic.Domain.Aggregates.GenericDataGeneration.Events.GenericIntegrationDataEvent",
+      "IRT.Modules.DataTransfer.Generic.Domain.Aggregates.DynamicSetting.Events.DynamicSettingCreated",
+      "IRT.Modules.DataTransfer.Generic.Domain.Aggregates.DynamicSetting.Events.DynamicSettingDllCreated",
+      "IRT.Modules.DataTransfer.Generic.Domain.Aggregates.ClientNotifications.Events.ClientNotificationAdditionalInfoUpdated",
+      "IRT.Modules.DataTransfer.Generic.Domain.Aggregates.ClientNotifications.Events.ClientNotificationCreated",
+      "IRT.Modules.DataTransfer.Generic.Domain.Aggregates.ClientNotifications.Events.ClientNotificationReceived",
+      "IRT.Modules.DataTransfer.Generic.Domain.Aggregates.ClientNotifications.Events.ClientNotificationSent",
+      "IRT.Modules.DataTransfer.Generic.Domain.Aggregates.ClientNotifications.Events.ClientNotificationUpdated",
+      "IRT.Modules.DataTransfer.Generic.Domain.Aggregates.ClientNotifications.Events.NotificationMarkedAsSent"
+    ],
+    "Realm": "DTGeneric.Events",
+    "Part": null,
+    "Layer": 2,
+    "SlangEntityName": "DTGeneric",
+    "Subfolder": null,
+    "TypeName": "GenericIntegrationDataEvent",
+    "TypeFullName": "IRT.Modules.DataTransfer.Generic.Domain.Aggregates.GenericDataGeneration.Events.GenericIntegrationDataEvent",
+    "SkipProperties": [],
+    "GenericTypes": []
+  }
+]

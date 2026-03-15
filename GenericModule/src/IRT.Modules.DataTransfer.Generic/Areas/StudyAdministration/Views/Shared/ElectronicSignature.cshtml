@@ -1,0 +1,49 @@
+﻿@using Res = IRT.Modules.DataTransfer.Generic.Areas.StudyAdministration.Views.Shared.Resources
+@using IRT.Modules.DataTransfer.Generic.Areas.Constants
+@model IRT.Modules.DataTransfer.Generic.Areas.StudyAdministration.Models.ElectronicSignatureViewModel
+
+<h4>@Res.ElectronicSignature.Header</h4>
+<p>@Html.ValidationMessage(ErrorMessageKeys.SignatureServerError)</p>
+
+<div class="control-group">
+    <label for="SignatureCheckbox" class="control-label checkbox">
+        <input id="SignatureCheckbox" name="SignatureCheckbox" type="checkbox" onchange="onSignatureCheckboxChange(checked)" />
+        @Res.ElectronicSignature.ApproveFormCheckboxLabel
+    </label>
+</div>
+
+<div class="control-group">
+    @Html.LabelFor(x => x.SignatureUsername, new { @class = "control-label required" })
+    <div class="controls">
+        @Html.TextBoxFor(x => x.SignatureUsername, new { AutoComplete = "off", disabled = "disabled", type = "text" })
+    </div>
+    @Html.ValidationMessageFor(x => x.SignatureUsername)
+</div>
+
+<div class="control-group">
+    @Html.LabelFor(x => x.SignaturePassword, new { @class = "control-label required" })
+    <div class="controls">
+        @Html.TextBoxFor(x => x.SignaturePassword, new { AutoComplete = "off", disabled = "disabled", type = "password" })
+    </div>
+    @Html.ValidationMessageFor(x => x.SignaturePassword)
+</div>
+
+<script>
+    $(document).ready(function () {
+        var shouldBeChecked = !!$("#SignatureUsername").val() || $("#SignaturePassword").val();
+        $("#SignatureCheckbox").prop("checked", shouldBeChecked);
+        $("#SignatureUsername").prop("disabled", !shouldBeChecked);
+        $("#SignaturePassword").prop("disabled", !shouldBeChecked);
+        $("#SubmitForm").prop("disabled", !shouldBeChecked);
+    });
+
+    function onSignatureCheckboxChange(value) {
+        $("#SignatureUsername").prop("disabled", !value);
+        $("#SignaturePassword").prop("disabled", !value);
+        if (!value) {
+            $("#SignatureUsername").val(null);
+            $("#SignaturePassword").val(null);
+        }
+        $("#SubmitForm").prop("disabled", !value);
+    }
+</script>

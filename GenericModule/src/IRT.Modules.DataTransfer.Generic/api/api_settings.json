@@ -1,0 +1,17 @@
+{
+  "InputDll": "..\\bin\\DebugGenerateAPI\\net8.0\\IRT.Modules.DataTransfer.Generic.dll",
+  "ApiMappingFile": "api_mappings.csv",
+  "ModelDirectory": "APIOutput\\Model",
+  "ApiOutputDirectory": "",
+  "DllNamespace": "Modules.DataTransfer.Generic",
+  "Layers": "Commands, EntityReads, Events, Queries",
+  "TemplateDirectory": "APIOutput\\templates\\dotnet8",
+  "ApiRoot": ".",
+  "UseGroupMap": "false",
+  "ConnectionString": "",
+  "GenerateIfProductNotSet": true,
+  "GenerationErrorFile": "generation_errors.txt",
+  "UseNewRoutes": true,
+  "EnableQuerySettings": { "MaxExpansionDepth": 15 },
+  "ModuleSpecificDll": "..\\bin\\DebugGenerateAPI\\net8.0\\IRT.Modules.DataTransfer.Generic.dll"
+}

@@ -1,0 +1,15 @@
+%%
+if (EnumInfo.Exposure == ExposureKind.Protected
+    || EnumInfo.Exposure == ExposureKind.Private
+    || EnumInfo.Exposure == ExposureKind.Internal)
+    Error(EnumInfo.Location, $"Enum '{EnumInfo.FullName}' cannot be declared '{EnumInfo.Exposure.Value.ToString().ToLower()}'.");
+%%
+namespace @EnumInfo.TypeNamespace
+{
+    public enum @EnumInfo.TypeName
+    {
+%foreach (EnumMemberInfo member in EnumInfo.Members) {
+        @member.Name = @member.Value,
+%}
+    }
+}

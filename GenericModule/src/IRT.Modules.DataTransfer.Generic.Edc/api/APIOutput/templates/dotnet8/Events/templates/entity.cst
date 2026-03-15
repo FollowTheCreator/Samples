@@ -1,0 +1,114 @@
+%include "_header.cst"
+
+%%
+bool useNewRoutes = Entity.Features["UseNewRoutes"].Values[0].ToString() == "True";
+string suppressOldRoutes = useNewRoutes ? "// old routes --" : ""; 
+string suppressNewRoutes = useNewRoutes ? "" : "// new routes --";
+%%
+
+%%
+string route = string.Join("/", Entity.Features["Realm"].Values);
+string realm = route.Replace("/"," > ");
+
+if (Entity.Features.ContainsKey("Subfolder"))
+{
+    route += $"/{Entity.Features["Subfolder"].Values[0].ToString()}";
+}
+
+string entityShapeName = Entity.ShapeName;
+%%
+namespace @Entity.ShapeNamespace.Replace(".Shapes",default)
+{
+%include "documentation.cst"
+%Indent += 4;
+%WriteXmlDocumentation(Entity?.Documentation, "The generated side of " + entityShapeName);
+%Indent -= 4;
+    @suppressOldRoutes [Realm("@realm")]
+   @suppressOldRoutes [Route("api/IRT/v1/@(route)")]
+    [Produces("application/json")]
+    public partial class @(entityShapeName) : EventsController
+    {
+        /// <summary>
+        /// constructor
+        /// </summary>
+        public @(entityShapeName)
+        (
+            IHttpContextAccessor httpContextAccessor,
+            IUnityContainer unityContainer,
+            IRTDbContext dbContext
+        )
+        : base(httpContextAccessor, unityContainer, dbContext)
+        {
+        }
+
+        private ActionResult GetEventsResult(DateTime? from, DateTime? to, string typeName)
+        {
+            ActionResult response;
+
+            var events = GetEvents(from, to, typeName);
+
+            response = Ok(events);
+            return response;
+        }
+
+        private IEnumerable<IEvent> GetEvents(DateTime? from, DateTime? to, string typeName)
+        {
+            return GetEventSqlViews(from, to, typeName).Select(e => e.ToEvent());
+        }
+
+        private IEnumerable<EventSqlView> GetEventSqlViews(DateTime? from, DateTime? to, string typeName)
+        {
+            if (from == null)
+            {
+                from = DateTime.MinValue;
+            }
+
+            if (to == null)
+            {
+                to = DateTime.MaxValue;
+            }
+
+            Func<EventSqlView, bool> predicate = (EventSqlView pEvent) => pEvent.TypeName.Equals(typeName) && pEvent.OccurredDateTimeUtc > from && pEvent.OccurredDateTimeUtc <= to;
+            var results = DbContext.Set<EventSqlView>().Where(predicate);
+            return results;
+        }
+%%
+Indent += 4;
+Indent += 4;
+foreach (CommandInfo c in Entity.Commands) {
+
+string newRoute = c.Features["Route"].Values[0].ToString();
+string newRealm = c.Features["Route"].Values[1].ToString() + " : Events : " + c.Features["Route"].Values[2].ToString();
+
+
+string cName = c.Name.Replace("Command",default);
+string tName = c.Features["Event"].Values[0].ToString();
+tName = tName.Replace("__","*").Replace("_",".").Replace("*","_");
+%>
+%>/// <summary>
+%>/// @(cName) event endpoint
+%>/// </summary>
+%>/// <param name="from">from</param>
+%>/// <param name="to">to</param>
+%>[HttpGet]
+%>@suppressOldRoutes [Route("@(cName)")]
+%>@suppressNewRoutes [Route("api/@(newRoute)")]
+%>@suppressNewRoutes [SwaggerOperation(Tags = new[] { "@(newRealm)" })]
+
+%>[ProducesResponseType(typeof(@(tName)), StatusCodes.Status200OK)]
+%>public ActionResult @(cName)(DateTime? from, DateTime? to)
+%>{
+Indent += 4;
+%>ActionResult response;
+%>
+%>response = GetEventsResult(from, to, typeof(@(tName)).FullName);
+%>
+%>return response;
+Indent -= 4;
+%>}
+}
+Indent -= 4;
+Indent -= 4;
+%%
+    }
+}

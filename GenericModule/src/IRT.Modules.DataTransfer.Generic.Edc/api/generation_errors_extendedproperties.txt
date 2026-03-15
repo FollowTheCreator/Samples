@@ -1,0 +1,8 @@
+NO_ENTRY in ExtendedProperties: GenericEdcNotificationDefinitionSettings has no entry in the mapping table!
+UNMAPPED in ExtendedProperties: GenericEdcNotificationDefinitionSettings is not mapped to a product
+NO_ENTRY in Entities: NotificationDefinition has no entry in the mapping table!
+UNMAPPED in Entities: NotificationDefinition is not mapped to a product
+NO_ENTRY in ExtendedProperties: GenericEdcVisitSettings has no entry in the mapping table!
+UNMAPPED in ExtendedProperties: GenericEdcVisitSettings is not mapped to a product
+NO_ENTRY in Entities: Visit has no entry in the mapping table!
+UNMAPPED in Entities: Visit is not mapped to a product

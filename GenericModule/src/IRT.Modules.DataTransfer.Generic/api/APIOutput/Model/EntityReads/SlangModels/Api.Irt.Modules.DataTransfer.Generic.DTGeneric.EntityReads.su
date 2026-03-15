@@ -1,0 +1,98 @@
+namespace Api.Irt.Modules.DataTransfer.Generic.EntityReads {
+
+	// entities
+
+	entity DynamicDataTransferSetting {
+
+		feature Route: "irt/v1/data-transfer-generic/i-r-t/dynamic-data-transfer-settings", "IRT", "Data-transfer-generic"
+		feature EnableQuerySettings: "MaxExpansionDepth=15"
+
+		feature Realm: DTGeneric, EntityReads
+
+		feature UseNewRoutes: True
+
+		feature Subfolder: IRT
+
+		feature DbContextTableType: IRT_Modules_DataTransfer_Generic_Domain_SqlViews_DynamicDataTransferSettings_DynamicDataTransferSettingSqlView
+
+		feature DbContextTableName: DynamicDataTransferSetting
+
+		// * * * PK inferred * * *
+
+		feature PrimaryKey: EntityTypeName, ExtendedPropertiesTypeName, EntityId, ExtendedPropertyName, Value
+
+		string EntityTypeName
+
+		string ExtendedPropertiesTypeName
+
+		string EntityId
+
+		string ExtendedPropertyName
+
+		string Value
+
+		feature AutoCommands: Read
+	}
+
+	entity DynamicSetting {
+
+		feature Route: "irt/v1/data-transfer-generic/i-r-t/dynamic-settings", "IRT", "Data-transfer-generic"
+		feature EnableQuerySettings: "MaxExpansionDepth=15"
+
+		feature Realm: DTGeneric, EntityReads
+
+		feature UseNewRoutes: True
+
+		feature Subfolder: IRT
+
+		feature DbContextTableType: IRT_Modules_DataTransfer_Generic_Domain_SqlViews_DynamicSetting_DynamicSettingSqlView
+
+		feature DbContextTableName: DynamicSetting
+
+		feature PrimaryKey: DynamicSettingId
+
+		guid DynamicSettingId
+
+		string Name
+
+		string Description
+
+		string DefaultValue
+
+		string EntityTypeName
+
+		string ExtendedPropertyName
+
+		feature AutoCommands: Read
+	}
+
+	entity NotificationDependency {
+
+		feature Route: "irt/v1/data-transfer-generic/i-r-t/notification-dependencies", "IRT", "Data-transfer-generic"
+		feature EnableQuerySettings: "MaxExpansionDepth=15"
+
+		feature Realm: DTGeneric, EntityReads
+
+		feature UseNewRoutes: True
+
+		feature Subfolder: IRT
+
+		feature DbContextTableType: IRT_Modules_DataTransfer_Generic_Domain_SqlViews_GenericNotificationDependency_NotificationDependencySqlView
+
+		feature DbContextTableName: NotificationDependency
+
+		feature PrimaryKey: NotificationId
+
+		guid NotificationId
+
+		optional guid DependsOnId
+
+		string GroupKey
+
+		datetime CreatedAt
+
+		has one NotificationSqlView as Notification
+
+		feature AutoCommands: Read
+	}
+}

@@ -1,0 +1,7 @@
+project Api.Irt.Modules.DataTransfer.Generic.EntityReads
+
+include "Api.Irt.Modules.DataTransfer.Generic.EntityReads.enum.su"
+include "Api.Irt.Modules.DataTransfer.Generic.EntityReads.external.su"
+include "Api.Irt.Modules.DataTransfer.Generic.EntityReads.type.su"
+
+include "Api.Irt.Modules.DataTransfer.Generic.DTGeneric.EntityReads.su"

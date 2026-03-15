@@ -1,0 +1,58 @@
+namespace Api.Irt.Modules.DataTransfer.Generic.EntityReads {
+
+	// internal enums
+
+	enum IRT_Modules_DataTransfer_Generic_Domain_ValueObjects_ApacheHop_ApacheHopExecutionStatus {
+
+		Success = 0
+
+		Failure = 1
+	}
+
+	enum IRT_Modules_DataTransfer_Generic_Domain_SqlViews_NotificationType {
+
+		Generic = 0
+
+		Client = 1
+
+		SelfTransform = 2
+	}
+
+	enum IRT_Modules_DataTransfer_Generic_Domain_SqlViews_NotificationVendor {
+
+		Rave = 0
+
+		Veeva = 1
+	}
+
+	enum IRT_Modules_DataTransfer_Generic_Domain_ValueObjects_Veeva_RequestType {
+
+		CreateCasebook = 0
+
+		SetSubjectStatus = 1
+
+		CreateEventGroups = 2
+
+		SetEventDate = 3
+
+		SetItemValue = 4
+
+		EditSubmittedForm = 5
+
+		SubmitForm = 6
+
+		Authorization = 7
+
+		UnsetSubjectStatus = 8
+
+		CreateForms = 9
+
+		UpsertForms = 10
+
+		CombinationFormDataUpdate = 11
+
+		SetEventAsDidNotOccur = 12
+
+		UpsertEventGroups = 13
+	}
+}

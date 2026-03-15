@@ -1,0 +1,20 @@
+﻿@model IRT.Modules.DataTransfer.Generic.Edc.Domain.Notifications.DataServices.Errors.ClientDataTransferErrorSummaryNotificationDataService
+<table>
+    <thead>
+        <tr>
+            <th style="width: 600px; text-align: left"><b>Form</b></th>
+            <th style="width: 400px; text-align: left"><b>Error Message</b></th>
+            <th style="text-align: left"><b>Notification Id</b></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var notification in Model.ModelData.Notifications)
+        {
+            <tr>
+                <td>@notification.Title</td>
+                <td>@notification.ErrorMessage</td>
+                <td>@notification.NotificationId</td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,32 @@
+%public
+%%
+void WriteXmlDocumentation(DocumentationInfo documentation, string defaultSummary = null)
+{
+    if (!string.IsNullOrEmpty(documentation?.Summary))
+    {
+%>/// <summary>
+%>/// @(documentation.Summary.XmlEncode(quot: false).WrapText(75, "\r\n").Replace("\n", "\n/// "))
+%>/// </summary>
+    }
+    else if (!string.IsNullOrEmpty(defaultSummary))
+    {
+%>/// <summary>
+%>/// @(defaultSummary.XmlEncode(quot: false).WrapText(75, "\r\n").Replace("\n", "\n/// "))
+%>/// </summary>
+    }
+    
+    if (!string.IsNullOrEmpty(documentation?.Remarks))
+    {
+%>/// <remarks>
+%>/// @(documentation.Remarks.XmlEncode(quot: false).WrapText(75, "\r\n").Replace("\n", "\n/// "))
+%>/// </remarks>
+    }
+
+    foreach (string example in documentation?.Examples ?? Enumerable.Empty<string>())
+    {
+%>/// <example>
+%>/// @(example.XmlEncode(quot: false).WrapText(75, "\r\n").Replace("\n", "\n/// "))
+%>/// </example>
+    }
+}
+%%

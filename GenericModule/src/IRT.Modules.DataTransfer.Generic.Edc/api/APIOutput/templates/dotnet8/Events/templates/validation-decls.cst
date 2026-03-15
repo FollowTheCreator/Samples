@@ -1,0 +1,78 @@
+#region Validation Declarations
+
+%%
+foreach (PropertyInfo prop in Properties) {
+    if (prop.Kind == PropertyKind.Alias)
+        continue;
+
+    if (prop.Type == PropertyType.Int || prop.Type == PropertyType.Short
+        || prop.Type == PropertyType.Byte || prop.Type == PropertyType.Long
+        || prop.Type == PropertyType.Float || prop.Type == PropertyType.Double) {
+        if (prop.CombinedConstraints.Minimum != null) {
+%>// '@prop.Name' must be at least @prop.CombinedConstraints.Minimum.ToCSharp().
+%>public const @prop.CSharpTypeName @(prop.Name)_Minimum = @prop.CombinedConstraints.Minimum.ToCSharp();
+%>
+        }
+        if (prop.CombinedConstraints.Maximum != null) {
+%>// '@prop.Name' must be at least @prop.CombinedConstraints.Maximum.ToCSharp().
+%>public const @prop.CSharpTypeName @(prop.Name)_Maximum = @prop.CombinedConstraints.Maximum.ToCSharp();
+%>
+        }
+    }
+    else if (prop.Type == PropertyType.Decimal || prop.Type == PropertyType.DateTime) {
+        if (prop.CombinedConstraints.Minimum != null) {
+%>// '@prop.Name' must be at least @prop.CombinedConstraints.Minimum.ToCSharp().
+%>public static readonly @prop.CSharpTypeName @(prop.Name)_Minimum = @prop.CombinedConstraints.Minimum.ToCSharp();
+%>
+        }
+        if (prop.CombinedConstraints.Maximum != null) {
+%>// '@prop.Name' must be at least @prop.CombinedConstraints.Maximum.ToCSharp().
+%>public static readonly @prop.CSharpTypeName @(prop.Name)_Maximum = @prop.CombinedConstraints.Maximum.ToCSharp();
+%>
+        }
+    }
+    else if (prop.Type == PropertyType.String || prop.Type == PropertyType.Json) {
+        if (prop.CombinedConstraints.Length.HasValue) {
+%>// '@prop.Name' must be exactly @prop.CombinedConstraints.Length.Value characters long.
+%>public const int @(prop.Name)_Length = @prop.CombinedConstraints.Length.Value;
+%>
+        }
+        else {
+            if (prop.CombinedConstraints.MinLength.HasValue) {
+%>// '@prop.Name' must be at least @prop.CombinedConstraints.MinLength.Value characters long.
+%>public const int @(prop.Name)_MinLength = @prop.CombinedConstraints.MinLength.Value;
+%>
+            }
+            if (prop.CombinedConstraints.MaxLength.HasValue) {
+%>// '@prop.Name' must be at most @prop.CombinedConstraints.MaxLength.Value characters long.
+%>public const int @(prop.Name)_MaxLength = @prop.CombinedConstraints.MaxLength.Value;
+%>
+            }
+        }
+        if (prop.CombinedConstraints.Matches != null && prop.CombinedConstraints.Matches.Any()) {
+            if (prop.CombinedConstraints.Matches.Count > 1) {
+%>// '@prop.Name' must match these regexes.
+%>public static readonly System.Collections.Generic.IList<(System.Text.RegularExpressions.Regex, string, string)> @(prop.Name)_Regexes =
+%>    new System.Collections.ObjectModel.ReadOnlyCollection<(System.Text.RegularExpressions.Regex, string, string)>(new[] {
+                foreach (RegexInfo regex in prop.CombinedConstraints.Matches) {
+%>        (new System.Text.RegularExpressions.Regex("@regex.Pattern.AddCSlashes()", @regex.RegexOptionsAsText),
+%>            "@regex.Pattern.AddCSlashes()", "@regex.Options.AddCSlashes()"),
+                }
+%>    };
+%>
+            }
+            else {
+                RegexInfo regex = prop.CombinedConstraints.Matches[0];
+%>// '@prop.Name' must match this regex.
+%>public const string @(prop.Name)_RegexPattern = "@regex.Pattern.AddCSlashes()";
+%>public const string @(prop.Name)_RegexOptions = "@regex.Options.AddCSlashes()";
+%>public static readonly System.Text.RegularExpressions.Regex @(prop.Name)_Regex =
+%>    new System.Text.RegularExpressions.Regex(@(prop.Name)_RegexPattern, @regex.RegexOptionsAsText);
+%>
+            }
+        }
+    }
+}
+%%
+#endregion
+

@@ -1,0 +1,30 @@
+namespace Api.Irt.Modules.DataTransfer.Generic.Commands {
+
+	// entities
+
+	entity DTGeneric {
+
+		feature Realm: DTGeneric, Commands
+
+		feature UseNewRoutes: True
+
+		command RaveAknowledgeClientNotification {
+
+			feature Route: "irt/v1/data-transfer-generic/commands/rave-aknowledge-client-notification", "IRT", "Data-transfer-generic"
+
+			feature CommandType: IRT_Modules_DataTransfer_Generic_Edc_Domain_Aggregates_ClientNotifications_Commands_Rave_RaveAknowledgeClientNotification
+
+			string FileOid
+
+			guid ClientNotificationId
+
+			string ErrorCode
+
+			string ResponseMessage
+
+			bool IsSuccess
+
+			string Url
+		}
+	}
+}

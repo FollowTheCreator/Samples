@@ -1,0 +1,222 @@
+%%
+string tableType = entityTableType.Replace("_",".");
+string tableName = $"Set<{@tableType}>()";
+
+bool useNewRoutes = Entity.Features["UseNewRoutes"].Values[0].ToString() == "True";
+string suppressOldRoutes = useNewRoutes ? "// old routes --" : ""; 
+string suppressNewRoutes = useNewRoutes ? "" : "// new routes --";
+string newRoute = Entity.Features["Route"].Values[0].ToString();
+string newRealm = Entity.Features["Route"].Values[1].ToString() + " : EntityReads : " + Entity.Features["Route"].Values[2].ToString();
+string enableQuerySettings = Entity.Features["EnableQuerySettings"].Values.First().ToString();
+
+%%
+//Use this to allow Kernel.OData module to determine what methods to register as odata masked endpoints
+//One can also use the "Get" as method name
+[HttpGet]
+//Use this attribute to enable standard odata support for a given method
+[EnableQuery(@enableQuerySettings)]
+//Please use this attribute allow Kernel.OData module to determine how the endpoint should look like
+@suppressNewRoutes [Route("@(newRoute)")]
+@suppressNewRoutes [SwaggerOperation(Tags = new[] { "@(newRealm)" })]
+[Produces(typeof(IQueryable<@tableType>))]
+public ActionResult Get()
+{
+    ActionResult response;
+
+    try
+    {
+        IQueryable<@tableType> result
+            = DbContext.@(tableName).AsQueryable();
+
+        response = Ok(result);
+    }
+    catch (Exception e)
+    {
+        response = Error(e);
+    }
+
+    return response;
+}
+%%
+string comma;
+string idParams = default;
+string slash = default;
+foreach (string name in primaryKeyList.Keys)
+{
+    %>/// <param name="@(name)">@(name)</param>
+idParams += $"{slash}{{{name}}}";
+slash = "/";
+}
+%%
+//Use this to allow Kernel.OData module to determine what methods to register as odata masked endpoints
+//One can also use the "Get" as method name
+[HttpGet]
+//Use this attribute to enable standard odata support for a given method
+[EnableQuery(@enableQuerySettings)]
+//Please use this attribute allow Kernel.OData module to determine how the endpoint should look like
+@suppressOldRoutes [Route("@(idParams)")]
+@suppressNewRoutes [Route("@(newRoute)/@(idParams)")]
+@suppressNewRoutes [SwaggerOperation(Tags = new[] { "@(newRealm)" })]
+[Produces(typeof(@tableType))]
+public ActionResult Get
+(
+%Indent += 4;
+%%
+comma = "  ";
+string typeName;
+foreach (string name in primaryKeyList.Keys)
+{
+typeName = primaryKeyList[name].Replace("_",".").Replace("__","_");
+if (typeName.StartsWith("optional_"))
+{
+    typeName = typeName.Substring(9);
+    if (typeName.Equals("guid"))
+    {
+        typeName = "Guid";
+    }
+    typeName = typeName+"?";
+}
+    %>@(comma)@(typeName) @(name)
+    comma = ", ";
+}
+%%
+%Indent -= 4;
+)
+{
+    ActionResult response;
+
+    try
+    {
+        IQueryable<@tableType> result
+            = DbContext.@(tableName).Where(entity => 
+%Indent += 4;
+%Indent += 4;
+%Indent += 4;
+%%
+var amp = " && ";
+var primaryKeyListKeys = primaryKeyList.Keys.ToList();
+for (var i=0; i< primaryKeyListKeys.Count; i++)
+{
+var name = primaryKeyListKeys[i];
+typeName = name.Replace("_",".").Replace("__","_");
+if (typeName.StartsWith("optional_"))
+{
+    typeName = typeName.Substring(9);
+    if (typeName.Equals("guid"))
+    {
+        typeName = "Guid";
+    }
+    typeName = typeName+"?";
+}
+    %>@(i == 0? "" : amp) entity.@(name) == @(name) 
+}
+%%
+%Indent -= 4;
+%Indent -= 4;
+%Indent -= 4;
+        );
+
+        if (0 < result.Count())
+        {
+            response = Ok(SingleResult.Create(result));
+        }
+        else
+        {
+            response = NotFound();
+        }
+    }
+    catch (Exception e)
+    {
+        response = Error(e);
+    }
+
+    return response;
+} 
+
+/// <summary>
+/// Read an entity by the primary key, without embedded entities
+/// </summary>
+%%
+foreach (string name in primaryKeyList.Keys)
+{
+    %>/// <param name="@(name)">@(name)</param>
+}
+%%
+/// <returns>the entity if found, default otherwise</returns>
+protected @tableType ReadByKeyWithoutEmbeds
+(
+%Indent += 4;
+%%
+comma = "  ";
+foreach (string name in primaryKeyList.Keys)
+{
+    typeName = primaryKeyList[name].Replace("_",".").Replace("__","_");
+    %>@(comma)@(typeName) @(name)
+    comma = ", ";
+}
+%%
+%Indent -= 4;
+)
+{
+    @tableType result = null;
+    @tableType read;
+
+    try
+    {
+        read = ReadByKey
+        (
+%Indent += 4;
+%Indent += 4;
+%Indent += 4;
+%%
+comma = "  ";
+foreach (string name in primaryKeyList.Keys)
+{
+    %>@(comma)@(name)
+    comma = ", ";
+}
+%%
+%Indent -= 4;
+%Indent -= 4;
+%Indent -= 4;
+        );
+
+        if (read != null)
+        {
+            result = new @(tableType)()
+            {
+%Indent += 4;
+%Indent += 4;
+%Indent += 4;
+%%
+            comma = "  ";
+            foreach (PropertyInfo p in Entity.Properties) 
+            {
+                if(
+                    (p.Type != PropertyType.Reference)
+                &&  (p.Features.Keys.Contains("readonly") == false)
+                ){
+                    pName = p.Name;
+
+                    if(pName.Equals($"{entityShapeName}X"))
+                    {
+                        pName = pName.Substring(0, pName.Length-1);
+                    }
+
+                    %>@(comma)@(pName) = read.@(pName)
+                    comma = ", ";
+                }
+            }
+%%
+%Indent -= 4;
+%Indent -= 4;
+%Indent -= 4;
+            };
+        }
+    }
+    catch
+    {
+    }
+
+    return result;
+}

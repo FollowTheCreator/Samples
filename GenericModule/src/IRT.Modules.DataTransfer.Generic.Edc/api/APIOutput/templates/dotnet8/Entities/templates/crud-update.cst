@@ -1,0 +1,90 @@
+%%
+string tableType = entityTableType.Replace("_",".");
+string tableName = $"Set<{@tableType}>()";
+
+bool useNewRoutes = Entity.Features["UseNewRoutes"].Values[0].ToString() == "True";
+string suppressOldRoutes = useNewRoutes ? "// old routes --" : ""; 
+string suppressNewRoutes = useNewRoutes ? "" : "// new routes --";
+string newRoute = Entity.Features["Route"].Values[0].ToString();
+string newRealm = Entity.Features["Route"].Values[1].ToString() + " : EntityUpdates : " + Entity.Features["Route"].Values[2].ToString();
+
+%%
+
+/// <summary>
+/// update an instance of @(entityShapeName)
+/// </summary>
+/// <param name="from">data for the entity to update.</param>
+[HttpPost]
+@suppressOldRoutes [Route("Update")]
+@suppressNewRoutes [Route("api/updates/@(newRoute)/update")]
+@suppressNewRoutes [SwaggerOperation(Tags = new[] { "@(newRealm)" })]
+[ProducesResponseType(typeof(ActionResult), StatusCodes.Status200OK)]
+public ActionResult Update([FromBody] @(entityShapeName)Input from)
+{
+    ActionResult response;
+
+    try
+    {
+        @tableType old = ReadByKey
+        (
+%Indent += 4;
+%Indent += 4;
+%Indent += 4;
+%%
+string comma = "  ";
+foreach (string name in primaryKeyList.Keys)
+{
+    %>@(comma)from.@(name)
+    comma = ", ";
+}
+%%
+%Indent -= 4;
+%Indent -= 4;
+%Indent -= 4;
+        );
+
+        if (old != null)
+        {
+%Indent += 4;
+%Indent += 4;
+%Indent += 4;
+%%
+        foreach (PropertyInfo p in Entity.Properties) {
+            if(
+                (p.Type != PropertyType.Reference)
+            &&  (p.Type != PropertyType.Reference)
+            &&  (p.Name.Equals($"{entityShapeName}X") == false)
+            &&  (p.CSharpTypeName.StartsWith("Collection") == false)
+            &&  (p.CSharpTypeName.StartsWith("ICollection") == false)
+            &&  (p.CSharpTypeName.StartsWith("IList") == false)
+            &&  (primaryKeyList.Keys.Contains(p.Name) == false)
+            &&  (p.Features.Keys.Contains("readonly") == false)
+            ){
+                %>old.@(p.Name) = from.@(p.Name);
+            }
+        }
+
+%%
+%Indent -= 4;
+%Indent -= 4;
+%Indent -= 4;
+
+            DbContext.@(tableName)
+                .Update(old);
+
+            DbContext.SaveChanges();
+
+            response = Ok();
+        }
+        else
+        {
+            response = NotFound();
+        }
+    }
+    catch(Exception e)
+    {
+        response = Error(e);
+    }
+
+    return response;
+}

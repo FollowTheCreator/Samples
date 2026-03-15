@@ -1,0 +1,318 @@
+%public
+%%
+
+/// <summary>
+/// Generates a full sequence of validation statements for all properties
+/// on the given shape.  This assumes that the validation data declarations
+/// have already been emitted somewhere.
+/// <summary>
+/// <param name="validationProperties">The set of properties to generate validation code for.</param>
+/// <param name="objectName">The (optional) short name (in scope) of the object whose properties are being validated, like 'entity' or 'command'.</param>
+/// <param name="action">An action to perform when the validation fails, like
+/// "throw new ArgumentException" or "MessageBox" or "errorList.Add".  This will be
+/// invoked with a single string argument.</param>
+/// <param name="isImmutableEntity">Whether the type being validated is an
+/// immutable-entity representation (if it is, we generate additional validations
+/// against any Reference-type Ids).</param>
+void GeneratePropertyValidationLogic(IEnumerable<PropertyInfo> properties,
+    string objectName, string typeName, string action, bool isImmutableEntity = false)
+{
+    // Generate code that retrieves the requested validation error message, by short name.
+    string GetValidationErrorMessage(string name)
+        => Model.GetFullName(Targets.Resources) + "."
+            + ("Platform.CommonValidationMessages." + name).Replace('.', '_');
+
+    // Generate code that is able to access the given named property correctly.
+    string GetPropName(string canonicalName)
+        => !string.IsNullOrEmpty(objectName)
+            ? objectName + '.' + canonicalName
+            : canonicalName.Camelize();
+
+    // Emit any required validation rules for each property.
+    foreach (PropertyInfo prop in properties)
+    {
+        if (prop.Kind == PropertyKind.Alias)
+            continue;
+
+        string propName = GetPropName(prop.Name);
+
+        if (prop.Type == PropertyType.Reference)
+        {
+            if (isImmutableEntity && !prop.IsOptional)
+            {
+%>if (ReferenceEquals(@(propName), null) && @(propName)Id == null)
+%>{
+%>    @(action)(string.Format(
+%>        @GetValidationErrorMessage("Null.BothNullError"),
+%>        "@(prop.Name.AddCSlashes())",
+%>        "@(prop.Name.AddCSlashes())Id"
+%>    ));
+%>}
+%>
+            }
+            continue;
+        }
+
+        if (prop.Type == PropertyType.ReferenceCollection)
+        {
+            if (isImmutableEntity && !prop.IsOptional)
+            {
+%>if (@(propName).Any(item => ReferenceEquals(item, null)))
+%>{
+%>    @(action)(string.Format(
+%>        @GetValidationErrorMessage("Null.CollectionItemError"),
+%>        "@prop.Name.AddCSlashes()"
+%>    ));
+%>}
+%>if (@(GetPropName(prop.RelationshipInfo.HasManyLocalIdCollectionName)).Any(item => ReferenceEquals(item, null)))
+%>{
+%>    @(action)(string.Format(
+%>        @GetValidationErrorMessage("Null.CollectionItemError"),
+%>        "@prop.RelationshipInfo.HasManyLocalIdCollectionName.AddCSlashes()"
+%>    ));
+%>}
+            }
+            continue;
+        }
+
+        if (prop.IsReferenceType && !prop.IsOptional)
+        {
+%>if (ReferenceEquals(@(propName), null))
+%>{
+%>    @(action)(string.Format(
+%>        @GetValidationErrorMessage("Null.NullError"),
+%>        "@prop.Name.AddCSlashes()"
+%>    ));
+%>}
+%>
+        }
+
+        if (prop.Type == PropertyType.String || prop.Type == PropertyType.Json)
+        {
+            if (prop.CombinedConstraints.Length.HasValue)
+            {
+                if (prop.IsOptional)
+                {
+%>if (@propName != null && @(propName).Length != @(typeName).@(prop.Name)_Length)
+                }
+                else
+                {
+%>if ((@(propName)?.Length ?? 0) != @(typeName).@(prop.Name)_Length)
+                }
+%>{
+%>    @(action)(string.Format(
+%>        @GetValidationErrorMessage("Length.ExactError"),
+%>        "@prop.Name.AddCSlashes()",
+%>        @(typeName).@(prop.Name)_Length
+%>    ));
+%>}
+%>
+            }
+            else
+            {
+                if (prop.CombinedConstraints.MinLength.HasValue && prop.CombinedConstraints.MaxLength.HasValue)
+                {
+                    if (prop.IsOptional)
+                    {
+%>if (@propName != null
+%>    && (@(propName).Length < @(typeName).@(prop.Name)_MinLength
+%>        || @(propName).Length > @(typeName).@(prop.Name)_MaxLength))
+                    }
+                    else
+                    {
+%>if ((@(propName)?.Length ?? 0) < @(typeName).@(prop.Name)_MinLength
+%>    || (@(propName)?.Length ?? 0) > @(typeName).@(prop.Name)_MaxLength)
+                    }
+%>{
+%>    @(action)(string.Format(
+%>        @GetValidationErrorMessage("Length.RangeError"),
+%>        "@prop.Name.AddCSlashes()",
+%>        @(typeName).@(prop.Name)_MinLength,
+%>        @(typeName).@(prop.Name)_MaxLength
+%>    ));
+%>}
+%>
+                }
+                else if (prop.CombinedConstraints.MinLength.HasValue)
+                {
+                    if (prop.IsOptional)
+                    {
+%>if (@propName != null && @(propName).Length < @(typeName).@(prop.Name)_MinLength)
+                    }
+                    else
+                    {
+%>if ((@(propName)?.Length ?? 0) < @(typeName).@(prop.Name)_MinLength)
+                    }
+%>{
+%>    @(action)(string.Format(
+%>        @GetValidationErrorMessage("Length.MinimumError"),
+%>        "@prop.Name.AddCSlashes()",
+%>        @(typeName).@(prop.Name)_MinLength
+%>    ));
+%>}
+%>
+                }
+                else if (prop.CombinedConstraints.MaxLength.HasValue)
+                {
+                    if (prop.IsOptional)
+                    {
+%>if (@propName != null && @(propName).Length > @(typeName).@(prop.Name)_MaxLength)
+                    }
+                    else
+                    {
+%>if ((@(propName)?.Length ?? 0) > @(typeName).@(prop.Name)_MaxLength)
+                    }
+%>{
+%>    @(action)(string.Format(
+%>        @GetValidationErrorMessage("Length.MaximumError"),
+%>        "@prop.Name.AddCSlashes()",
+%>        @(typeName).@(prop.Name)_MaxLength
+%>    ));
+%>}
+%>
+                }
+            }
+            if (prop.CombinedConstraints.Matches != null && prop.CombinedConstraints.Matches.Any())
+            {
+                if (prop.CombinedConstraints.Matches.Count > 1)
+                {
+                    for (int i = 0; i < prop.CombinedConstraints.Matches.Count; i++)
+                    {
+                        RegexInfo regex = prop.CombinedConstraints.Matches[i];
+                        if (prop.IsOptional)
+                        {
+%>if (@propName != null && !@(typeName).@(prop.Name)_Regexes[@i].Item1.IsMatch(@(propName)))
+                        }
+                        else
+                        {
+%>if (!@(typeName).@(prop.Name)_Regexes[@i].Item1.IsMatch(@propName ?? string.Empty))
+                        }
+%>{
+%>    @(action)(string.Format(
+%>        @GetValidationErrorMessage("Regex.MatchError"),
+%>        "@prop.Name.AddCSlashes()",
+%>        @(typeName).@(prop.Name)_Regexes[@i].Item2,
+%>        @(typeName).@(prop.Name)_Regexes[@i].Item3
+%>    ));
+%>}
+%>
+                    }
+                }
+                else
+                {
+                    RegexInfo regex = prop.CombinedConstraints.Matches[0];
+                    if (prop.IsOptional)
+                    {
+%>if (@propName != null && !@(typeName).@(prop.Name)_Regex.IsMatch(@propName))
+                    }
+                    else
+                    {
+%>if (!@(typeName).@(prop.Name)_Regex.IsMatch(@propName ?? string.Empty))
+                    }
+%>{
+%>    @(action)(string.Format(
+%>        @GetValidationErrorMessage("Regex.MatchError"),
+%>        "@prop.Name.AddCSlashes()",
+%>        @(typeName).@(prop.Name)_RegexPattern,
+%>        @(typeName).@(prop.Name)_RegexOptions
+%>    ));
+%>}
+%>
+                }
+            }
+        }
+
+        if (prop.CombinedConstraints.Minimum != null && prop.CombinedConstraints.Maximum != null)
+        {
+            if (prop.IsOptional)
+            {
+%>if (@(propName).HasValue
+%>    && (@(propName).Value < @(typeName).@(prop.Name)_Minimum
+%>        || @(propName).Value > @(typeName).@(prop.Name)_Maximum))
+            }
+            else
+            {
+%>if (@(propName) < @(typeName).@(prop.Name)_Minimum
+%>    || @(propName) > @(typeName).@(prop.Name)_Maximum)
+            }
+%>{
+%>    @(action)(string.Format(
+%>        @GetValidationErrorMessage("Value.RangeError"),
+%>        "@prop.Name.AddCSlashes()",
+%>        @(typeName).@(prop.Name)_Minimum,
+%>        @(typeName).@(prop.Name)_Maximum
+%>    ));
+%>}
+%>
+        }
+        else if (prop.CombinedConstraints.Minimum != null)
+        {
+            if (prop.IsOptional)
+            {
+%>if (@(propName).HasValue && @(propName).Value < @(typeName).@(prop.Name)_Minimum)
+            }
+            else
+            {
+%>if (@(propName) < @(typeName).@(prop.Name)_Minimum)
+            }
+%>{
+%>    @(action)(string.Format(
+%>        @GetValidationErrorMessage("Value.MinimumError"),
+%>        "@prop.Name.AddCSlashes()",
+%>        @(typeName).@(prop.Name)_Minimum
+%>    ));
+%>}
+%>
+        }
+        else if (prop.CombinedConstraints.Maximum != null)
+        {
+            if (prop.IsOptional)
+            {
+%>if (@(propName).HasValue && @(propName).Value > @(typeName).@(prop.Name)_Maximum)
+            }
+            else
+            {
+%>if (@(propName) > @(typeName).@(prop.Name)_Maximum)
+            }
+%>{
+%>    @(action)(string.Format(
+%>        @GetValidationErrorMessage("Value.MaximumError"),
+%>        "@prop.Name.AddCSlashes()",
+%>        @(typeName).@(prop.Name)_Maximum
+%>    ));
+%>}
+%>
+        }
+    }
+}
+
+/// <summary>
+/// Generates a full sequence of validation statements for all custom JS validations
+/// on the given shape.
+/// <summary>
+/// <param name="validations">The set of validations to generate validation code for.</param>
+/// <param name="objectName">The (optional) short name (in scope) of the object that is being validated, like 'entity' or 'command'.</param>
+/// <param name="action">An action to perform when the validation fails, like
+/// "throw new ArgumentException" or "MessageBox" or "errorList.Add".  This will be
+/// invoked with a single string argument.</param>
+void GenerateJsValidationLogic(IEnumerable<ValidateInfo> validations,
+    string objectName, string typeName, string action)
+{
+    foreach (ValidateInfo validation in validations)
+    {
+        NameInfo validationsName = validation.NameInfo.AddNamespace("Validations");
+%>{
+%>    (bool result, string? error) = JavaScriptExpressionTester.TestAndReturnErrorsToo(@objectName, @(Model.GetFullName(Targets.Resources) + "." + (validationsName.Append("JavaScript").FullName).Replace('.', '_')));
+%>    if (!result)
+%>    {
+%>        if (error != null)
+%>            @(action)($"JavaScript error in rule '@(validationsName.FullName): {error}");
+%>        else
+%>            @(action)(@(Model.GetFullName(Targets.Resources) + "." + (validationsName.Append("ErrorMessage").FullName).Replace('.', '_')));
+%>    }
+%>}
+%>
+    }
+}
+
+%%

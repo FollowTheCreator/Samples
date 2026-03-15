@@ -1,0 +1,112 @@
+﻿@using System.Text
+@using IRT.Domain
+@using Resources = IRT.Modules.DataTransfer.Generic.Areas.StudyAdministration.Views.ManageDynamicSettings.Resources
+@using Kernel.Utilities.Extensions
+@using IRT.Modules.DataTransfer.Generic.Areas.Constants
+@using Kendo.Mvc.UI
+
+@model IRT.Modules.DataTransfer.Generic.Areas.StudyAdministration.Models.DynamicSettingCreateViewModel
+
+@{
+    string manageDynamicSettingTitle = IRT.Modules.DataTransfer.Generic.Domain.Resources.FunctionOperationResources.ManageDynamicSettings;
+    string operationId = ViewBag.OperationId + "";
+    string dropdownPlaceholderLabel = Resources.Create.DropdownPlaceholderFormat.F(Resources.Create.DropdownPlaceholderText);
+    var entityTypes = ViewBag.EntityType as IEnumerable<SelectListItem> ?? new List<SelectListItem>();
+}
+
+<span class="breadcrumbs-back">
+    @Html.ActionLink(manageDynamicSettingTitle, "Index", this.ViewContext.RouteData.Values["controller"].ToString(), new { id = operationId }, new { @class = "breadcrumb-link" })
+</span>
+
+<span class="breadcrumbs-round-box">
+    @Resources.Create.CreateDynamicSettingTitle
+</span>
+
+<div class="box-container">
+    @using (Html.BeginForm("Create", "ManageDynamicSettings", FormMethod.Post))
+    {
+        @Html.ValidationMessage(ErrorMessageKeys.DynamicSettingError)
+
+        <div class="control-group">
+            @Html.LabelFor(model => model.EntityTypeName, new { @class = "required" })
+            <div class="controls">
+                @(Html.Kendo().DropDownListFor(x => x.EntityTypeName)
+                    .HtmlAttributes(new { style = "width:100%" })
+                    .DataTextField("Text")
+                    .DataValueField("Value")
+                    .OptionLabel(dropdownPlaceholderLabel)
+                    .BindTo(entityTypes))
+            </div>
+            @Html.ValidationMessageFor(x => x.EntityTypeName)
+        </div>
+
+        <div class="control-group">
+            @Html.LabelFor(x => x.ExtendedPropertyName, new { @class = "control-label required" })
+            <div class="controls">
+                @Html.TextBoxFor(x => x.ExtendedPropertyName, new { @class = "input-block-level" })
+            </div>
+            @Html.ValidationMessageFor(x => x.ExtendedPropertyName)
+        </div>
+
+        <div class="control-group">
+            @Html.LabelFor(x => x.Name, new { @class = "control-label  required" })
+            <div class="controls">
+                @Html.TextBoxFor(x => x.Name, new { @class = "input-block-level" })
+            </div>
+            @Html.ValidationMessageFor(x => x.Name)
+        </div>
+
+        <div class="control-group title-group">
+            @Html.LabelFor(x => x.Description, new { @class = "control-label  required" })
+            <div class="controls">
+                @Html.TextAreaFor(x => x.Description, new { @class = "input-block-level full-width", style = "height:100px;" })
+            </div>
+            @Html.ValidationMessageFor(x => x.Description)
+        </div>
+
+        <div class="control-group">
+            @Html.LabelFor(x => x.DefaultValue, new { @class = "control-label  required" })
+            <div class="controls">
+                @Html.TextBoxFor(x => x.DefaultValue, new { @class = "input-block-level" })
+            </div>
+            @Html.ValidationMessageFor(x => x.DefaultValue)
+        </div>
+
+        <div class="form-group d-flex justify-content-between" style="margin-top: 10px">
+            <button type="submit" class="btn btn-primary" id="SubmitForm">@Resources.Create.Save</button>
+            <a class="btn btn-secondary" href="@Url.Action("Index", this.ViewContext.RouteData.Values["controller"].ToString(), new { id = operationId })">@Resources.Create.Cancel</a>
+        </div>
+    }
+</div>
+
+<style>
+    .client-notification-body {
+        resize: vertical;
+    }
+
+    .inline-label {
+        margin-right: 10px;
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    .control-group {
+        margin-bottom: 15px;
+    }
+
+    .controls {
+        display: inline-block;
+        vertical-align: middle;
+        width: 100%;
+    }
+
+    .full-width {
+        width: 100%;
+    }
+</style>
+
+<script>
+    $(function () {
+        $("form").kendoValidator();
+    });
+</script>

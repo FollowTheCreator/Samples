@@ -1,0 +1,12 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)..\build\Plugins\$(MSBuildThisFileName).dll">
+      <Link>Plugins\$(MSBuildThisFileName).dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Condition="'$(Configuration)' != 'Release'" Include="$(MSBuildThisFileDirectory)..\build\Plugins\$(MSBuildThisFileName).pdb">
+      <Link>Plugins\$(MSBuildThisFileName).pdb</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+</Project>

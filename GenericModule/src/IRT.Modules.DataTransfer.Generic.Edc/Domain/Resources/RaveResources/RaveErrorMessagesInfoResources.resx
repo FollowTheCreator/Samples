@@ -1,0 +1,672 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="RWS00005" xml:space="preserve">
+    <value>User is locked out.</value>
+  </data>
+  <data name="RWS00006" xml:space="preserve">
+    <value>Internal Error - Web Service currently unavailable.</value>
+  </data>
+  <data name="RWS00008" xml:space="preserve">
+    <value>Incorrect login and password combination.</value>
+  </data>
+  <data name="RWS00009" xml:space="preserve">
+    <value>Insecure HTTP requests are forbidden by configuration. Only secure HTTPS requests are allowed.</value>
+  </data>
+  <data name="RWS00010" xml:space="preserve">
+    <value>This is not a valid XML document.</value>
+  </data>
+  <data name="RWS00011" xml:space="preserve">
+    <value>This is not a valid ODM 1.2 standard document.</value>
+  </data>
+  <data name="RWS00012" xml:space="preserve">
+    <value>Filetype not supported.</value>
+  </data>
+  <data name="RWS00013" xml:space="preserve">
+    <value>Data not imported as more than one study was found in the document.</value>
+  </data>
+  <data name="RWS00014" xml:space="preserve">
+    <value>Study does not exist.</value>
+  </data>
+  <data name="RWS00015" xml:space="preserve">
+    <value>Site has no CRF version assigned.</value>
+  </data>
+  <data name="RWS00016" xml:space="preserve">
+    <value>Site not active.</value>
+  </data>
+  <data name="RWS00017" xml:space="preserve">
+    <value>Site does not exist.</value>
+  </data>
+  <data name="RWS00018" xml:space="preserve">
+    <value>Subject not authorised.</value>
+  </data>
+  <data name="RWS00019" xml:space="preserve">
+    <value>Subject not active.</value>
+  </data>
+  <data name="RWS00020" xml:space="preserve">
+    <value>Data for more than one subject was found in the document.</value>
+  </data>
+  <data name="RWS00021" xml:space="preserve">
+    <value>Transaction not processed as more than one subject has the same identifier at the given site.</value>
+  </data>
+  <data name="RWS00022" xml:space="preserve">
+    <value>Transaction not processed as more then one subject (without site details ) identified in study.</value>
+  </data>
+  <data name="RWS00023" xml:space="preserve">
+    <value>Subject does not exist.</value>
+  </data>
+  <data name="RWS00024" xml:space="preserve">
+    <value>Subject already exists.</value>
+  </data>
+  <data name="RWS00025" xml:space="preserve">
+    <value>Subjects must have site details to be created.</value>
+  </data>
+  <data name="RWS00026" xml:space="preserve">
+    <value>Folder not authorised.</value>
+  </data>
+  <data name="RWS00027" xml:space="preserve">
+    <value>Folder does not exist.</value>
+  </data>
+  <data name="RWS00028" xml:space="preserve">
+    <value>Folder not found.</value>
+  </data>
+  <data name="RWS00029" xml:space="preserve">
+    <value>Folder already exists.</value>
+  </data>
+  <data name="RWS00030" xml:space="preserve">
+    <value>Non sequential or non consecutive folders are not permitted.</value>
+  </data>
+  <data name="RWS00031" xml:space="preserve">
+    <value>Form not authorised.</value>
+  </data>
+  <data name="RWS00032" xml:space="preserve">
+    <value>Form does not exist.</value>
+  </data>
+  <data name="RWS00033" xml:space="preserve">
+    <value>Form does not exist.</value>
+  </data>
+  <data name="RWS00034" xml:space="preserve">
+    <value>Form already exists.</value>
+  </data>
+  <data name="RWS00035" xml:space="preserve">
+    <value>Non sequential or non consecutive forms are not permitted.</value>
+  </data>
+  <data name="RWS00036" xml:space="preserve">
+    <value>Form locked.</value>
+  </data>
+  <data name="RWS00037" xml:space="preserve">
+    <value>Record does not exist.</value>
+  </data>
+  <data name="RWS00038" xml:space="preserve">
+    <value>Record already exists.</value>
+  </data>
+  <data name="RWS00039" xml:space="preserve">
+    <value>Non sequential or non consecutive records are not permitted.</value>
+  </data>
+  <data name="RWS00040" xml:space="preserve">
+    <value>Record locked.</value>
+  </data>
+  <data name="RWS00041" xml:space="preserve">
+    <value>Field does not exist.</value>
+  </data>
+  <data name="RWS00042" xml:space="preserve">
+    <value>Field not authorised.</value>
+  </data>
+  <data name="RWS00043" xml:space="preserve">
+    <value>Field already exists.</value>
+  </data>
+  <data name="RWS00044" xml:space="preserve">
+    <value>Field locked.</value>
+  </data>
+  <data name="RWS00045" xml:space="preserve">
+    <value>Hidden field/ field not visible.</value>
+  </data>
+  <data name="RWS00046" xml:space="preserve">
+    <value>Picture/file upload field cannot be updated.</value>
+  </data>
+  <data name="RWS00047" xml:space="preserve">
+    <value>Data not in dictionary.</value>
+  </data>
+  <data name="RWS00048" xml:space="preserve">
+    <value>Transaction on frozen field is not permitted.</value>
+  </data>
+  <data name="RWS00049" xml:space="preserve">
+    <value>Transaction on derived field is not permitted.</value>
+  </data>
+  <data name="RWS00050" xml:space="preserve">
+    <value>Unit Dictionary does not exist.</value>
+  </data>
+  <data name="RWS00051" xml:space="preserve">
+    <value>Unit Dictionary entry does not exist.</value>
+  </data>
+  <data name="RWS00052" xml:space="preserve">
+    <value>Requested web service does not exist.</value>
+  </data>
+  <data name="RWS00053" xml:space="preserve">
+    <value>Cannot create more than one reusable folder at the same level.</value>
+  </data>
+  <data name="RWS00054" xml:space="preserve">
+    <value>Removing a subject is not permitted.</value>
+  </data>
+  <data name="RWS00055" xml:space="preserve">
+    <value>RWS URL does not exist.</value>
+  </data>
+  <data name="RWS00056" xml:space="preserve">
+    <value>This is not a valid ODM 1.3 standard document.</value>
+  </data>
+  <data name="RWS00057" xml:space="preserve">
+    <value>Lock not authorized.</value>
+  </data>
+  <data name="RWS00058" xml:space="preserve">
+    <value>Unlock not authorized.</value>
+  </data>
+  <data name="RWS00059" xml:space="preserve">
+    <value>Freeze not authorized.</value>
+  </data>
+  <data name="RWS00060" xml:space="preserve">
+    <value>Unfreeze not authorized.</value>
+  </data>
+  <data name="RWS00061" xml:space="preserve">
+    <value>Review not authorized.</value>
+  </data>
+  <data name="RWS00062" xml:space="preserve">
+    <value>UnReview not authorized.</value>
+  </data>
+  <data name="RWS00063" xml:space="preserve">
+    <value>Review group name not found.</value>
+  </data>
+  <data name="RWS00064" xml:space="preserve">
+    <value>Field not associated with the Review Group.</value>
+  </data>
+  <data name="RWS00065" xml:space="preserve">
+    <value>Verify not authorized.</value>
+  </data>
+  <data name="RWS00066" xml:space="preserve">
+    <value>UnVerify not authorized.</value>
+  </data>
+  <data name="RWS00067" xml:space="preserve">
+    <value>Duplicate ReviewGroup name.</value>
+  </data>
+  <data name="RWS00068" xml:space="preserve">
+    <value>Open query not authorized.</value>
+  </data>
+  <data name="RWS00069" xml:space="preserve">
+    <value>Cancel query not authorized.</value>
+  </data>
+  <data name="RWS00070" xml:space="preserve">
+    <value>Close query not authorized.</value>
+  </data>
+  <data name="RWS00071" xml:space="preserve">
+    <value>Query marking group name not found.</value>
+  </data>
+  <data name="RWS00072" xml:space="preserve">
+    <value>Query repeat key not found.</value>
+  </data>
+  <data name="RWS00073" xml:space="preserve">
+    <value>Answer query not authorized.</value>
+  </data>
+  <data name="RWS00074" xml:space="preserve">
+    <value>Query not does not require response.</value>
+  </data>
+  <data name="RWS00075" xml:space="preserve">
+    <value>Forward query not authorized.</value>
+  </data>
+  <data name="RWS00076" xml:space="preserve">
+    <value>Place sticky not authorized.</value>
+  </data>
+  <data name="RWS00077" xml:space="preserve">
+    <value>Sticky marking group name not found.</value>
+  </data>
+  <data name="RWS00078" xml:space="preserve">
+    <value>Acknowledge sticky not authorized.</value>
+  </data>
+  <data name="RWS00079" xml:space="preserve">
+    <value>Sticky repeat key not found.</value>
+  </data>
+  <data name="RWS00080" xml:space="preserve">
+    <value>Add protocol deviation not authorized.</value>
+  </data>
+  <data name="RWS00081" xml:space="preserve">
+    <value>Edit protocol deviation not authorized.</value>
+  </data>
+  <data name="RWS00082" xml:space="preserve">
+    <value>Remove protocol deviation not authorized.</value>
+  </data>
+  <data name="RWS00083" xml:space="preserve">
+    <value>Protocol deviation repeat key not found.</value>
+  </data>
+  <data name="RWS00084" xml:space="preserve">
+    <value>Protocol deviation class not found.</value>
+  </data>
+  <data name="RWS00085" xml:space="preserve">
+    <value>Protocol deviation code not found.</value>
+  </data>
+  <data name="RWS00086" xml:space="preserve">
+    <value>Translation not authorized.</value>
+  </data>
+  <data name="RWS00087" xml:space="preserve">
+    <value>Item does not require translation.</value>
+  </data>
+  <data name="RWS00088" xml:space="preserve">
+    <value>Record restricted by max limit.</value>
+  </data>
+  <data name="RWS00089" xml:space="preserve">
+    <value>Record inactivation not authorised.</value>
+  </data>
+  <data name="RWS00090" xml:space="preserve">
+    <value>Field requiring translation, update in default locale not authorised.</value>
+  </data>
+  <data name="RWS00091" xml:space="preserve">
+    <value>Architect loader error.</value>
+  </data>
+  <data name="RWS00092" xml:space="preserve">
+    <value>CRF version not found.</value>
+  </data>
+  <data name="RWS00093" xml:space="preserve">
+    <value>Data posted to incorrect study URL.</value>
+  </data>
+  <data name="RWS00094" xml:space="preserve">
+    <value>Query is already closed or cancelled.</value>
+  </data>
+  <data name="RWS00095" xml:space="preserve">
+    <value>Updating a field associated to a dynamic search list is not supported.</value>
+  </data>
+  <data name="RWS00096" xml:space="preserve">
+    <value>Field not enabled for coding.</value>
+  </data>
+  <data name="RWS00097" xml:space="preserve">
+    <value>User not authorised for coding.</value>
+  </data>
+  <data name="RWS00098" xml:space="preserve">
+    <value>Coding dictionary not associated with the field.</value>
+  </data>
+  <data name="RWS00099" xml:space="preserve">
+    <value>Coding dictionary level/column does not exist.</value>
+  </data>
+  <data name="RWS00100" xml:space="preserve">
+    <value>Datapoint context value does not match current value.</value>
+  </data>
+  <data name="RWS00101" xml:space="preserve">
+    <value>Non log line form, cannot insert multiple records.</value>
+  </data>
+  <data name="RWS00102" xml:space="preserve">
+    <value>Data posted to incorrect draft URL.</value>
+  </data>
+  <data name="RWS00103" xml:space="preserve">
+    <value>Vendor extension mdsol:Attribute namespace-name pair already exists.</value>
+  </data>
+  <data name="RWS00104" xml:space="preserve">
+    <value>Vendor extension mdsol:Attribute amespace-name pair does not exist.</value>
+  </data>
+  <data name="RWS00105" xml:space="preserve">
+    <value>Vendor extension mdsol:Attribute namespace does not exist.</value>
+  </data>
+  <data name="RWS00106" xml:space="preserve">
+    <value>Draft not found.</value>
+  </data>
+  <data name="RWS00107" xml:space="preserve">
+    <value>Transaction type not supported for this element.</value>
+  </data>
+  <data name="RWS00108" xml:space="preserve">
+    <value>Identifier too long.</value>
+  </data>
+  <data name="RWS00109" xml:space="preserve">
+    <value>Duplicate study identified.</value>
+  </data>
+  <data name="RWS00110" xml:space="preserve">
+    <value>Can not accept more than one element for Coding Data.</value>
+  </data>
+  <data name="RWS00112" xml:space="preserve">
+    <value>Dictionary item does not require specify value.</value>
+  </data>
+  <data name="RWS00113" xml:space="preserve">
+    <value>Simultaneous coding and translating not supported.</value>
+  </data>
+  <data name="RWS00114" xml:space="preserve">
+    <value>Coding value already exists.</value>
+  </data>
+  <data name="RWS00115" xml:space="preserve">
+    <value>Can not accept 2 elements for Translated Data.</value>
+  </data>
+  <data name="RWS00116" xml:space="preserve">
+    <value>Query cannot be closed without answer.</value>
+  </data>
+  <data name="RWS00117" xml:space="preserve">
+    <value>Preceding query does not exist.</value>
+  </data>
+  <data name="RWS00118" xml:space="preserve">
+    <value>Cannot re-query an unanswered query.</value>
+  </data>
+  <data name="RWS00119" xml:space="preserve">
+    <value>Cannot Forward Query to the same Marking Group.</value>
+  </data>
+  <data name="RWS00120" xml:space="preserve">
+    <value>Query cannot be opened with query repeat key.</value>
+  </data>
+  <data name="RWS00121" xml:space="preserve">
+    <value>Query already answered.</value>
+  </data>
+  <data name="RWS00122" xml:space="preserve">
+    <value>Query can only be forwarded or cancelled.</value>
+  </data>
+  <data name="RWS00123" xml:space="preserve">
+    <value>Coding integration not available.</value>
+  </data>
+  <data name="RWS00124" xml:space="preserve">
+    <value>Segment does not exist.</value>
+  </data>
+  <data name="RWS00125" xml:space="preserve">
+    <value>Coding dictionary does not exist.</value>
+  </data>
+  <data name="RWS00126" xml:space="preserve">
+    <value>Coding dictionary version does not exist.</value>
+  </data>
+  <data name="RWS00127" xml:space="preserve">
+    <value>Coding dictionary version not associated with the segment.</value>
+  </data>
+  <data name="RWS00128" xml:space="preserve">
+    <value>Coding dictionary version not used in the study.</value>
+  </data>
+  <data name="RWS00129" xml:space="preserve">
+    <value>Query requires response.</value>
+  </data>
+  <data name="RWS00130" xml:space="preserve">
+    <value>media type Request format not found.</value>
+  </data>
+  <data name="RWS00131" xml:space="preserve">
+    <value>Response format not found.</value>
+  </data>
+  <data name="RWS00132" xml:space="preserve">
+    <value>Formats supplied in header and query string do not match.</value>
+  </data>
+  <data name="RWS00133" xml:space="preserve">
+    <value>Failure during format transformation.</value>
+  </data>
+  <data name="RWS00134" xml:space="preserve">
+    <value>Dataset does not exist.</value>
+  </data>
+  <data name="RWS00135" xml:space="preserve">
+    <value>Dataset is not configured for this request.</value>
+  </data>
+  <data name="RWS00136" xml:space="preserve">
+    <value>User does not have permission for this action.</value>
+  </data>
+  <data name="RWS00137" xml:space="preserve">
+    <value>Format not found.</value>
+  </data>
+  <data name="RWS00138" xml:space="preserve">
+    <value>Not a valid xslt document.</value>
+  </data>
+  <data name="RWS00139" xml:space="preserve">
+    <value>Invalid parameter supplied.</value>
+  </data>
+  <data name="RWS00140" xml:space="preserve">
+    <value>This service is not implemented.</value>
+  </data>
+  <data name="RWS00141" xml:space="preserve">
+    <value>Cannot set the lab for this particular form.</value>
+  </data>
+  <data name="RWS00142" xml:space="preserve">
+    <value>Lab does not exist.</value>
+  </data>
+  <data name="RWS00143" xml:space="preserve">
+    <value>Log line not found.</value>
+  </data>
+  <data name="RWS00144" xml:space="preserve">
+    <value>Unique log line not found.</value>
+  </data>
+  <data name="RWS00145" xml:space="preserve">
+    <value>CrfVersion already exists.</value>
+  </data>
+  <data name="RWS00146" xml:space="preserve">
+    <value>User does not exists.</value>
+  </data>
+  <data name="RWS00147" xml:space="preserve">
+    <value>Study not assigned to user.</value>
+  </data>
+  <data name="RWS00148" xml:space="preserve">
+    <value>Dataset does not exist.</value>
+  </data>
+  <data name="RWS00149" xml:space="preserve">
+    <value>Invalid object name.</value>
+  </data>
+  <data name="RWS00150" xml:space="preserve">
+    <value>Dataset format not found.</value>
+  </data>
+  <data name="RWS00151" xml:space="preserve">
+    <value>Invalid column name.</value>
+  </data>
+  <data name="RWS00152" xml:space="preserve">
+    <value>Invalid data type of filter value.</value>
+  </data>
+  <data name="RWS00153" xml:space="preserve">
+    <value>Unique form not found.</value>
+  </data>
+  <data name="RWS00154" xml:space="preserve">
+    <value>No matching form found.</value>
+  </data>
+  <data name="RWS00155" xml:space="preserve">
+    <value>No context provided.</value>
+  </data>
+  <data name="RWS00156" xml:space="preserve">
+    <value>Multiple folders found for the tag.</value>
+  </data>
+  <data name="RWS00157" xml:space="preserve">
+    <value>Multiple forms found for the tag.</value>
+  </data>
+  <data name="RWS00158" xml:space="preserve">
+    <value>Multiple fields found for the tag.</value>
+  </data>
+  <data name="RWS00159" xml:space="preserve">
+    <value>Unique folder not found.</value>
+  </data>
+  <data name="RWS00160" xml:space="preserve">
+    <value>No matching folder found.</value>
+  </data>
+  <data name="RWS00161" xml:space="preserve">
+    <value>Invalid template.</value>
+  </data>
+  <data name="RWS00162" xml:space="preserve">
+    <value>Queue item not found.</value>
+  </data>
+  <data name="RWS00163" xml:space="preserve">
+    <value>Tag does not exist.</value>
+  </data>
+  <data name="RWS00164" xml:space="preserve">
+    <value>This is not a valid ODM 1.3 standard document.</value>
+  </data>
+  <data name="RWS00165" xml:space="preserve">
+    <value>User is not authorised to delete items from the queue.</value>
+  </data>
+  <data name="RWS00166" xml:space="preserve">
+    <value>Coding can only be applied to the items with transaction type of Context.</value>
+  </data>
+  <data name="RWS00167" xml:space="preserve">
+    <value>iMedidata authentication exception.</value>
+  </data>
+  <data name="RWS00168" xml:space="preserve">
+    <value>MAuth authentication exception.</value>
+  </data>
+  <data name="RWS00169" xml:space="preserve">
+    <value>MAuth server is unavailable.</value>
+  </data>
+  <data name="RWS00170" xml:space="preserve">
+    <value>Authentication type not supported.</value>
+  </data>
+  <data name="RWS00171" xml:space="preserve">
+    <value>Using the Subject UUID is not authorized for this action.</value>
+  </data>
+  <data name="RWS00172" xml:space="preserve">
+    <value>Request file size exceeds the allowed limit.</value>
+  </data>
+  <data name="RWS00173" xml:space="preserve">
+    <value>Unexpected encoding.</value>
+  </data>
+  <data name="RWS00174" xml:space="preserve">
+    <value>Attribute is incompatible with the field’s control type.</value>
+  </data>
+  <data name="RWS00175" xml:space="preserve">
+    <value>Request size exceeds the allowed limit</value>
+  </data>
+  <data name="RWS00176" xml:space="preserve">
+    <value>A potentially dangerous value was detected from the client request.</value>
+  </data>
+  <data name="RWS00177" xml:space="preserve">
+    <value>Error while logging the request.</value>
+  </data>
+  <data name="RWS00178" xml:space="preserve">
+    <value>User does not have the permission to use this service.</value>
+  </data>
+  <data name="RWS00179" xml:space="preserve">
+    <value>Workflow with OID does not exist.</value>
+  </data>
+  <data name="RWS00180" xml:space="preserve">
+    <value>Coding dictionary with OID does not exist.</value>
+  </data>
+  <data name="RWS00181" xml:space="preserve">
+    <value>DictionaryLevelData element required.</value>
+  </data>
+  <data name="RWS00182" xml:space="preserve">
+    <value>You must use the iMedidata StudyOIDType.</value>
+  </data>
+  <data name="RWS00183" xml:space="preserve">
+    <value>Study registration requires at least one dictionary and workflow.</value>
+  </data>
+  <data name="RWS00184" xml:space="preserve">
+    <value>User not authorised to reactivate the logline.</value>
+  </data>
+  <data name="RWS00185" xml:space="preserve">
+    <value>Logline repeat key not found.</value>
+  </data>
+  <data name="RWS00204" xml:space="preserve">
+    <value>Form is inactivated and could not be updated.</value>
+  </data>
+  <data name="RWS00205" xml:space="preserve">
+    <value>Form does not exist in the designated folder.</value>
+  </data>
+  <data name="RWS00206" xml:space="preserve">
+    <value>Exception occurred during applying changes.</value>
+  </data>
+  <data name="RWS00209" xml:space="preserve">
+    <value>Your changes cannot be saved because a subject has been updated by another user.</value>
+  </data>
+  <data name="UnknownError" xml:space="preserve">
+    <value>Internal Error - Web service currently unavailable.</value>
+  </data>
+</root>

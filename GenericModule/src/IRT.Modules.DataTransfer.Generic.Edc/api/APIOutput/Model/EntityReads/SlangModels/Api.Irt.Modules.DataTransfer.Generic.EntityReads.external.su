@@ -1,0 +1,66 @@
+namespace Api.Irt.Modules.DataTransfer.Generic.EntityReads {
+
+	// external enums
+
+	enum MailPriority {
+
+		Normal = 0
+
+		Low = 1
+
+		High = 2
+	}
+
+	enum Kernel_Globalization_Domain_Aggregates_LanguageAggregate_Enums_SpokenDateFormat {
+
+		BigEndian = 0
+
+		LittleEndian = 1
+
+		MiddleEndian = 2
+	}
+
+	enum Kernel_Globalization_Domain_Aggregates_LanguageAggregate_Enums_SpokenNumberFormat {
+
+		Cardinal = 0
+
+		CardinalWithZero = 1
+
+		Individual = 2
+	}
+
+	enum Kernel_Globalization_Domain_Aggregates_LanguageAggregate_Enums_SpokenYearFormat {
+
+		Cardinal = 0
+
+		CardinalComposite = 1
+
+		Individual = 2
+	}
+
+	enum Kernel_Globalization_Domain_Aggregates_LanguageAggregate_Enums_TranslationLevel {
+
+		None = 0
+
+		WorkflowsIVR = 1
+
+		WorkflowsIWR = 2
+
+		Other = 4
+	}
+
+	enum Kernel_Globalization_Domain_Aggregates_LanguageAggregate_Enums_WordOrder {
+
+		SOV = 0
+
+		SVO = 1
+
+		VSO = 2
+
+		VOS = 3
+
+		OVS = 4
+
+		OSV = 5
+	}
+}

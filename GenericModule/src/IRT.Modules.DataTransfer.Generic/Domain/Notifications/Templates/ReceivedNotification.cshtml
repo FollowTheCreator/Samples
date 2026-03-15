@@ -1,0 +1,4 @@
+﻿@using Microsoft.AspNetCore.Html
+
+@model IRT.Modules.DataTransfer.Generic.Domain.Notifications.DataServices.ReceivedNotificationDataService
+@(new HtmlString(this.Model.ModelData.Body))

@@ -1,0 +1,29 @@
+﻿@using Kendo.Mvc.UI
+@using Kernel.Kendo.Extensions
+@using ViewResources = IRT.Modules.DataTransfer.Generic.Areas.StudyAdministration.Views.ManageDynamicSettings.Resources
+
+@model IRT.Shared.Models.ExtendedPropertiesCrudViewModel
+
+@{
+    this.ViewBag.Title = this.Model.FunctionTitle;
+}
+
+<h2>@this.Model.FunctionTitle</h2>
+
+<div class="row">
+    <div class="span3 pull-right" style="padding-bottom: 10px">
+        <a class="btn btn-block" href="@Url.Action("Create", this.ViewContext.RouteData.Values["controller"].ToString(), new { id = this.Model.OperationId} )">@ViewResources.Index.CreateDynamicSetting</a>
+    </div>
+    <div class="span12">
+        <span class="breadcrumbs-round-box">
+            @this.Model.FunctionTitle
+        </span>
+        <div class="row">
+            <div class="span12">
+                @await Html.PartialAsync("~/Views/ExtendedPropertiesCrud/Index.cshtml", this.Model)
+            </div>
+        </div>
+    </div>
+</div>
+
+

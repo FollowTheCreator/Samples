@@ -1,0 +1,217 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <CodeAnalysisRuleSet>..\..\IRT.Modules.DataTransfer.Generic.ruleset</CodeAnalysisRuleSet>
+    <Configurations>Debug;Release;DebugGenerateAPI</Configurations>
+    <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
+  </PropertyGroup>
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Message Text="Running on '$(OS)' operating system." Importance="high">
+    </Message>
+    <Warning Condition=" '$(OS)' != 'Windows_NT' " Text="Setty.Runner.exe. will not be executed.">
+    </Warning>
+    <Exec Condition=" '$(OS)' == 'Windows_NT' " Command="&quot;$(MSBuildProjectDirectory)\..\..\tools\setty\Setty.Runner.exe&quot; -q" />
+  </Target>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugGenerateAPI|AnyCPU'">
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningsAsErrors />
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="Domain\Aggregates\ClientNotifications\Commands\Rave\CreateRaveErrorListNotification.cs" />
+    <Compile Remove="Domain\Jobs\RaveFailedNotificationSenderJob.cs" />
+    <Compile Remove="Domain\Jobs\VeevaFailedNotificationSenderJob.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="api\.config\dotnet-tools.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Html.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.2.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis" Version="4.8.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Scripting" Version="4.8.0" />
+    <PackageReference Include="MimeTypeMapOfficial" Version="1.0.17" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+	<PackageReference Include="Frameworks.Workflows" Version="8.4.1" />
+    <PackageReference Include="Api.Irt.Shared" Version="2025.2.2" />
+    <PackageReference Include="IRT.Domain" Version="2025.2.2" />
+    <PackageReference Include="IRT.Shared" Version="2025.2.2" />
+    <PackageReference Include="Kernel.EntityFramework" Version="8.4.1" />
+    <PackageReference Include="Kernel.Packaging.Boilerplates.Module" Version="8.4.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.13" />
+	<PackageReference Include="IRT.Modules.UserManagement.Contracts" Version="8.4.1" />
+    <PackageReference Include="IRT.Modules.DrugManagement.Contracts" Version="8.3.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Domain\Jobs\Resources\ClientErrorSummaryNotificationGeneratorJob.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ClientErrorSummaryNotificationGeneratorJob.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Domain\Jobs\Resources\ClientRaveErrorListNotificationGeneratorJob.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ClientRaveErrorListNotificationGeneratorJob.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Domain\Jobs\Resources\ClientVeevaErrorListNotificationGeneratorJob.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ClientVeevaErrorListNotificationGeneratorJob.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Domain\Jobs\Resources\FailedSendingJobResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>FailedSendingJobResources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Domain\Jobs\Resources\VeevaClientSending.Designer.cs">
+      <DependentUpon>VeevaClientSending.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Domain\Jobs\Resources\RaveClientSending.Designer.cs">
+      <DependentUpon>RaveClientSending.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Domain\Jobs\Resources\RaveClientNotificationsSenderJob.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>RaveClientNotificationsSenderJob.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Domain\Jobs\Resources\ApacheHopEndpointsHealthCheckJob.Designer.cs">
+      <DependentUpon>ApacheHopEndpointsHealthCheckJob.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Domain\Jobs\Resources\VeevaClientNotificationsSenderJob.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>VeevaClientNotificationsSenderJob.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Domain\Notifications\Resources\GenericNotificationDefinitionRenderer.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>GenericNotificationDefinitionRenderer.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Domain\Notifications\Resources\NotificationDefinitions.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>NotificationDefinitions.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Domain\Resources\FunctionOperationResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>FunctionOperationResources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Domain\Resources\RaveResources\RaveErrorMessagesInfoResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>RaveErrorMessagesInfoResources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Domain\ValueObjects\StudySettings\Resources\GenericEdcNotificationDefinitionSettings.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>GenericEdcNotificationDefinitionSettings.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Domain\ValueObjects\StudySettings\Resources\GenericEdcStudySettings.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>GenericEdcStudySettings.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Domain\ValueObjects\StudySettings\Resources\GenericEdcVisitSettings.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>GenericEdcVisitSettings.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Domain\Jobs\Resources\ClientErrorSummaryNotificationGeneratorJob.resx">
+      <Generator>ResXFileCodeGeneratorEx</Generator>
+      <LastGenOutput>ClientErrorSummaryNotificationGeneratorJob.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Domain\Jobs\Resources\ClientRaveErrorListNotificationGeneratorJob.resx">
+      <Generator>ResXFileCodeGeneratorEx</Generator>
+      <LastGenOutput>ClientRaveErrorListNotificationGeneratorJob.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Domain\Jobs\Resources\ClientVeevaErrorListNotificationGeneratorJob.resx">
+      <Generator>ResXFileCodeGeneratorEx</Generator>
+      <LastGenOutput>ClientVeevaErrorListNotificationGeneratorJob.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Domain\Jobs\Resources\FailedSendingJobResources.resx">
+      <Generator>ResXFileCodeGeneratorEx</Generator>
+      <LastGenOutput>FailedSendingJobResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Domain\Jobs\Resources\VeevaClientSending.resx">
+      <LastGenOutput>VeevaClientSending.Designer.cs</LastGenOutput>
+      <Generator>ResXFileCodeGeneratorEx</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Domain\Jobs\Resources\RaveClientSending.resx">
+      <LastGenOutput>RaveClientSending.Designer.cs</LastGenOutput>
+      <Generator>ResXFileCodeGeneratorEx</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Domain\Jobs\Resources\RaveClientNotificationsSenderJob.resx">
+      <Generator>ResXFileCodeGeneratorEx</Generator>
+      <LastGenOutput>RaveClientNotificationsSenderJob.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Domain\Jobs\Resources\ApacheHopEndpointsHealthCheckJob.resx">
+      <LastGenOutput>ApacheHopEndpointsHealthCheckJob.Designer.cs</LastGenOutput>
+      <Generator>ResXFileCodeGeneratorEx</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Domain\Jobs\Resources\VeevaClientNotificationsSenderJob.resx">
+      <Generator>ResXFileCodeGeneratorEx</Generator>
+      <LastGenOutput>VeevaClientNotificationsSenderJob.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Domain\Notifications\Resources\GenericNotificationDefinitionRenderer.resx">
+      <Generator>ResXFileCodeGeneratorEx</Generator>
+      <LastGenOutput>GenericNotificationDefinitionRenderer.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Domain\Notifications\Resources\NotificationDefinitions.resx">
+      <Generator>ResXFileCodeGeneratorEx</Generator>
+      <LastGenOutput>NotificationDefinitions.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Domain\Resources\FunctionOperationResources.resx">
+      <Generator>ResXFileCodeGeneratorEx</Generator>
+      <LastGenOutput>FunctionOperationResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Domain\Resources\RaveResources\RaveErrorMessagesInfoResources.resx">
+      <Generator>ResXFileCodeGeneratorEx</Generator>
+      <LastGenOutput>RaveErrorMessagesInfoResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Domain\ValueObjects\StudySettings\Resources\GenericEdcNotificationDefinitionSettings.resx">
+      <Generator>ResXFileCodeGeneratorEx</Generator>
+      <LastGenOutput>GenericEdcNotificationDefinitionSettings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Domain\ValueObjects\StudySettings\Resources\GenericEdcStudySettings.resx">
+      <Generator>ResXFileCodeGeneratorEx</Generator>
+      <LastGenOutput>GenericEdcStudySettings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Domain\ValueObjects\StudySettings\Resources\GenericEdcVisitSettings.resx">
+      <Generator>ResXFileCodeGeneratorEx</Generator>
+      <LastGenOutput>GenericEdcVisitSettings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGeneratorEx</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Gotenberg.Sharp.API.Client">
+      <HintPath>..\..\..\installed_packages\gotenberg.sharp.api.client\2.1.1\lib\net6.0\Gotenberg.Sharp.API.Client.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\IRT.Modules.DataTransfer.Generic\IRT.Modules.DataTransfer.Generic.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Domain\ValueObjects\Rave\" />
+    <Folder Include="Domain\ValueObjects\Veeva\" />
+  </ItemGroup>
+</Project>

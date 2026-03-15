@@ -1,0 +1,6 @@
+﻿@using Microsoft.AspNetCore.Html
+@{
+    Layout = "IRT.EmailTemplates.Templates.Shared._TitleLayout";
+}
+@model IRT.Modules.DataTransfer.Generic.Domain.Notifications.DataServices.ReceivedNotificationDataService
+@(new HtmlString(this.Model.ModelData.Title))

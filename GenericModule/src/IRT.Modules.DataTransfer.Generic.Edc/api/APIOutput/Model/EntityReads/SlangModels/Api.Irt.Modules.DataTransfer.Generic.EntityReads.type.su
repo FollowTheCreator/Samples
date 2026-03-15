@@ -1,0 +1,11 @@
+namespace Api.Irt.Modules.DataTransfer.Generic.EntityReads {
+
+	type optional_bool {
+	}
+
+	type optional_guid {
+	}
+
+	type optional_int {
+	}
+}

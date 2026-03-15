@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+	<CodeAnalysisRuleSet>..\..\IRT.Modules.DataTransfer.Generic.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="Kernel.Packaging.Boilerplates.Plugin" Version="8.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\IRT.Modules.DataTransfer.Generic.Edc\IRT.Modules.DataTransfer.Generic.Edc.csproj" />
+    </ItemGroup>
+
+</Project>

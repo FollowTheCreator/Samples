@@ -1,0 +1,7 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <!--NOTE: this file contains MSBuild targets that will be imported into the current project by the Kernel.Packaging package. You could use this file to customize the package build process. -->
+  <!--NOTE: please, note that targets won't be imported automatically if you rename this file.-->
+
+  <Target Name="PackageBeforeBuildWrapper" BeforeTargets="BeforeBuild" DependsOnTargets="GenerateCustomAssemblyInfo"/>
+  <Target Name="PackageAfterBuildWrapper" AfterTargets="AfterBuild" DependsOnTargets="CreateNuSpecTemplate;CreateNugetPackage;PublishNugetPackage" />
+</Project>

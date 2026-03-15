@@ -1,0 +1,137 @@
+%include "_header.cst"
+
+%%
+string route = string.Join("/", Entity.Features["Realm"].Values);
+string realm = route.Replace("/"," > ");
+bool useNewRoutes = Entity.Features["UseNewRoutes"].Values[0].ToString() == "True";
+string suppressOldRoutes = useNewRoutes ? "// old routes --" : ""; 
+string suppressNewRoutes = useNewRoutes ? "" : "// new routes --"; 
+
+if (Entity.Features.ContainsKey("Subfolder"))
+{
+    route += $"/{Entity.Features["Subfolder"].Values[0].ToString()}";
+}
+bool isGenericFlow;
+string genericFlowTypeFullname;
+string genericFlowConcreteNameSpace;
+string genericFlowConcreteType;
+if (Entity.Features.ContainsKey("GenericFlowTypeFullname"))
+{
+    isGenericFlow = true;
+    genericFlowTypeFullname = $"{Entity.Features["GenericFlowTypeFullname"].Values.First().ToString()}";
+    genericFlowConcreteNameSpace = genericFlowTypeFullname.Substring(0, genericFlowTypeFullname.LastIndexOf('.'));
+    genericFlowConcreteType = genericFlowTypeFullname.Substring(genericFlowTypeFullname.LastIndexOf('.') + 1);
+}
+
+string entityShapeName = Entity.ShapeName;
+
+if(!string.IsNullOrEmpty(genericFlowConcreteNameSpace))
+{
+%>using @genericFlowConcreteNameSpace;
+}
+
+%%
+
+namespace @Entity.ShapeNamespace.Replace(".Shapes",default)
+{
+%include "documentation.cst"
+%Indent += 4;
+%WriteXmlDocumentation(Entity?.Documentation, "The generated side of " + Entity.ShapeName);
+%Indent -= 4;
+    @suppressOldRoutes [Realm("@realm")]
+    @suppressOldRoutes [Route("api/IRT/v1/@(route)")]
+    [Produces("application/json")]
+    public partial class @(entityShapeName) : CommandsController
+    {
+        /// <summary>
+        /// constructor
+        /// </summary>
+        public @(entityShapeName)
+        (
+            ICommandBus commandBus,
+            IHttpContextAccessor httpContextAccessor,
+            IUnityContainer unityContainer,
+            IRTDbContext dbContext
+        )
+        : base(commandBus, httpContextAccessor, unityContainer, dbContext)
+        {
+        }
+%%
+Indent += 4;
+Indent += 4;
+foreach (CommandInfo c in Entity.Commands) {
+string cName = c.Name.Replace("Command",default);
+string newRoute = c.Features["Route"].Values[0].ToString();
+string newRealm = c.Features["Route"].Values[1].ToString() + " : Commands : " + c.Features["Route"].Values[2].ToString();
+string commandType = c.Features["CommandType"].Values[0].ToString();
+commandType = commandType.Replace("_",".").Replace("__","_");
+string genericTypeNamespace = c.Features.ContainsKey("GenericTypeNamespace") ? c.Features["GenericTypeNamespace"].Values.First().ToString() : null;
+string genericTypeName = c.Features.ContainsKey("GenericTypeName") ? c.Features["GenericTypeName"].Values.First().ToString() : null;
+%>
+%>/// <summary>
+%>/// @(cName) handler endpoint
+%>/// </summary>
+%>/// <param name="command">command</param>
+%>[HttpPost]
+%>@suppressOldRoutes [Route("@(cName)")]
+%>@suppressNewRoutes [Route("api/@(newRoute)")]
+%>@suppressNewRoutes [SwaggerOperation(Tags = new[] { "@(newRealm)" })]
+%>[ProducesResponseType(typeof(Kernel.AspNetMvc.CommandResult), StatusCodes.Status200OK)]
+%>public ActionResult @(cName)
+%>(
+Indent += 4;
+%>@(commandType) command
+Indent -= 4;
+%>)
+%>{
+Indent += 4;
+%>ActionResult response;
+%>
+%>try
+%>{
+Indent += 4;
+if(isGenericFlow)
+{
+%>var genericCommand = new @genericTypeNamespace.@genericTypeName<@genericFlowConcreteType>{ Item = command.Item };
+%>Kernel.AspNetMvc.RestApi.CommandResult result = SendCommand(genericCommand);
+}
+else{
+%>Kernel.AspNetMvc.RestApi.CommandResult result = SendCommand(command);
+}
+%>
+%>if (result.IsSuccess)
+%>{
+Indent += 4;
+%>response = Ok(result);
+Indent -= 4;
+%>}
+%>else
+%>{
+Indent += 4;
+%>response = Fail(result);
+Indent -= 4;
+%>}
+Indent -= 4;
+%>}
+%>catch (Exception e)
+%>{
+Indent += 4;
+%>response = Error(e);
+Indent -= 4;
+%>}
+%>
+%>return response;
+Indent -= 4;
+%>}
+%>
+if(isGenericFlow)
+{
+%>public class @commandType : @genericTypeNamespace.@genericTypeName<@genericFlowConcreteType>{}
+}
+
+}
+Indent -= 4;
+Indent -= 4;
+%%
+    }
+}

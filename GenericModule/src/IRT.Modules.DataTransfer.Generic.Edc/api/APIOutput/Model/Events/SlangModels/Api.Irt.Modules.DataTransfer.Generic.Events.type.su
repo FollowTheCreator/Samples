@@ -1,0 +1,24 @@
+namespace Api.Irt.Modules.DataTransfer.Generic.Events {
+
+	// external enums
+
+	type MailPriority {
+	}
+
+	// property types
+
+	type optional_guid {
+	}
+
+	type IRT_Modules_DataTransfer_Generic_Edc_Domain_ValueObjects_Errors_ErrorListData {
+	}
+
+	type Kernel_DDD_Domain_Commands_CommandMetadata {
+	}
+
+	type Kernel_DDD_Domain_Events_EventMessagingMetadata {
+	}
+
+	type Kernel_DDD_Domain_Events_EventMetadata {
+	}
+}

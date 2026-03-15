@@ -1,0 +1,4 @@
+project Api.Irt.Modules.DataTransfer.Generic.Events
+
+include "Api.Irt.Modules.DataTransfer.Generic.Events.type.su"
+include "Api.Irt.Modules.DataTransfer.Generic.DTGeneric.Events.su"

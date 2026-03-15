@@ -1,0 +1,7 @@
+%%
+if (Entity.Features.ContainsKey("IsRemote") != true)
+{
+    string comma;
+    include "entity.local.cst";;;
+}
+%%

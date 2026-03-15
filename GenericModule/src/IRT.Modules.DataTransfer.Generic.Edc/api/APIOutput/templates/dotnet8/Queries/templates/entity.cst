@@ -1,0 +1,128 @@
+%include "_header.cst"
+
+%%
+bool useNewRoutes = Entity.Features["UseNewRoutes"].Values[0].ToString() == "True";
+string suppressOldRoutes = useNewRoutes ? "// old routes --" : ""; 
+string suppressNewRoutes = useNewRoutes ? "" : "// new routes --";
+%%
+
+%%
+string route = string.Join("/", Entity.Features["Realm"].Values);
+string realm = route.Replace("/"," > ");
+
+string entityShapeName = Entity.ShapeName;
+string dataServiceType = Entity.Features["DataService"].Values[0].ToString().Replace("_",".").Replace("__","_");
+string dataServiceName = dataServiceType.Substring(dataServiceType.LastIndexOf(".")+1);
+%%
+namespace @Entity.ShapeNamespace.Replace(".Shapes",default)
+{
+%include "documentation.cst"
+%Indent += 4;
+%WriteXmlDocumentation(Entity?.Documentation, "The generated side of " + Entity.ShapeName);
+%Indent -= 4;
+    @suppressOldRoutes [Realm("@realm")]
+    @suppressOldRoutes [Route("api/IRT/v1/@(route)/@(entityShapeName.Replace("QueriesController",default))")]
+    [Produces("application/json")]
+    public partial class @(entityShapeName) : QueriesController
+    {
+        /// <summary>
+        /// constructor
+        /// </summary>
+        public @(entityShapeName)
+        (
+            @(dataServiceType) dataService,
+            IHttpContextAccessor httpContextAccessor,
+            IUnityContainer unityContainer,
+            IRTDbContext dbContext
+        )
+        : base(httpContextAccessor, unityContainer, dbContext)
+        {
+            @(dataServiceName) = dataService;
+        }
+%%
+Indent += 4;
+foreach (CommandInfo c in Entity.Commands)
+{
+string cName = c.Name.Replace("Command",default);
+string qName = c.Features["Query"].Values[0].ToString();
+string resultType = c.Features["ResultType"].Values[0].ToString();
+resultType = resultType.Replace("_Array","[]");
+resultType = resultType.Replace("guid","Guid");
+resultType = resultType.Replace("_",".").Replace("__","_");
+Indent += 4;
+string newRoute = c.Features["Route"].Values[0].ToString();
+string newRealm = c.Features["Route"].Values[1].ToString() + " : Queries : " + c.Features["Route"].Values[2].ToString();
+
+%>
+%>/// <summary>
+%>/// @(cName) handler endpoint
+%>/// </summary>
+foreach (PropertyInfo p in c.Properties)
+{
+    %>/// <param name="@(p.Name)">@(p.Name)</param>
+}
+%>[HttpGet]
+%>@suppressOldRoutes [Route("@(qName)")]
+%>@suppressNewRoutes [Route("api/@(newRoute)")]
+%>@suppressNewRoutes  [SwaggerOperation(Tags = new[] { "@(newRealm)" })]
+%>[ProducesResponseType(typeof(@(resultType)), StatusCodes.Status200OK)]
+%>public ActionResult Get@(cName)
+%>(
+Indent += 4;
+string comma = " ";
+foreach (PropertyInfo p in c.Properties)
+{
+string typeName = p.CSharpTypeName;
+typeName = typeName.Replace("Api.Irt.Domain.Queries.Types.",default);
+//typeName = typeName.Replace("Api.Irt.Modules.CoreDA.Queries.Types.",default);
+//typeName = typeName.Replace("System.",default);
+typeName = typeName.Replace("_Array","[]");
+typeName = typeName.Replace("guid","Guid");
+typeName = typeName.Replace("_",".").Replace("__","_");
+    %>@(comma)@(typeName) @(p.Name)
+    comma = ",";
+}
+Indent -= 4;
+%>)
+%>{
+Indent += 4;
+%>ActionResult response;
+%>
+%>@(resultType) result;
+%>
+%>try
+%>{
+Indent += 4;
+%>result = @(dataServiceName).Get@(qName)
+%>(
+Indent += 4;
+comma = " ";
+foreach (PropertyInfo p in c.Properties)
+{
+    %>@(comma)@(p.Name)
+    comma = ",";
+}
+Indent -= 4;
+%>);
+%>
+%>response = Ok(result);
+Indent -= 4;
+%>}
+%>catch (Exception e)
+%>{
+Indent += 4;
+%>response = Error(e);
+Indent -= 4;
+%>}
+%>
+%>return response;
+Indent -= 4;
+%>}
+Indent -= 4;
+}
+Indent -= 4;
+%%
+
+        protected @(dataServiceType) @(dataServiceName);    
+    }
+}

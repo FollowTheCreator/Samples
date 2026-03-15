@@ -1,0 +1,149 @@
+﻿@using Resources = IRT.Modules.DataTransfer.Generic.Areas.StudyAdministration.Views.ClientNotifications.Resources
+@using Kernel.Utilities.Extensions
+@using IRT.Modules.DataTransfer.Generic.Areas.Constants
+@using Kendo.Mvc.UI
+
+@model IRT.Modules.DataTransfer.Generic.Areas.StudyAdministration.Models.ClientNotificationCreateViewModel
+
+@{
+    ViewBag.Title = Resources.Create.Title;
+
+    var dropdownPlaceholderLabel = Resources.Create.DropdownPlaceholderFormat.F(Resources.Create.DropdownPlaceholderText);
+}
+
+<span class="breadcrumbs-back">
+    @Html.ActionLink(Resources.Index.Title, "Index", null, new { @class = "breadcrumb-link" })
+</span>
+
+<span class="breadcrumbs-round-box">
+    @ViewBag.Title
+</span>
+
+<div class="box-container">
+    @using (Html.BeginForm("Create", "ClientNotifications", FormMethod.Post))
+    {
+        <div class="control-group">
+            @Html.LabelFor(x => x.Title, new { @class = "control-label" })
+            <div class="controls">
+                @Html.TextBoxFor(x => x.Title, new { @class = "input-block-level" })
+            </div>
+            @Html.ValidationMessageFor(x => x.Title)
+        </div>
+
+        <div class="row-fluid">
+            <div class="span4">
+                @Html.LabelFor(x => x.NotificationDefinitionId)
+                @(Html.Kendo().DropDownListFor(x => x.NotificationDefinitionId)
+                    .HtmlAttributes(new { style = "width:100%" })
+                    .DataTextField("Text")
+                    .DataValueField("Value")
+                    .OptionLabel(dropdownPlaceholderLabel)
+                    .DataSource(source =>
+                    {
+                        source.Read(read => read.Action("NotificationDefinitions_Read", "ClientNotifications").Type(HttpVerbs.Post))
+                        .ServerFiltering(true);
+                    }))
+                @Html.ValidationMessageFor(x => x.NotificationDefinitionId)
+            </div>
+            <div class="span4">
+                @Html.LabelFor(x => x.SubjectId)
+                @(Html.Kendo().DropDownListFor(x => x.SubjectId)
+                    .HtmlAttributes(new { style = "width:100%" })
+                    .DataTextField("Text")
+                    .DataValueField("Value")
+                    .OptionLabel(dropdownPlaceholderLabel)
+                    .DataSource(source =>
+                    {
+                        source.Read(read => read.Action("Subjects_Read", "ClientNotifications").Type(HttpVerbs.Post))
+                        .ServerFiltering(true);
+                    }))
+                @Html.ValidationMessageFor(x => x.SubjectId)
+            </div>
+            <div class="span4">
+                @Html.LabelFor(x => x.SubjectVisitId)
+                @(Html.Kendo().DropDownListFor(x => x.SubjectVisitId)
+                    .HtmlAttributes(new { style = "width:100%" })
+                    .DataTextField("Text")
+                    .DataValueField("Value")
+                    .OptionLabel("< {0} >".F("Select"))
+                    .DataSource(source =>
+                    {
+                        source.Read(read => read.Action("SubjectVisits_Read", "ClientNotifications").Type(HttpVerbs.Post).Data("getSubjectId"))
+                        .ServerFiltering(true);
+                    })
+                    .Enable(false)
+                    .CascadeFrom("SubjectId"))
+                @Html.ValidationMessageFor(x => x.SubjectVisitId)
+            </div>
+        </div>
+
+        <div class="control-group">
+            @Html.LabelFor(x => x.Body, new { @class = "control-label" })
+            <div class="controls">
+                @Html.TextAreaFor(x => x.Body, new { @class = "client-notification-body input-block-level", rows = 15 })
+            </div>
+            @Html.ValidationMessageFor(x => x.Body)
+            @Html.ValidationMessage(ErrorMessageKeys.BodyServerError)
+        </div>
+
+        <div class="row-fluid">
+            <div class="span12">
+                @Html.LabelFor(x => x.DependentNotificationId)
+                @(Html.Kendo().DropDownListFor(x => x.DependentNotificationId)
+                    .HtmlAttributes(new { style = "width:100%" })
+                    .DataTextField("Text")
+                    .DataValueField("Value")
+                    .OptionLabel("< {0} >".F("Select"))
+                    .DataSource(source =>
+                    {
+                        source.Read(read => read.Action("DependentNotificationIds_Read", "ClientNotifications").Type(HttpVerbs.Post).Data("getNotificationDefinitionId"))
+                        .ServerFiltering(true);
+                    })
+                    .Enable(false)
+                    .CascadeFrom("NotificationDefinitionId"))
+                @Html.ValidationMessageFor(x => x.DependentNotificationId)
+                @Html.ValidationMessage(ErrorMessageKeys.DependentNotificationError)
+            </div>
+        </div>
+
+        <hr />
+        await Html.RenderPartialAsync("ElectronicSignature", Model);
+        <hr />
+
+        <div class="control-group">
+            <div class="controls">
+                <button type="submit" class="btn btn-primary" id="SubmitForm" disabled="disabled">Save</button>
+                @this.Html.ActionLink("Close", "Index", null, new { @class = "btn" })
+            </div>
+        </div>
+    }
+</div>
+
+<style>
+    .client-notification-body {
+        resize: vertical;
+    }
+
+    .inline-label {
+        margin-right: 20px;
+        display: inline-block;
+    }
+</style>
+
+<script>
+    function getNotificationDefinitionId() {
+        return {
+            notificationDefinitionId: $("#NotificationDefinitionId").val()
+        };
+    }
+
+    function getSubjectId() {
+        return {
+            subjectId: $("#SubjectId").val()
+        };
+    }
+
+    $(function () {
+        $("form").kendoValidator();
+    });
+</script>

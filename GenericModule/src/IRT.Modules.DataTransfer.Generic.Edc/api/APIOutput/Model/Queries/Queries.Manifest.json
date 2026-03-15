@@ -1,0 +1,246 @@
+[
+  {
+    "DataService": "IRT.Modules.DataTransfer.Generic.Edc.Domain.Notifications.DataServices.Errors.ClientDataTransferErrorNotificationDataService",
+    "QueryTypeName": [
+      "DepotName",
+      "DepotCountryName",
+      "CountryName"
+    ],
+    "Aggregate": "DTGeneric",
+    "IsExcluded": false,
+    "Name": "ClientDataTransferErrorNotification",
+    "Namespace": "Queries.DTGeneric",
+    "OpTypeName": [
+      "DepotName",
+      "DepotCountryName",
+      "CountryName"
+    ],
+    "Realm": "DTGeneric.Queries",
+    "Part": null,
+    "Layer": 3,
+    "SlangEntityName": "ClientDataTransferErrorNotification",
+    "Subfolder": null,
+    "TypeName": "ClientDataTransferErrorNotificationDataService",
+    "TypeFullName": "IRT.Modules.DataTransfer.Generic.Edc.Domain.Notifications.DataServices.Errors.ClientDataTransferErrorNotificationDataService",
+    "SkipProperties": [],
+    "GenericTypes": []
+  },
+  {
+    "DataService": "IRT.Modules.DataTransfer.Generic.Edc.Domain.Notifications.DataServices.Errors.ClientDataTransferErrorSummaryNotificationDataService",
+    "QueryTypeName": [
+      "DepotName",
+      "DepotCountryName",
+      "CountryName"
+    ],
+    "Aggregate": "DTGeneric",
+    "IsExcluded": false,
+    "Name": "ClientDataTransferErrorSummaryNotification",
+    "Namespace": "Queries.DTGeneric",
+    "OpTypeName": [
+      "DepotName",
+      "DepotCountryName",
+      "CountryName"
+    ],
+    "Realm": "DTGeneric.Queries",
+    "Part": null,
+    "Layer": 3,
+    "SlangEntityName": "ClientDataTransferErrorSummaryNotification",
+    "Subfolder": null,
+    "TypeName": "ClientDataTransferErrorSummaryNotificationDataService",
+    "TypeFullName": "IRT.Modules.DataTransfer.Generic.Edc.Domain.Notifications.DataServices.Errors.ClientDataTransferErrorSummaryNotificationDataService",
+    "SkipProperties": [],
+    "GenericTypes": []
+  },
+  {
+    "DataService": "IRT.Modules.DataTransfer.Generic.Edc.Domain.Notifications.DataServices.GenericDemographicsNotificationDataService",
+    "QueryTypeName": [
+      "SiteName",
+      "PILastName",
+      "SiteCountryName",
+      "DepotName",
+      "DepotCountryName",
+      "CountryName"
+    ],
+    "Aggregate": "DTGeneric",
+    "IsExcluded": false,
+    "Name": "GenericDemographicsNotification",
+    "Namespace": "Queries.DTGeneric",
+    "OpTypeName": [
+      "SiteName",
+      "PILastName",
+      "SiteCountryName",
+      "DepotName",
+      "DepotCountryName",
+      "CountryName"
+    ],
+    "Realm": "DTGeneric.Queries",
+    "Part": null,
+    "Layer": 3,
+    "SlangEntityName": "GenericDemographicsNotification",
+    "Subfolder": null,
+    "TypeName": "GenericDemographicsNotificationDataService",
+    "TypeFullName": "IRT.Modules.DataTransfer.Generic.Edc.Domain.Notifications.DataServices.GenericDemographicsNotificationDataService",
+    "SkipProperties": [],
+    "GenericTypes": []
+  },
+  {
+    "DataService": "IRT.Modules.DataTransfer.Generic.Edc.Domain.Notifications.DataServices.GenericDrugDispensationNotificationDataService",
+    "QueryTypeName": [
+      "SiteName",
+      "PILastName",
+      "SiteCountryName",
+      "DepotName",
+      "DepotCountryName",
+      "CountryName"
+    ],
+    "Aggregate": "DTGeneric",
+    "IsExcluded": false,
+    "Name": "GenericDrugDispensationNotification",
+    "Namespace": "Queries.DTGeneric",
+    "OpTypeName": [
+      "SiteName",
+      "PILastName",
+      "SiteCountryName",
+      "DepotName",
+      "DepotCountryName",
+      "CountryName"
+    ],
+    "Realm": "DTGeneric.Queries",
+    "Part": null,
+    "Layer": 3,
+    "SlangEntityName": "GenericDrugDispensationNotification",
+    "Subfolder": null,
+    "TypeName": "GenericDrugDispensationNotificationDataService",
+    "TypeFullName": "IRT.Modules.DataTransfer.Generic.Edc.Domain.Notifications.DataServices.GenericDrugDispensationNotificationDataService",
+    "SkipProperties": [],
+    "GenericTypes": []
+  },
+  {
+    "DataService": "IRT.Modules.DataTransfer.Generic.Edc.Domain.Notifications.DataServices.GenericEnrollmentNotificationDataService",
+    "QueryTypeName": [
+      "SiteName",
+      "PILastName",
+      "SiteCountryName",
+      "DepotName",
+      "DepotCountryName",
+      "CountryName"
+    ],
+    "Aggregate": "DTGeneric",
+    "IsExcluded": false,
+    "Name": "GenericEnrollmentNotification",
+    "Namespace": "Queries.DTGeneric",
+    "OpTypeName": [
+      "SiteName",
+      "PILastName",
+      "SiteCountryName",
+      "DepotName",
+      "DepotCountryName",
+      "CountryName"
+    ],
+    "Realm": "DTGeneric.Queries",
+    "Part": null,
+    "Layer": 3,
+    "SlangEntityName": "GenericEnrollmentNotification",
+    "Subfolder": null,
+    "TypeName": "GenericEnrollmentNotificationDataService",
+    "TypeFullName": "IRT.Modules.DataTransfer.Generic.Edc.Domain.Notifications.DataServices.GenericEnrollmentNotificationDataService",
+    "SkipProperties": [],
+    "GenericTypes": []
+  },
+  {
+    "DataService": "IRT.Modules.DataTransfer.Generic.Edc.Domain.Notifications.DataServices.GenericScreenFailedNotificationDataService",
+    "QueryTypeName": [
+      "SiteName",
+      "PILastName",
+      "SiteCountryName",
+      "DepotName",
+      "DepotCountryName",
+      "CountryName"
+    ],
+    "Aggregate": "DTGeneric",
+    "IsExcluded": false,
+    "Name": "GenericScreenFailedNotification",
+    "Namespace": "Queries.DTGeneric",
+    "OpTypeName": [
+      "SiteName",
+      "PILastName",
+      "SiteCountryName",
+      "DepotName",
+      "DepotCountryName",
+      "CountryName"
+    ],
+    "Realm": "DTGeneric.Queries",
+    "Part": null,
+    "Layer": 3,
+    "SlangEntityName": "GenericScreenFailedNotification",
+    "Subfolder": null,
+    "TypeName": "GenericScreenFailedNotificationDataService",
+    "TypeFullName": "IRT.Modules.DataTransfer.Generic.Edc.Domain.Notifications.DataServices.GenericScreenFailedNotificationDataService",
+    "SkipProperties": [],
+    "GenericTypes": []
+  },
+  {
+    "DataService": "IRT.Modules.DataTransfer.Generic.Edc.Domain.Notifications.DataServices.GenericScreeningNotificationDataService",
+    "QueryTypeName": [
+      "SiteName",
+      "PILastName",
+      "SiteCountryName",
+      "DepotName",
+      "DepotCountryName",
+      "CountryName"
+    ],
+    "Aggregate": "DTGeneric",
+    "IsExcluded": false,
+    "Name": "GenericScreeningNotification",
+    "Namespace": "Queries.DTGeneric",
+    "OpTypeName": [
+      "SiteName",
+      "PILastName",
+      "SiteCountryName",
+      "DepotName",
+      "DepotCountryName",
+      "CountryName"
+    ],
+    "Realm": "DTGeneric.Queries",
+    "Part": null,
+    "Layer": 3,
+    "SlangEntityName": "GenericScreeningNotification",
+    "Subfolder": null,
+    "TypeName": "GenericScreeningNotificationDataService",
+    "TypeFullName": "IRT.Modules.DataTransfer.Generic.Edc.Domain.Notifications.DataServices.GenericScreeningNotificationDataService",
+    "SkipProperties": [],
+    "GenericTypes": []
+  },
+  {
+    "DataService": "IRT.Modules.DataTransfer.Generic.Edc.Domain.Notifications.DataServices.GenericSubjectNotificationDataService",
+    "QueryTypeName": [
+      "SiteName",
+      "PILastName",
+      "SiteCountryName",
+      "DepotName",
+      "DepotCountryName",
+      "CountryName"
+    ],
+    "Aggregate": "DTGeneric",
+    "IsExcluded": false,
+    "Name": "GenericSubjectNotification",
+    "Namespace": "Queries.DTGeneric",
+    "OpTypeName": [
+      "SiteName",
+      "PILastName",
+      "SiteCountryName",
+      "DepotName",
+      "DepotCountryName",
+      "CountryName"
+    ],
+    "Realm": "DTGeneric.Queries",
+    "Part": null,
+    "Layer": 3,
+    "SlangEntityName": "GenericSubjectNotification",
+    "Subfolder": null,
+    "TypeName": "GenericSubjectNotificationDataService",
+    "TypeFullName": "IRT.Modules.DataTransfer.Generic.Edc.Domain.Notifications.DataServices.GenericSubjectNotificationDataService",
+    "SkipProperties": [],
+    "GenericTypes": []
+  }
+]

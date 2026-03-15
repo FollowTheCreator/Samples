@@ -1,0 +1,19 @@
+﻿@model IRT.Modules.DataTransfer.Generic.Edc.Domain.Notifications.DataServices.Errors.ClientDataTransferErrorNotificationDataService
+<table>
+    <tr>
+        <td style="width: 250px;"><b>Error:</b></td>
+        <td>@Model.ModelData.ErrorCode</td>
+    </tr>
+    <tr>
+        <td style="width: 250px;"><b>URL:</b></td>
+        <td>@Model.ModelData.Url</td>
+    </tr>
+    <tr>
+        <td style="width: 250px; vertical-align: top;"><b>Posted Message:</b></td>
+        <td><pre>@Model.ModelData.PostedMessage</pre></td>
+    </tr>
+    <tr style="white-space: normal;">
+        <td style="width: 250px; vertical-align: top;"><b>Response:</b></td>
+        <td><pre>@Model.ModelData.Response</pre></td>
+    </tr>
+</table>

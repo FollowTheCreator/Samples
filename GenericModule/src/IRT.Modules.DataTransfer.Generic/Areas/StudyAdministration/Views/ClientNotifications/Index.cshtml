@@ -1,0 +1,59 @@
+﻿@using Kendo.Mvc.UI
+@using IRT.Domain
+@using IRT.Modules.DataTransfer.Generic.Areas.StudyAdministration.Models
+@using Kernel.Globalization.Providers
+@using Kernel.Kendo.Extensions
+@using Res = IRT.Modules.DataTransfer.Generic.Areas.StudyAdministration.Views.ClientNotifications.Resources
+
+@{
+    this.ViewBag.Title = Res.Index.Title;
+}
+
+<div class="row">
+    <div class="span3 pull-right" style="padding-bottom: 10px">
+        <a class="btn btn-large btn-block" href="@Url.Action("Create")">@Res.Index.CreateButtonText</a>
+    </div>
+    <div class="span3 pull-right" style="padding-bottom: 10px">
+        <a class="btn btn-large btn-block" href="@Url.Action("MarkNotifications")">@Res.Index.MarkNotificationsButtonText</a>
+    </div>
+    <div class="span12">
+        <span class="breadcrumbs-round-box">
+            @Res.Index.Breadcrumbs
+        </span>
+        <div class="row">
+            <div class="span12">
+                <div class="box-unityContainer">
+                    @{
+                        var createUrl = Url.Action("Create");
+                        var viewUrl = Url.Action("Details");
+                        var editUrl = Url.Action("Update");
+                        var copyUrl = Url.Action("Create");
+                    }
+                    @(Html.Kendo().Grid<ClientNotificationViewModel>()
+                        .Name("Grid")
+                        .Columns(c =>
+                        {
+                            c.Bound(x => x.Id).Width(85).Title(string.Empty).Sortable(false).Filterable(false).Groupable(false)
+                            .ClientTemplate("<a class='k-button' href='" + viewUrl + "/#=Id #'>" + Res.Index.ViewButtonLabel + "</a> <a class='k-button' href='" + editUrl + "/#=Id #'>" + Res.Index.EditButtonLabel + "</a> <a class='k-button' href='" + createUrl + "/#=Id #'>" + Res.Index.CopyButtonLabel + "</a>");
+                            c.Bound(x => x.NotificationDefinitionName).Width(130);
+                            c.Bound(x => x.Title).Width(300);
+                            c.Bound(x => x.GeneratedUtcDateTime).Format(DateTimeFormatProvider.MvcDateTimeDisplayFormatString).Width(130);
+                            c.Bound(x => x.Status).Width(85);
+                            c.Bound(x => x.SentUtcDateTime).Format(DateTimeFormatProvider.MvcDateTimeDisplayFormatString).Width(130);
+                            c.Bound(x => x.FailedSendAttempts).Width(110);
+                            //c.Bound(x => x.AdditionalInfo).Width(100);
+                        })
+                        .AAAGrid()
+                        .Pageable()
+                        .Scrollable(x => x.Height(500))
+                        .Filterable()
+                        .Sortable()
+                        .DataSource(c => c.Ajax().Read("Read", "ClientNotifications")))
+                </div>
+            </div>
+        </div>
+     </div>
+</div>
+
+
+

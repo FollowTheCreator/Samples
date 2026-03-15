@@ -1,0 +1,36 @@
+namespace Api.Irt.Modules.DataTransfer.Generic.Events {
+
+	// external enums
+
+	type MailPriority {
+	}
+
+	// property types
+
+	type KeyValue_string_string {
+	}
+
+	type optional_guid {
+	}
+
+	type optional_int {
+	}
+
+	type Frameworks_ExtendedProperties_Dto_ExtendedPropertyEntityDto`1[[IRT_Modules_DataTransfer_Generic_Domain_ValueObjects_StudySettings_NotificationGenerationSettings,_IRT_Modules_DataTransfer_Generic,_Version=8_1_1_0,_Culture=neutral,_PublicKeyToken=null]] {
+	}
+
+	type IRT_Domain_ViewsSql_SelfSupportWorkflows_SelfSupportModificationRequestSqlView {
+	}
+
+	type Kernel_DDD_Domain_Commands_CommandMetadata {
+	}
+
+	type Kernel_DDD_Domain_Events_EventMessagingMetadata {
+	}
+
+	type Kernel_DDD_Domain_Events_EventMetadata {
+	}
+
+	type Kernel_SharedDomain_ValueObjects_Visit_VisitContext {
+	}
+}

@@ -1,0 +1,121 @@
+namespace Api.Irt.Modules.DataTransfer.Generic.Commands {
+
+	// entities
+
+	entity DTGeneric {
+
+		feature Realm: DTGeneric, Commands
+
+		feature UseNewRoutes: True
+
+		command AcknowledgeClientNotification {
+
+			feature Route: "irt/v1/data-transfer-generic/commands/acknowledge-client-notification", "IRT", "Data-transfer-generic"
+
+			feature CommandType: IRT_Modules_DataTransfer_Generic_Domain_Aggregates_ClientNotifications_Commands_AcknowledgeClientNotification
+
+			guid ClientNotificationId
+
+			string ErrorCode
+
+			string ResponseMessage
+
+			bool IsSuccess
+
+			string Url
+		}
+
+		command CreateClientNotification {
+
+			feature Route: "irt/v1/data-transfer-generic/commands/create-client-notification", "IRT", "Data-transfer-generic"
+
+			feature CommandType: IRT_Modules_DataTransfer_Generic_Domain_Aggregates_ClientNotifications_Commands_CreateClientNotification
+
+			guid NotificationId
+
+			string Title
+
+			string Body
+
+			guid SubjectId
+
+			optional_guid SubjectVisitId
+
+			string VisitId
+
+			guid NotificationDefinitionId
+
+			bool IsNotificationSent
+
+			optional_guid DependentNotificationId
+		}
+
+		command MarkNotificationsAsSent {
+
+			feature Route: "irt/v1/data-transfer-generic/commands/mark-notifications-as-sent", "IRT", "Data-transfer-generic"
+
+			feature CommandType: IRT_Modules_DataTransfer_Generic_Domain_Aggregates_ClientNotifications_Commands_MarkNotificationsAsSent
+
+			guid[] NotificationIds
+		}
+
+		command ReceiveClientNotification {
+
+			feature Route: "irt/v1/data-transfer-generic/commands/receive-client-notification", "IRT", "Data-transfer-generic"
+
+			feature CommandType: IRT_Modules_DataTransfer_Generic_Domain_Aggregates_ClientNotifications_Commands_ReceiveClientNotification
+
+			string Title
+
+			string Body
+
+			string SiteId
+
+			optional_guid SubjectId
+
+			optional_guid SubjectVisitId
+
+			bool IsNotificationSent
+
+			string AdditionalInfo
+		}
+
+		command UpdateClientNotification {
+
+			feature Route: "irt/v1/data-transfer-generic/commands/update-client-notification", "IRT", "Data-transfer-generic"
+
+			feature CommandType: IRT_Modules_DataTransfer_Generic_Domain_Aggregates_ClientNotifications_Commands_UpdateClientNotification
+
+			guid NotificationId
+
+			string Title
+
+			string Body
+
+			optional_int FailedSendAttempts
+
+			string SiteId
+
+			bool IsNotificationSent
+		}
+
+		command CreateDynamicSetting {
+
+			feature Route: "irt/v1/data-transfer-generic/commands/create-dynamic-setting", "IRT", "Data-transfer-generic"
+
+			feature CommandType: IRT_Modules_DataTransfer_Generic_Domain_Aggregates_DynamicSetting_Commands_CreateDynamicSetting
+
+			guid DynamicSettingId
+
+			string Name
+
+			string Description
+
+			string DefaultValue
+
+			string EntityTypeName
+
+			string ExtendedPropertyName
+		}
+	}
+}

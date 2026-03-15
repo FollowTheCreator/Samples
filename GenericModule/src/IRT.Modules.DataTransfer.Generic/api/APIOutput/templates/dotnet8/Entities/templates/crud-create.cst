@@ -1,0 +1,108 @@
+%%
+string tableType = entityTableType.Replace("_",".");
+string tableName = $"Set<{@tableType}>()";
+bool useNewRoutes = Entity.Features["UseNewRoutes"].Values[0].ToString() == "True";
+string suppressOldRoutes = useNewRoutes ? "// old routes --" : ""; 
+string suppressNewRoutes = useNewRoutes ? "" : "// new routes --";
+string newRoute = Entity.Features["Route"].Values[0].ToString();
+string newRealm = Entity.Features["Route"].Values[1].ToString() + " : EntityUpdates : " + Entity.Features["Route"].Values[2].ToString();
+
+%%
+
+/// <summary>
+/// create a(n) @(entityShapeName)
+/// </summary>
+/// <param name="add">data for the entity to create.</param>
+[HttpPost]
+// even create is in /updates
+@suppressOldRoutes [Route("Create")]
+@suppressNewRoutes [Route("api/updates/@(newRoute)/create")]
+@suppressNewRoutes [SwaggerOperation(Tags = new[] { "@(newRealm)" })]
+
+[ProducesResponseType(typeof(ActionResult), StatusCodes.Status200OK)]
+public ActionResult Create([FromBody] @(entityShapeName)Input add)
+{
+    ActionResult response;
+
+    try
+    {
+        @tableType old = ReadByKey
+        (
+%Indent += 4;
+%Indent += 4;
+%Indent += 4;
+%%
+string comma = "  ";
+foreach (string name in primaryKeyList.Keys)
+{
+    %>@(comma)add.@(name)
+    comma = ", ";
+}
+%%
+%Indent -= 4;
+%Indent -= 4;
+%Indent -= 4;
+        );
+
+        if (old != null)
+        {
+            response = Conflict();
+        }
+        else
+        {
+%Indent += 4;
+%Indent += 4;
+%Indent += 4;
+%%
+            %>@(tableType) create =
+Indent += 4;
+                %>new @(tableType)();
+Indent -= 4;
+%%
+
+%%
+            foreach (PropertyInfo p in Entity.Properties) {
+                if(
+                    (p.Type != PropertyType.Reference)
+                &&(p.CSharpTypeName.StartsWith("Collection") == false)
+                &&(p.CSharpTypeName.StartsWith("ICollection") == false)
+                &&(p.CSharpTypeName.StartsWith("IList") == false)
+                &&(
+                    (p.IsWrappedType == false)
+                ||
+                    (primaryKeyList.Keys.Contains(p.Name) == false)
+                )
+                &&  (p.Features.Keys.Contains("readonly") == false)
+                ){
+                    pName = p.Name;
+
+                    if(pName.Equals($"{entityShapeName}X"))
+                    {
+                        pName = pName.Substring(0, pName.Length-1);
+                    }
+
+                    %>create.@(pName) = add.@(pName);
+                }
+            }
+%%
+
+%Indent -= 4;
+%Indent -= 4;
+%Indent -= 4;
+            DbContext.@(tableName)
+%Indent += 4;
+            .Add(create);
+%Indent -= 4;
+
+            DbContext.SaveChanges();
+
+            response = Ok();
+        }
+    }
+    catch (Exception e)
+    {
+        response = Error(e);
+    }
+
+    return response;
+}

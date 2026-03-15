@@ -1,0 +1,11 @@
+﻿[*.cs]
+
+# Default severity for analyzer diagnostics with category 'Naming'
+dotnet_analyzer_diagnostic.category-Naming.severity = none
+
+# SA1300: Element should begin with upper-case letter
+dotnet_diagnostic.SA1300.severity = none
+
+# SA1300: Element should begin with upper-case letter
+dotnet_diagnostic.SA1412.severity = none
+

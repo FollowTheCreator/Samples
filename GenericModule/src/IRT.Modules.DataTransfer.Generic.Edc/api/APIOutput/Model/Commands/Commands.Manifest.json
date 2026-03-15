@@ -1,0 +1,31 @@
+[
+  {
+    "CommandTypeName": [
+      "IRT.Modules.DataTransfer.Generic.Edc.Domain.Aggregates.ClientNotifications.Commands.CreateDataTransferErrorNotification",
+      "IRT.Modules.DataTransfer.Generic.Edc.Domain.Aggregates.ClientNotifications.Commands.Veeva.CreateVeevaDataTransferErrorSummaryNotification",
+      "IRT.Modules.DataTransfer.Generic.Edc.Domain.Aggregates.ClientNotifications.Commands.Veeva.VeevaAcknowledgeClientNotification",
+      "IRT.Modules.DataTransfer.Generic.Edc.Domain.Aggregates.ClientNotifications.Commands.Rave.CreateRaveDataTransferErrorSummaryNotification",
+      "IRT.Modules.DataTransfer.Generic.Edc.Domain.Aggregates.ClientNotifications.Commands.Rave.RaveAknowledgeClientNotification"
+    ],
+    "Aggregate": "DTGeneric",
+    "IsExcluded": false,
+    "Name": "DTGeneric",
+    "Namespace": "Commands.DTGeneric",
+    "OpTypeName": [
+      "IRT.Modules.DataTransfer.Generic.Edc.Domain.Aggregates.ClientNotifications.Commands.CreateDataTransferErrorNotification",
+      "IRT.Modules.DataTransfer.Generic.Edc.Domain.Aggregates.ClientNotifications.Commands.Veeva.CreateVeevaDataTransferErrorSummaryNotification",
+      "IRT.Modules.DataTransfer.Generic.Edc.Domain.Aggregates.ClientNotifications.Commands.Veeva.VeevaAcknowledgeClientNotification",
+      "IRT.Modules.DataTransfer.Generic.Edc.Domain.Aggregates.ClientNotifications.Commands.Rave.CreateRaveDataTransferErrorSummaryNotification",
+      "IRT.Modules.DataTransfer.Generic.Edc.Domain.Aggregates.ClientNotifications.Commands.Rave.RaveAknowledgeClientNotification"
+    ],
+    "Realm": "DTGeneric.Commands",
+    "Part": null,
+    "Layer": 0,
+    "SlangEntityName": "DTGeneric",
+    "Subfolder": null,
+    "TypeName": "CreateDataTransferErrorNotification",
+    "TypeFullName": "IRT.Modules.DataTransfer.Generic.Edc.Domain.Aggregates.ClientNotifications.Commands.CreateDataTransferErrorNotification",
+    "SkipProperties": [],
+    "GenericTypes": []
+  }
+]

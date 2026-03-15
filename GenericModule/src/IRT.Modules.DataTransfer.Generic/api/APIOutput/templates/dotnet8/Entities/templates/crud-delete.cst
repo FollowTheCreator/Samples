@@ -1,0 +1,87 @@
+%%
+string tableType = entityTableType.Replace("_",".");
+string tableName = $"Set<{@tableType}>()";
+bool useNewRoutes = Entity.Features["UseNewRoutes"].Values[0].ToString() == "True";
+string suppressOldRoutes = useNewRoutes ? "// old routes --" : ""; 
+string suppressNewRoutes = useNewRoutes ? "" : "// new routes --";
+string newRoute = Entity.Features["Route"].Values[0].ToString();
+string newRealm = Entity.Features["Route"].Values[1].ToString() + " : EntityUpdates : " + Entity.Features["Route"].Values[2].ToString();
+
+%%
+
+/// <summary>
+/// delete an instance of @(entityShapeName)
+/// </summary>
+%%
+foreach (string name in primaryKeyList.Keys)
+{
+    %>/// <param name="@(name)">@(name)</param>
+}
+%%
+[HttpPost]
+@suppressOldRoutes [Route("Delete")]
+@suppressNewRoutes [Route("api/updates/@(newRoute)/delete")]
+@suppressNewRoutes [SwaggerOperation(Tags = new[] { "@(newRealm)" })]
+[ProducesResponseType(typeof(ActionResult), StatusCodes.Status200OK)]
+public ActionResult Delete
+(
+%Indent += 4;
+%%
+string comma = "  ";
+foreach (string name in primaryKeyList.Keys)
+{
+string typeName = primaryKeyList[name].Replace("_",".").Replace("__","_");
+if (typeName.StartsWith("optional_"))
+{
+    typeName = typeName.Substring(9);
+    if (typeName.Equals("guid"))
+    {
+        typeName = "Guid";
+    }
+    typeName = typeName+"?";
+}
+    %>@(comma)@(typeName) @(name)
+    comma = ", ";
+}
+%%
+%Indent -= 4;
+)
+{
+    ActionResult response;
+
+    try
+    {
+        @tableType old = ReadByKey
+        (
+%Indent += 4;
+%Indent += 4;
+%Indent += 4;
+%%
+comma = "  ";
+foreach (string name in primaryKeyList.Keys)
+{
+    %>@(comma)@(name)
+    comma = ", ";
+}
+%%
+%Indent -= 4;
+%Indent -= 4;
+%Indent -= 4;
+        );
+
+        if (old != null)
+        {
+            DbContext.@(tableName).Remove(old);
+
+            DbContext.SaveChanges();
+        }
+
+        response = Ok();
+    }
+    catch (Exception e)
+    {
+        response = Error(e);
+    }
+
+    return response;
+}

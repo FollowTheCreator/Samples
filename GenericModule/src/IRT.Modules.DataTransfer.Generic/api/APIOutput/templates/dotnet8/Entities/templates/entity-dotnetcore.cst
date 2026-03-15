@@ -1,0 +1,334 @@
+%%
+bool IsImmutable = false;
+bool IsEF = true;
+
+// Precalculate how many validations this entity uses, since we'll need that
+// answer in a few places.  If you change `validation.cst`, be sure to change
+// this logic as well to match it.
+int NumValidations = 0;
+foreach (PropertyInfo p in Entity.Properties) {
+    if (p.Kind == PropertyKind.Alias)
+        continue;
+
+    if (p.Type == PropertyType.Reference) {
+        if (IsImmutable && !p.IsOptional)
+            NumValidations++;
+    }
+    else if (p.Type == PropertyType.ReferenceCollection) {
+        if (IsImmutable && !p.IsOptional)
+            NumValidations += 2;
+    }
+    else if (p.Type == PropertyType.String || p.Type == PropertyType.Json) {
+        if (p.CombinedConstraints.Length.HasValue)
+            NumValidations++;
+        else {
+            if (p.CombinedConstraints.MinLength.HasValue)
+                NumValidations++;
+            if (p.CombinedConstraints.MaxLength.HasValue)
+                NumValidations++;
+        }
+        if (p.CombinedConstraints.Matches != null && p.CombinedConstraints.Matches.Any())
+            NumValidations += p.CombinedConstraints.Matches.Count;
+    }
+}
+
+bool HasEntityReadRule = Entity.AuthReadRule.IsMeaningful();
+bool HasEntityWriteRule = Entity.AuthWriteRule.IsMeaningful();
+bool HasPropertyReadRules = Entity.Properties.Any(p => p.AuthReadRule.IsMeaningful());
+
+// This is a collection of all of the interfaces to be added to the entity.
+// We only add interfaces where required, and this is a HashSet to avoid duplication.
+HashSet<string> EntityInterfaces = new HashSet<string>();
+EntityInterfaces.Add("System.IEquatable<" + Entity.ShapeName + ">");
+if (HasEntityReadRule || HasPropertyReadRules)
+    EntityInterfaces.Add("IReadAuthorizedEntity");
+if (HasEntityWriteRule)
+    EntityInterfaces.Add("IWriteAuthorizedEntity");
+if (HasEntityWriteRule || NumValidations > 0)
+    EntityInterfaces.Add("ISaveTrackedEntity");
+if (Entity.IsRoot)
+    EntityInterfaces.Add("IAggregateRoot");
+
+if (Entity.Exposure == ExposureKind.Protected
+    || Entity.Exposure == ExposureKind.Private
+    || Entity.Exposure == ExposureKind.Internal)
+    Error(Entity.Location, $"Entity '{Entity.FullName}' cannot be declared '{Entity.Exposure.Value.ToString().ToLower()}'.");
+%%
+%include "_header.cst"
+
+using EntityFramework.Extensions;
+
+using System.Data.Entity;
+
+using System.Net;
+using System.Net.Http;
+using System.Net.Mail;
+
+using System.Web.Http.Description;
+
+using Frameworks.Notifications.Entities;
+
+using Kernel.Globalization.Domain.Aggregates.LanguageAggregate.Enums;
+using Kernel.Globalization.Entities;
+
+using IRT.Api.Common;
+
+using IRT.Domain;
+using IRT.Domain.AdhocReporting.Views;
+using IRT.Domain.Aggregates.Depot.ValueObjects;
+using IRT.Domain.Aggregates.SelfSupportWorkflowOrchestrator.ValueObjects;
+using IRT.Domain.Aggregates.Site.ValueObjects;
+using IRT.Domain.Aggregates.StudyData.ValueObjects;
+using IRT.Domain.Aggregates.Subject.ValueObjects;
+using IRT.Domain.Notifications;
+using IRT.Domain.ValueObjects;
+using IRT.Domain.ValueObjects.Country.HomeDelivery;
+using IRT.Domain.ValueObjects.Dose;
+using IRT.Domain.ValueObjects.DrugOrdering;
+using IRT.Domain.ValueObjects.DrugOrdering.HomeDelivery;
+using IRT.Domain.ValueObjects.DrugRelease;
+using IRT.Domain.ValueObjects.EcoaUserAccess;
+using IRT.Domain.ValueObjects.InformedConsent;
+using IRT.Domain.ValueObjects.InformedConsentReports;
+using IRT.Domain.ValueObjects.Questionnaires.Enums;
+using IRT.Domain.ValueObjects.Randomization;
+using IRT.Domain.ValueObjects.SiteTemperatureExcursion;
+using IRT.Domain.ValueObjects.SiteTemRule;
+using IRT.Domain.ValueObjects.Subject.Counts;
+using IRT.Domain.ValueObjects.SupplyStrategies;
+using IRT.Domain.ValueObjects.TemperatureExcursion;
+using IRT.Domain.ValueObjects.Treatment;
+using IRT.Domain.ValueObjects.Visits.Enums;
+using IRT.Domain.ViewsSql;
+using IRT.Domain.ViewsSql.EnumSeedViews;
+using IRT.Domain.ViewsSql.Subject.SubjectWaiver;
+using IRT.Domain.ViewsSql.SubjectOperationLog;
+using IRT.Domain.ViewsSql.Cohort;
+using IRT.Domain.ViewsSql.Compliance;
+using IRT.Domain.ViewsSql.ConfigData;
+using IRT.Domain.ViewsSql.CountriesToLocalizedValues;
+using IRT.Domain.ViewsSql.Country;
+using IRT.Domain.ViewsSql.CountryApprovers;
+using IRT.Domain.ViewsSql.DataTransferSettings;
+using IRT.Domain.ViewsSql.Depot;
+using IRT.Domain.ViewsSql.Dose;
+using IRT.Domain.ViewsSql.Drugs;
+using IRT.Domain.ViewsSql.DrugAssignment;
+using IRT.Domain.ViewsSql.DrugCode;
+using IRT.Domain.ViewsSql.DrugLabelGroup;
+using IRT.Domain.ViewsSql.DrugRelease;
+using IRT.Domain.ViewsSql.DrugRequests;
+using IRT.Domain.ViewsSql.DrugShipment;
+using IRT.Domain.ViewsSql.DrugSupplyStrategy;
+using IRT.Domain.ViewsSql.EntityLocation;
+using IRT.Domain.ViewsSql.EnumSeedViews.Views;
+using IRT.Domain.ViewsSql.EthicsCommittee;
+using IRT.Domain.ViewsSql.ExtendedProperty;
+using IRT.Domain.ViewsSql.HomeDeliveryDrugRequests;
+using IRT.Domain.ViewsSql.InformedConsentDocument;
+using IRT.Domain.ViewsSql.LabeledDrugHistory;
+using IRT.Domain.ViewsSql.Language;
+using IRT.Domain.ViewsSql.Lot;
+using IRT.Domain.ViewsSql.Notifications;
+using IRT.Domain.ViewsSql.Permission;
+using IRT.Domain.ViewsSql.PropertyModificationRequest;
+using IRT.Domain.ViewsSql.Questionnaire;
+using IRT.Domain.ViewsSql.RandomizationItem;
+using IRT.Domain.ViewsSql.Role;
+using IRT.Domain.ViewsSql.SelfSupportWorkflows;
+using IRT.Domain.ViewsSql.ShipmentDocument;
+using IRT.Domain.ViewsSql.Site;
+using IRT.Domain.ViewsSql.SiteLicense;
+using IRT.Domain.ViewsSql.SiteTemperatureExcursion;
+using IRT.Domain.ViewsSql.SiteTemRules;
+using IRT.Domain.ViewsSql.Stratum;
+using IRT.Domain.ViewsSql.Study;
+using IRT.Domain.ViewsSql.StudyUserLinks;
+using IRT.Domain.ViewsSql.Subject;
+using IRT.Domain.ViewsSql.Subject.Ecoa;
+using IRT.Domain.ViewsSql.Subject.InformedConsent;
+using IRT.Domain.ViewsSql.Subject.SubjectDrugDiscontinuation;
+using IRT.Domain.ViewsSql.Subject.SubjectVisitDrug;
+using IRT.Domain.ViewsSql.SubjectReservation;
+using IRT.Domain.ViewsSql.TemperatureLogger;
+using IRT.Domain.ViewsSql.TempTables;
+using IRT.Domain.ViewsSql.Treatment;
+using IRT.Domain.ViewsSql.User;
+using IRT.Domain.ViewsSql.UserAccess;
+using IRT.Domain.ViewsSql.UserAccessRequest;
+using IRT.Domain.ViewsSql.Visit;
+%%
+string pkMessage = default;
+string pkValue = default;
+
+string domain = string.Join(".", Entity.Features["Domain"].Values);
+
+string entityShapeName = Entity.ShapeName;
+string entityTableType = Entity.Features["DbContextTableType"].Values.First().ToString();
+string entityTableName = Entity.Features["DbContextTableName"].Values.First().ToString();
+%%
+
+namespace @Entity.ShapeNamespace.Replace(".Shapes",default)
+{
+%include "documentation.cst"
+%WriteXmlDocumentation(Entity?.Documentation, "The standard controller for a " + Entity.ShapeName + " entity.");
+[Realm("@domain")]
+[ApiController]
+public class @(entityShapeName)Controller : ControllerBase
+{
+%Indent += 4;
+#region Constructors
+
+/// <summary>
+/// constructor
+/// </summary>
+public @(entityShapeName)Controller(IRTDbContext dbContext)
+{
+    DbContext = dbContext;
+}
+#endregion
+%%
+string primaryKeyType = default;
+string primaryKeyName = default;
+
+string pName = default;
+
+Dictionary<string, string> primaryKeyList = new Dictionary<string, string>();
+
+// find the primary key names
+foreach (PropertyInfo p in Entity.Properties) {
+
+    if (Entity.Features["PrimaryKey"].Values.Contains(p.Name))
+    {
+        if (p.Name.Equals($"{entityShapeName}X"))
+        {
+            primaryKeyName = entityShapeName;
+        }
+        else
+        {
+            primaryKeyName = p.Name;
+        }
+
+        primaryKeyType = p.CSharpTypeName;
+        int suffix = primaryKeyType.LastIndexOf(".");
+        if (-1 < suffix)
+        {
+            primaryKeyType = primaryKeyType.Substring(suffix+1);
+        }
+
+        primaryKeyList[primaryKeyName] = primaryKeyType;
+    }
+}
+if (primaryKeyList.Keys.Count < 1)
+{
+    throw(new Exception(@$"NO Primary Key found for {Entity.ShapeName}"));
+}
+
+if (Entity.Features.TryGetValue("AutoCommands", out FeatureInfo feature)) {
+    foreach (string autoCrud in feature.Values) {
+        switch (autoCrud) {
+        case "Create":
+%%
+
+#region Creates
+
+%include "crud-create.cst"
+
+#endregion
+%%
+        break;
+        case "Read":
+%%
+
+#region Reads
+
+%include "crud-read.cst"
+
+#endregion
+%%
+        break;
+        case "Update":
+%%
+
+#region Updates
+
+%include "crud-update.cst"
+
+#endregion
+%%
+        break;
+        case "Delete":
+%%
+
+#region Deletes
+
+%include "crud-delete.cst"
+
+#endregion
+%%
+        break;
+        }
+    }
+}
+    
+%%
+
+#region Instances
+
+private readonly IRTDbContext DbContext;
+
+#endregion
+%Indent -= 4;
+}
+
+/// <summary>
+/// input schema for the entity
+/// </summary>
+public class @(entityShapeName)Input
+{
+%Indent += 4;
+%Indent += 4;
+%%
+            bool isFirst = true;
+            string comma = "  ";
+            foreach (PropertyInfo p in Entity.Properties) {
+                if(
+                    (p.Type != PropertyType.Reference)
+                &&  (p.CSharpTypeName.StartsWith("Collection") == false)
+                &&  (p.CSharpTypeName.StartsWith("ICollection") == false)
+                &&  (p.CSharpTypeName.StartsWith("IList") == false)
+                &&(
+                    (p.IsWrappedType == false)
+                ||
+                    (primaryKeyList.Keys.Contains(p.Name) == false)
+                )
+                &&  (p.Features.Keys.Contains("readonly") == false)
+                ){
+                    pName = p.Name;
+
+                    if(pName.Equals($"{entityShapeName}X"))
+                    {
+                        pName = pName.Substring(0, pName.Length-1);
+                    }
+
+                    int dot = p.CSharpTypeName.LastIndexOf('.');
+                    string typeName = (dot < 0 ? @p.CSharpTypeName : @p.CSharpTypeName.Substring(dot + 1));
+                    if (isFirst != true) %>
+                    isFirst = false;
+                    %>/// <summary>
+                    %>/// @pName
+                    %>/// </summary>
+                    %>public @typeName @pName;
+                }
+                else
+                {
+                    if (isFirst != true) %>
+                    isFirst = false;
+                    %>// @p.CSharpTypeName @p.Name --> @p.Type IsWrappedType=@p.IsWrappedType isPrimaryKey=@primaryKeyList.Keys.Contains(p.Name)
+                }
+            }
+%%
+%Indent -= 4;
+}
+%Indent -= 4;
+}

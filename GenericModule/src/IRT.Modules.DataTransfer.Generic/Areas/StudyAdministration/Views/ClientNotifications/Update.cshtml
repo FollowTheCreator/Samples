@@ -1,0 +1,99 @@
+﻿@using System.Text
+@using Resources = IRT.Modules.DataTransfer.Generic.Areas.StudyAdministration.Views.ClientNotifications.Resources
+@using IRT.Domain
+@using Kernel.Utilities.Extensions
+@using IRT.Modules.DataTransfer.Generic.Areas.Constants
+@using IRT.Modules.DataTransfer.Generic.Domain.Notifications
+
+@model IRT.Modules.DataTransfer.Generic.Areas.StudyAdministration.Models.ClientNotificationUpdateViewModel
+
+@{
+    ViewBag.Title = Resources.Update.Title;
+}
+
+<span class="breadcrumbs-back">
+    @Html.ActionLink(Resources.Index.Title, "Index", null, new { @class = "breadcrumb-link" })
+</span>
+
+<span class="breadcrumbs-back">
+    @Html.ActionLink(Resources.Details.Title, "Details", new { id = Model.NotificationId }, new { @class = "breadcrumb-link" })
+</span>
+
+<span class="breadcrumbs-round-box">
+    @ViewBag.Title
+</span>
+
+<div class="box-container">
+    @using (Html.BeginForm("Update", "ClientNotifications", FormMethod.Post))
+    {
+        @Html.HiddenFor(x => x.NotificationId)
+
+        <div class="control-group">
+            @Html.LabelFor(x => x.Title, new { @class = "control-label" })
+            <div class="controls">
+                @Html.TextBoxFor(x => x.Title, new { @class = "input-block-level" })
+            </div>
+            @Html.ValidationMessageFor(x => x.Title)
+        </div>
+
+        <div class="control-group">
+            @Html.LabelFor(x => x.NotificationDefinitionName, new { @class = "control-label" })
+            <div class="controls">
+                @Html.TextBoxFor(x => x.NotificationDefinitionName, new { @class = "input-block-level", @readonly = "readonly" })
+            </div>
+        </div>
+
+        <div class="row-fluid">
+            <div class="span4">
+                <div class="control-group">
+                    <label for="IsNotificationSubmitted" class="control-label checkbox">
+                        @Html.CheckBoxFor(x => x.IsNotificationSent) Is notification sent?
+                    </label>
+                </div>
+                <div class="control-group">
+                    @Html.LabelFor(x => x.FailedSubmitAttempts, new { @class = "control-label inline-label" })
+                    @Html.TextBoxFor(x => x.FailedSubmitAttempts, new { @class = "span3" })
+                    @Html.ValidationMessageFor(x => x.FailedSubmitAttempts)
+                </div>
+            </div>
+        </div>
+
+        <div class="control-group">
+            @Html.LabelFor(x => x.Body, new { @class = "control-label" })
+            <div class="controls">
+                @Html.TextAreaFor(x => x.Body, new { @class = "client-notification-body input-block-level", rows = 15 })
+            </div>
+            @Html.ValidationMessageFor(x => x.Body)
+            @Html.ValidationMessage(ErrorMessageKeys.BodyServerError)
+        </div>
+
+        <p>@Resources.Details.DependentNotification</p>
+        <div class="row">
+            <div class="span11">
+                <pre>@this.Model.DependentNotification</pre>
+            </div>
+        </div>
+
+        <hr />
+        await Html.RenderPartialAsync("ElectronicSignature", Model);
+        <hr />
+
+        <div class="control-group">
+            <div class="controls">
+                <button type="submit" class="btn btn-primary" id="SubmitForm" disabled="disabled">Save</button>
+                @Html.ActionLink("Close", "Index", null, new { @class = "btn" })
+            </div>
+        </div>
+    }
+</div>
+
+<style>
+    .client-notification-body {
+        resize: vertical;
+    }
+
+    .inline-label {
+        margin-right: 20px;
+        display: inline-block;
+    }
+</style>

@@ -1,0 +1,33 @@
+[
+  {
+    "CommandTypeName": [
+      "IRT.Modules.DataTransfer.Generic.Domain.Aggregates.DynamicSetting.Commands.CreateDynamicSetting",
+      "IRT.Modules.DataTransfer.Generic.Domain.Aggregates.ClientNotifications.Commands.AcknowledgeClientNotification",
+      "IRT.Modules.DataTransfer.Generic.Domain.Aggregates.ClientNotifications.Commands.CreateClientNotification",
+      "IRT.Modules.DataTransfer.Generic.Domain.Aggregates.ClientNotifications.Commands.MarkNotificationsAsSent",
+      "IRT.Modules.DataTransfer.Generic.Domain.Aggregates.ClientNotifications.Commands.ReceiveClientNotification",
+      "IRT.Modules.DataTransfer.Generic.Domain.Aggregates.ClientNotifications.Commands.UpdateClientNotification"
+    ],
+    "Aggregate": "DTGeneric",
+    "IsExcluded": false,
+    "Name": "DTGeneric",
+    "Namespace": "Commands.DTGeneric",
+    "OpTypeName": [
+      "IRT.Modules.DataTransfer.Generic.Domain.Aggregates.DynamicSetting.Commands.CreateDynamicSetting",
+      "IRT.Modules.DataTransfer.Generic.Domain.Aggregates.ClientNotifications.Commands.AcknowledgeClientNotification",
+      "IRT.Modules.DataTransfer.Generic.Domain.Aggregates.ClientNotifications.Commands.CreateClientNotification",
+      "IRT.Modules.DataTransfer.Generic.Domain.Aggregates.ClientNotifications.Commands.MarkNotificationsAsSent",
+      "IRT.Modules.DataTransfer.Generic.Domain.Aggregates.ClientNotifications.Commands.ReceiveClientNotification",
+      "IRT.Modules.DataTransfer.Generic.Domain.Aggregates.ClientNotifications.Commands.UpdateClientNotification"
+    ],
+    "Realm": "DTGeneric.Commands",
+    "Part": null,
+    "Layer": 0,
+    "SlangEntityName": "DTGeneric",
+    "Subfolder": null,
+    "TypeName": "CreateDynamicSetting",
+    "TypeFullName": "IRT.Modules.DataTransfer.Generic.Domain.Aggregates.DynamicSetting.Commands.CreateDynamicSetting",
+    "SkipProperties": [],
+    "GenericTypes": []
+  }
+]

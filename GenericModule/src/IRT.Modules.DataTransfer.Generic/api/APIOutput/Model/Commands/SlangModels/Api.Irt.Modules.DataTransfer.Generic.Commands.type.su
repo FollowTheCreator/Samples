@@ -1,0 +1,15 @@
+namespace Api.Irt.Modules.DataTransfer.Generic.Commands {
+
+	// external enums
+
+	type MailPriority {
+	}
+
+	// property types
+
+	type optional_guid {
+	}
+
+	type optional_int {
+	}
+}

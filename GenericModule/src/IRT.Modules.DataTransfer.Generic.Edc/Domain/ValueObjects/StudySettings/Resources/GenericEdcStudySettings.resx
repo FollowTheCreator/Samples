@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ApacheHopBaseUrl" xml:space="preserve">
+    <value>Apache Hop Base URL</value>
+  </data>
+  <data name="ApacheHopBaseUrlDescription" xml:space="preserve">
+    <value>The base URL of Apache Hop Server </value>
+  </data>
+  <data name="ApacheHopPassword" xml:space="preserve">
+    <value>Apache Hop Password</value>
+  </data>
+  <data name="ApacheHopPasswordDescription" xml:space="preserve">
+    <value>The password used to authenticate requests on the Apache Hop Server</value>
+  </data>
+  <data name="ApacheHopUsername" xml:space="preserve">
+    <value>Apache Hop Username</value>
+  </data>
+  <data name="ApacheHopUsernameDescription" xml:space="preserve">
+    <value>The username used to authenticate requests on the Apache Hop Server</value>
+  </data>
+  <data name="DataTransferRaveCategory" xml:space="preserve">
+    <value>890 Data Transfer Generic Rave</value>
+  </data>
+  <data name="DataTransferRepeatKeyCategory" xml:space="preserve">
+    <value>900 Data Transfer Generic Repeat Key</value>
+  </data>
+  <data name="DataTransferVeevaCategory" xml:space="preserve">
+    <value>895 Data Transfer Generic Veeva</value>
+  </data>
+  <data name="EnableRaveErrorNotification" xml:space="preserve">
+    <value>Enable Rave Error Notification</value>
+  </data>
+  <data name="EnableRaveErrorNotificationDescription" xml:space="preserve">
+    <value>Enable or disable RaveErrorNotification and the RaveErrorListNotification</value>
+  </data>
+  <data name="EnableVeevaErrorNotification" xml:space="preserve">
+    <value>Enable Veeva Error Notification</value>
+  </data>
+  <data name="EnableVeevaErrorNotificationDescription" xml:space="preserve">
+    <value>Enable or disable VeevaErrorNotification and the VeevaErrorListNotification</value>
+  </data>
+  <data name="ExcludeFromScheduledVisits" xml:space="preserve">
+    <value>Visits to be excluded from the Scheduled Visits list</value>
+  </data>
+  <data name="ExcludeFromScheduledVisitsDescription" xml:space="preserve">
+    <value>Additional visits that will be excluded from the Scheduled Visits list (only "visit.IsUnscheduled = false" check is applied by default)</value>
+  </data>
+  <data name="InformedConsentVisits" xml:space="preserve">
+    <value>Informed Consent Visits</value>
+  </data>
+  <data name="InformedConsentVisitsDescription" xml:space="preserve">
+    <value>Visits that should be processed as Informed Consent Visits</value>
+  </data>
+  <data name="ReplacementVisits" xml:space="preserve">
+    <value>Replacement Visits</value>
+  </data>
+  <data name="ReplacementVisitsDescription" xml:space="preserve">
+    <value>Visits that should be processed as Replacement Visits</value>
+  </data>
+  <data name="ScreenFailVisits" xml:space="preserve">
+    <value>Screen Fail Visits</value>
+  </data>
+  <data name="ScreenFailVisitsDescription" xml:space="preserve">
+    <value>Visits that should be processed as Screen Fail Visits</value>
+  </data>
+  <data name="UnscheduledVisits" xml:space="preserve">
+    <value>Unscheduled Visits</value>
+  </data>
+  <data name="UnscheduledVisitsDescription" xml:space="preserve">
+    <value>Visits that should be processed as Unscheduled Visits</value>
+  </data>
+</root>

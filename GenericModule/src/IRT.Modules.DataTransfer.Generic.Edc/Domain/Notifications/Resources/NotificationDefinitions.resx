@@ -1,0 +1,240 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="RaveClientDemographicsForm" xml:space="preserve">
+    <value>Rave Client Demographics Form</value>
+  </data>
+  <data name="RaveClientDrugDispensationForm" xml:space="preserve">
+    <value>Rave Client Drug Dispensation Form</value>
+  </data>
+  <data name="RaveClientEdcReceivedData" xml:space="preserve">
+    <value>Rave Client Edc Get Data Request</value>
+  </data>
+  <data name="RaveClientEnrollmentForm" xml:space="preserve">
+    <value>Rave Client Enrollment Form</value>
+  </data>
+  <data name="RaveClientRandomizationForm" xml:space="preserve">
+    <value>Rave Client Randomization Form</value>
+  </data>
+  <data name="RaveClientScreenFailedForm" xml:space="preserve">
+    <value>Rave Client Screen Failed Form</value>
+  </data>
+  <data name="RaveClientScreeningForm" xml:space="preserve">
+    <value>Rave Client Screening Form</value>
+  </data>
+  <data name="RaveClientSubjectForm" xml:space="preserve">
+    <value>Rave Client Subject Form</value>
+  </data>
+  <data name="ErrorForm" xml:space="preserve">
+    <value>Form Error</value>
+  </data>
+  <data name="ErrorSummaryForm" xml:space="preserve">
+    <value>Error Forms Summary</value>
+  </data>
+  <data name="RaveGenericDemographicsForm" xml:space="preserve">
+    <value>Rave Generic Demographics Form</value>
+  </data>
+  <data name="RaveGenericDrugDispensationForm" xml:space="preserve">
+    <value>Rave Generic Drug Dispensation Form</value>
+  </data>
+  <data name="RaveGenericEnrollmentForm" xml:space="preserve">
+    <value>Rave Generic Enrollment Form</value>
+  </data>
+  <data name="RaveGenericRandomizationForm" xml:space="preserve">
+    <value>Rave Generic Randomization Form</value>
+  </data>
+  <data name="RaveGenericScreenFailedForm" xml:space="preserve">
+    <value>Rave Generic Screen Failed Form</value>
+  </data>
+  <data name="RaveGenericScreeningForm" xml:space="preserve">
+    <value>Rave Generic Screening Form</value>
+  </data>
+  <data name="RaveGenericSubjectForm" xml:space="preserve">
+    <value>Rave Generic Subject Form</value>
+  </data>
+  <data name="VeevaClientAuthorizationForm" xml:space="preserve">
+    <value>Veeva Client Authorization Form</value>
+  </data>
+  <data name="VeevaClientCombinationFormDataUpdateForm" xml:space="preserve">
+    <value>Veeva Client Combination Form Data Update Form</value>
+  </data>
+  <data name="VeevaClientCreateCasebookForm" xml:space="preserve">
+    <value>Veeva Client Create Casebook Form</value>
+  </data>
+  <data name="VeevaClientCreateEventGroupsForm" xml:space="preserve">
+    <value>Veeva Client Create Event Groups Form</value>
+  </data>
+  <data name="GenericRuntimeNotification" xml:space="preserve">
+    <value>Generic Runtime Notification - {0}</value>
+  </data>
+  <data name="VeevaClientCreateFormsForm" xml:space="preserve">
+    <value>Veeva Client Create Forms Form</value>
+  </data>
+  <data name="VeevaClientEditSubmittedFormForm" xml:space="preserve">
+    <value>Veeva Client Edit Submitted Form Form</value>
+  </data>
+  <data name="VeevaClientSetEventAsDidNotOccurForm" xml:space="preserve">
+    <value>Veeva Client Set Event As Did Not Occur  Form</value>
+  </data>
+  <data name="VeevaClientSetEventDateForm" xml:space="preserve">
+    <value>Veeva Client Set Event Date Form</value>
+  </data>
+  <data name="VeevaClientSetItemValueForm" xml:space="preserve">
+    <value>Veeva Client Set Item Value Form</value>
+  </data>
+  <data name="VeevaClientSetSubjectStatusForm" xml:space="preserve">
+    <value>Veeva Client Set Subject Status Form</value>
+  </data>
+  <data name="VeevaClientSubmitFormForm" xml:space="preserve">
+    <value>Veeva Client Submit Form Form</value>
+  </data>
+  <data name="VeevaClientUnsetSubjectStatusForm" xml:space="preserve">
+    <value>Veeva Client Unset Subject Status Form</value>
+  </data>
+  <data name="VeevaClientUpsertEventGroupsForm" xml:space="preserve">
+    <value>Veeva Client Upsert Event Groups Form</value>
+  </data>
+  <data name="VeevaClientUpsertFormsForm" xml:space="preserve">
+    <value>Veeva Client Upsert Forms Form</value>
+  </data>
+  <data name="VeevaGenericScreeningForm" xml:space="preserve">
+    <value>Veeva Generic Screening Form</value>
+  </data>
+  <data name="VeevaSelfTransformCreateCasebookForm" xml:space="preserve">
+    <value>Veeva Self Transform Create Casebook Form</value>
+  </data>
+  <data name="VeevaSelfTransformSubjectForm" xml:space="preserve">
+    <value>Veeva Self Transform Subject Form</value>
+  </data>
+  <data name="GenericSubjectForm" xml:space="preserve">
+    <value>Generic Subject Form</value>
+  </data>
+  <data name="RaveErrorForm" xml:space="preserve">
+    <value>Rave Form Error</value>
+  </data>
+  <data name="RaveErrorFormsList" xml:space="preserve">
+    <value>Rave Error Forms List</value>
+  </data>
+  <data name="VeevaErrorForm" xml:space="preserve">
+    <value>Veeva Form Error</value>
+  </data>
+  <data name="VeevaErrorFormsList" xml:space="preserve">
+    <value>Veeva Error Forms List</value>
+  </data>
+</root>

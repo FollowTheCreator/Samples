@@ -1,0 +1,16 @@
+using System;
+%%
+string realm = string.Join(".", Entity.Features["Realm"].Values);
+string entityShapeName = Entity.ShapeName;
+%%
+
+namespace @Entity.ShapeNamespace.Replace(".Shapes",default)
+{
+%include "documentation.cst"
+%Indent += 4;
+%WriteXmlDocumentation(Entity?.Documentation, "The custom side of " + Entity.ShapeName);
+%Indent -= 4;
+    public partial class @(entityShapeName)
+    {
+    }
+}

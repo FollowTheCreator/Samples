@@ -1,0 +1,113 @@
+%public
+%include "validation-logic.cst"
+%%
+void GenerateConstructor(
+    string typeName, string typeFullName, IReadOnlyCollection<ValidateInfo> validations,
+    IReadOnlyCollection<PropertyInfo> normalProperties,
+    IReadOnlyCollection<PropertyInfo> alwaysDefaultProperties,
+    string description,
+    bool allowDefaultArguments)
+{
+    List<PropertyInfo> allProperties = new List<PropertyInfo>();
+    allProperties.AddRange(normalProperties);
+    allProperties.AddRange(alwaysDefaultProperties);
+%%
+        /// <summary>
+        /// @(description.WrapText(75, "\r\n").Replace("\n", "\n        /// "))
+        /// </summary>
+        public @(typeName)(
+%%
+    bool haveDefault = false;
+    HashSet<string> defaultedArguments = new HashSet<string>();
+    foreach (PropertyInfo prop in normalProperties) {
+        string lowerName = prop.Name.Camelize();
+        haveDefault |= prop.IsOptional || prop.CombinedConstraints.Default != null;
+        haveDefault &= allowDefaultArguments;
+        string defaultValue = haveDefault ? " = " + prop.CSharpDefaultValue : string.Empty;
+        string propTypeName = prop.CSharpTypeName;
+
+        if (haveDefault && prop.Type == PropertyType.WrappedType && !prop.IsArray) {
+            if (!prop.IsOptional)
+                propTypeName += "?";
+            defaultValue = " = default";
+        }
+        if (haveDefault && prop.Type == PropertyType.Type && !prop.IsOptional) {
+            // Ugly special case for type arguments, since they can't reference the *real* default value in the constructor.
+            propTypeName += "?";
+            defaultValue = " = default";
+        }
+
+        if (haveDefault)
+            defaultedArguments.Add(prop.Name);
+
+        if (prop.IsArray) {
+%>            @ArrayType(prop, "IEnumerable") @lowerName@defaultValue@CommaIfNotLast(prop)
+        }
+        else {
+%>            @propTypeName @lowerName@defaultValue@CommaIfNotLast(prop)
+        }
+    }
+%%
+        )
+        {
+%%
+
+    // Populate default values where they can't be assigned in the constructor.
+    foreach (PropertyInfo prop in normalProperties)
+    {
+        if (!prop.IsArray
+            && (prop.Type == PropertyType.Type || prop.Type == PropertyType.WrappedType)
+            && defaultedArguments.Contains(prop.Name))
+        {
+%>            @prop.Name.Camelize() ??= @prop.CSharpDefaultValue;
+        }
+    }
+
+    // If we have properties that are always defaulted, assign them to local
+    // variables so they can participate in validation.
+    foreach (PropertyInfo prop in alwaysDefaultProperties)
+    {
+        if (prop.IsArray)
+        {
+%>            @prop.CSharpTypeName @prop.Name.Camelize() = default;
+        }
+        else
+        {
+%>            @prop.CSharpTypeName @prop.Name.Camelize() = @prop.CSharpDefaultValue;
+        }
+    }
+
+    Indent += 12;
+    GeneratePropertyValidationLogic(properties: normalProperties, objectName: null,
+        typeName: typeFullName, action: "throw new ArgumentException");
+    Indent -= 12;
+
+    // Clone any collections using ImmutableArray<T>; everything else is just
+    // assigned verbatim.
+    foreach (PropertyInfo prop in allProperties)
+    {
+        if (prop.IsArray)
+        {
+%>            this.@prop.Name = @prop.Name.Camelize() is ImmutableArray<@prop.GetCSharpTypeName(allowNullable: false)> @(prop.Name.Camelize())Array ? @(prop.Name.Camelize())Array
+            if (prop.IsOptional)
+            {
+%>                : @prop.Name.Camelize() == null ? (ImmutableArray<@prop.GetCSharpTypeName(allowNullable: false)>?)null
+            }
+%>                : ImmutableArray<@prop.GetCSharpTypeName(allowNullable: false)>.Empty.AddRange(@(prop.Name.Camelize()));
+        }
+        else {
+%>            this.@prop.Name = @prop.Name.Camelize()@(!prop.IsOptional ? "!" : "");
+        }
+    }
+
+    Indent += 12;
+    GenerateJsValidationLogic(validations: validations, objectName: "this",
+        typeName: typeFullName, action: "throw new ArgumentException");
+    Indent -= 12;
+%%
+        }
+
+%%
+    // End of GenerateConstructor() method.
+}
+%%

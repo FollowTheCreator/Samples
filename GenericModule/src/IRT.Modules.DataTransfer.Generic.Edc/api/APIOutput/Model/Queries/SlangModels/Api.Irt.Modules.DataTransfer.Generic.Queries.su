@@ -1,0 +1,4 @@
+project Api.Irt.Modules.DataTransfer.Generic.Queries
+
+include "Api.Irt.Modules.DataTransfer.Generic.Queries.type.su"
+include "Api.Irt.Modules.DataTransfer.Generic.DTGeneric.Queries.su"

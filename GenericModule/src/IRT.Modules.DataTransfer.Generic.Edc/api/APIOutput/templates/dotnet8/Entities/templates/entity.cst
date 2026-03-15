@@ -1,0 +1,438 @@
+%%
+bool IsImmutable = false;
+bool IsEF = true;
+
+bool useNewRoutes = Entity.Features["UseNewRoutes"].Values[0].ToString() == "True";
+string suppressOldRoutes = useNewRoutes ? "// old routes --" : ""; 
+string suppressNewRoutes = useNewRoutes ? "" : "// new routes --"; 
+
+// Precalculate how many validations this entity uses, since we'll need that
+// answer in a few places.  If you change `validation.cst`, be sure to change
+// this logic as well to match it.
+int NumValidations = 0;
+foreach (PropertyInfo p in Entity.Properties) {
+    if (p.Kind == PropertyKind.Alias)
+        continue;
+
+    if (p.Type == PropertyType.Reference) {
+        if (IsImmutable && !p.IsOptional)
+            NumValidations++;
+    }
+    else if (p.Type == PropertyType.ReferenceCollection) {
+        if (IsImmutable && !p.IsOptional)
+            NumValidations += 2;
+    }
+    else if (p.Type == PropertyType.String || p.Type == PropertyType.Json) {
+        if (p.CombinedConstraints.Length.HasValue)
+            NumValidations++;
+        else {
+            if (p.CombinedConstraints.MinLength.HasValue)
+                NumValidations++;
+            if (p.CombinedConstraints.MaxLength.HasValue)
+                NumValidations++;
+        }
+        if (p.CombinedConstraints.Matches != null && p.CombinedConstraints.Matches.Any())
+            NumValidations += p.CombinedConstraints.Matches.Count;
+    }
+}
+
+bool HasEntityReadRule = Entity.AuthReadRule.IsMeaningful();
+bool HasEntityWriteRule = Entity.AuthWriteRule.IsMeaningful();
+bool HasPropertyReadRules = Entity.Properties.Any(p => p.AuthReadRule.IsMeaningful());
+
+// This is a collection of all of the interfaces to be added to the entity.
+// We only add interfaces where required, and this is a HashSet to avoid duplication.
+HashSet<string> EntityInterfaces = new HashSet<string>();
+EntityInterfaces.Add("System.IEquatable<" + Entity.ShapeName + ">");
+if (HasEntityReadRule || HasPropertyReadRules)
+    EntityInterfaces.Add("IReadAuthorizedEntity");
+if (HasEntityWriteRule)
+    EntityInterfaces.Add("IWriteAuthorizedEntity");
+if (HasEntityWriteRule || NumValidations > 0)
+    EntityInterfaces.Add("ISaveTrackedEntity");
+if (Entity.IsRoot)
+    EntityInterfaces.Add("IAggregateRoot");
+
+if (Entity.Exposure == ExposureKind.Protected
+    || Entity.Exposure == ExposureKind.Private
+    || Entity.Exposure == ExposureKind.Internal)
+    Error(Entity.Location, $"Entity '{Entity.FullName}' cannot be declared '{Entity.Exposure.Value.ToString().ToLower()}'.");
+%%
+%include "_header.cst"
+
+%%
+string pkMessage = default;
+string pkValue = default;
+int dot;
+
+string route = Entity.Features["Realm"].Values[0].ToString();
+string layer = Entity.Features["Realm"].Values[1].ToString();
+string realm = string.Join(" > ", Entity.Features["Realm"].Values);
+
+if (Entity.Features.ContainsKey("Subfolder"))
+{
+    route += $"/{Entity.Features["Subfolder"].Values[0].ToString()}";
+}
+
+string entityShapeName = Entity.ShapeName;
+string entityTableType = Entity.Features["DbContextTableType"].Values.First().ToString();
+string tableType = entityTableType.Replace("_",".");
+string entityTableName = Entity.Features["DbContextTableName"].Values.First().ToString();
+string tableName = $"Set<{@tableType}>()";
+string prefix;
+if (layer.Equals("EntityReads"))
+{
+    prefix = "";
+}
+else
+{
+    prefix = "";
+}
+%%
+
+namespace @Entity.ShapeNamespace.Replace(".Shapes",default)
+{
+%include "documentation.cst"
+%Indent += 4;
+%WriteXmlDocumentation(Entity?.Documentation, "The standard controller for a " + Entity.ShapeName + " entity.");
+%Indent -= 4;
+    @suppressOldRoutes [Realm("@realm")]
+    @suppressOldRoutes [Route("@(prefix)IRT/v1/@(route)/@(entityShapeName)")]
+    [Produces("application/json")]
+    public class @(entityShapeName)@(layer)Controller : @(layer)Controller
+    {
+#region Constructors
+
+        /// <summary>
+        /// constructor
+        /// </summary>
+        public @(entityShapeName)@(layer)Controller
+        (
+            IHttpContextAccessor httpContextAccessor,
+            IUnityContainer unityContainer,
+            IRTDbContext dbContext
+        )
+        : base(httpContextAccessor, unityContainer, dbContext)
+        {
+        }
+
+#endregion
+%%
+string primaryKeyType = default;
+string primaryKeyName = default;
+
+string pName = default;
+
+Dictionary<string, string> primaryKeyList = new Dictionary<string, string>();
+Dictionary<string, string> primaryKeyRefList = new Dictionary<string, string>();
+
+// find the primary key names
+foreach (PropertyInfo p in Entity.Properties) {
+
+    if (Entity.Features["PrimaryKey"].Values.Contains(p.Name))
+    {
+        if (p.Name.Equals($"{entityShapeName}X"))
+        {
+            primaryKeyName = entityShapeName;
+        }
+        else
+        {
+            primaryKeyName = p.Name;
+        }
+
+        primaryKeyType = p.CSharpTypeName;
+        int suffix = primaryKeyType.LastIndexOf(".");
+        if (-1 < suffix)
+        {
+            primaryKeyType = primaryKeyType.Substring(suffix+1);
+        }
+
+        primaryKeyList[primaryKeyName] = primaryKeyType;
+        primaryKeyRefList[primaryKeyName] = primaryKeyName;
+    }
+}
+if (primaryKeyList.Keys.Count < 1)
+{
+    throw(new Exception(@$"NO Primary Key found for {Entity.ShapeName}"));
+}
+%%
+%Indent += 4;
+%Indent += 4;
+
+%dot = tableType.LastIndexOf('.');
+%string tablename = (dot < 0 ? tableType : tableType.Substring(dot + 1));
+
+public static void RegisterModel(ODataModelBuilder builder)
+{
+%%
+Indent += 4;
+if (1 < primaryKeyList.Keys.Count)
+{
+string keyList = "";
+comma = "{";
+foreach (string name in primaryKeyList.Keys)
+{
+    keyList = keyList+comma+"e."+name;
+    comma = ", ";
+}
+keyList = keyList+"}";
+%>builder.EntityType<@tableType>().HasKey(e => new @(keyList));
+}
+%%
+builder.EntitySet<@tableType>("@tablename");
+%Indent -= 4;
+}
+%%
+if (Entity.Features.TryGetValue("AutoCommands", out FeatureInfo feature))
+{
+    foreach (string autoCrud in feature.Values)
+    {
+        switch (autoCrud)
+        {
+        case "Create":
+%%
+
+%Indent -= 4;
+%Indent -= 4;
+#region Creates
+%Indent += 4;
+%Indent += 4;
+
+%include "crud-create.cst"
+
+%Indent -= 4;
+%Indent -= 4;
+#endregion
+%Indent += 4;
+%Indent += 4;
+%%
+        break;
+        case "Read":
+%%
+
+%Indent -= 4;
+%Indent -= 4;
+#region Reads
+%Indent += 4;
+%Indent += 4;
+
+%include "crud-read.cst"
+
+%Indent -= 4;
+%Indent -= 4;
+#endregion
+%Indent += 4;
+%Indent += 4;
+
+%%
+        break;
+        case "Update":
+%%
+
+%Indent -= 4;
+%Indent -= 4;
+#region Updates
+%Indent += 4;
+%Indent += 4;
+
+%include "crud-update.cst"
+
+%Indent -= 4;
+%Indent -= 4;
+#endregion
+%Indent += 4;
+%Indent += 4;
+
+%%
+        break;
+        case "Delete":
+%%
+
+%Indent -= 4;
+%Indent -= 4;
+#region Deletes
+%Indent += 4;
+%Indent += 4;
+
+%include "crud-delete.cst"
+
+%Indent -= 4;
+%Indent -= 4;
+#endregion
+%Indent += 4;
+%Indent += 4;
+%%
+        break;
+        }
+    }
+}
+%%
+
+%Indent -= 4;
+    /// <summary>
+    /// Read an entity by the primary key
+    /// </summary>
+%%
+foreach (string name in primaryKeyList.Keys)
+{
+%>/// <param name="@(name)">@(name)</param>
+}
+%%
+%Indent -= 4;
+    /// <returns>the entity if found, default otherwise</returns>
+    protected @tableType ReadByKey
+    (
+%%
+Indent += 4;
+Indent += 4;
+comma = "  ";
+foreach (string name in primaryKeyList.Keys)
+{
+string typeName = primaryKeyList[name].Replace("_",".").Replace("__","_");
+if (typeName.StartsWith("optional_"))
+{
+    typeName = typeName.Substring(9);
+    if (typeName.Equals("guid"))
+    {
+        typeName = "Guid";
+    }
+    typeName = typeName+"?";
+}
+    %>@(comma)@(typeName) @(name)
+    comma = ", ";
+}
+Indent -= 4;
+Indent -= 4;
+%%
+    )
+    {
+        @tableType result = null;
+
+        try
+        {
+            result = DbContext.@(tableName).Where
+            (s =>
+%Indent += 4;
+%Indent += 4;
+%Indent += 4;
+%Indent += 4;
+%%
+if (1 < primaryKeyList.Keys.Count)
+{
+string andOp = "";
+foreach (string name in primaryKeyList.Keys)
+{
+    if (primaryKeyList[name].EndsWith("?"))
+    {
+        %>@(andOp)( @(name) == null || s.@(name).Equals(@(name)) )
+    }
+    else
+    {
+        %>@(andOp)s.@(name).Equals(@(primaryKeyRefList[name]))
+    }
+    andOp = $"&& ";
+}
+}
+else
+{
+    %>s.@(primaryKeyList.Keys.First()).Equals(@(primaryKeyList.Keys.First()))
+}
+%%
+%Indent -= 4;
+%Indent -= 4;
+%Indent -= 4;
+%Indent -= 4;
+            ).FirstOrDefault();
+        }
+        catch
+        {
+        }
+
+        return result;
+    }
+
+%Indent -= 4;
+%Indent -= 4;
+    }
+
+    /// <summary>
+    /// input schema for the entity
+    /// </summary>
+    public class @(entityShapeName)Input
+    {
+%Indent += 4;
+%Indent += 4;
+%Indent += 4;
+%Indent += 4;
+%%
+            bool isFirst = true;
+            string comma = "  ";
+            foreach (PropertyInfo p in Entity.Properties) {
+                if(
+                    (p.Type != PropertyType.Reference)
+                &&  (p.CSharpTypeName.StartsWith("Collection") == false)
+                &&  (p.CSharpTypeName.StartsWith("ICollection") == false)
+                &&  (p.CSharpTypeName.StartsWith("IList") == false)
+                &&(
+                    (p.IsWrappedType == false)
+                ||
+                    (primaryKeyList.Keys.Contains(p.Name) == false)
+                )
+                &&  (p.Features.Keys.Contains("readonly") == false)
+                ){
+                    pName = p.Name;
+
+                    if(pName.Equals($"{entityShapeName}X"))
+                    {
+                        pName = pName.Substring(0, pName.Length-1);
+                    }
+
+                    string cName = @p.CSharpTypeName.Replace("_",".").Replace("__","_");
+
+                    cName = cName.Replace("_Array","[]");
+                    dot = cName.LastIndexOf(".AAA.");
+                    if (-1 < dot)
+                    {
+                        cName = cName.Substring(dot+1);
+                    }
+                    dot = cName.LastIndexOf('.');
+                    string typeName = (dot < 0 ? cName : cName.Substring(dot + 1));
+                    if (typeName.StartsWith("optional_"))
+                    {
+                        typeName = typeName.Substring(9);
+                        if (typeName.Equals("guid"))
+                        {
+                            typeName = "Guid";
+                        }
+                        typeName = typeName+"?";
+                    }
+                    else if (typeName.Equals("MailPriority"))
+                    {
+                        dot = -1;
+                    }
+                    if (-1 < dot)
+                    {
+                        typeName = cName.Substring(0, dot+1) + typeName;
+                    }
+                    if (isFirst != true) %>
+                    isFirst = false;
+                    %>/// <summary>
+                    %>/// @pName
+                    %>/// </summary>
+                    %>public @typeName @(pName) {get; set;}
+                }
+                else
+                {
+                    if (isFirst != true) %>
+                    isFirst = false;
+                    %>// @p.CSharpTypeName @p.Name --> @p.Type IsWrappedType=@p.IsWrappedType isPrimaryKey=@primaryKeyList.Keys.Contains(p.Name)
+                }
+            }
+%%
+%Indent -= 4;
+%Indent -= 4;
+%Indent -= 4;
+%Indent -= 4;
+    }
+%Indent -= 4;
+}

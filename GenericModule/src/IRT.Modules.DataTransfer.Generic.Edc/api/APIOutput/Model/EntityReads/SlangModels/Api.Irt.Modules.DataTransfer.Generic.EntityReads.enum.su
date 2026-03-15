@@ -1,0 +1,71 @@
+namespace Api.Irt.Modules.DataTransfer.Generic.EntityReads {
+
+	// internal enums
+
+	enum IRT_Modules_DataTransfer_Generic_Edc_Domain_ValueObjects_RepeatKey_RepeatKeyBasis {
+
+		Study = 0
+
+		Site = 1
+
+		Subject = 2
+
+		SubjectVisit = 3
+	}
+
+	enum IRT_Modules_DataTransfer_Generic_Edc_Domain_ValueObjects_RepeatKey_RepeatKeyCounterBasis {
+
+		DrugUnitId = 0
+
+		SubjectVisit = 1
+
+		ScreenFailReason = 2
+	}
+
+	enum IRT_Modules_DataTransfer_Generic_Edc_Domain_ValueObjects_RepeatKey_ReplacementVisitsStrategy {
+
+		Independent = 0
+
+		ParentSubjectVisit = 1
+
+		ReplacedDrugUnitId = 2
+	}
+
+	enum IRT_Modules_DataTransfer_Generic_Edc_Domain_ValueObjects_Veeva_RequestType {
+
+		CreateCasebook = 0
+
+		SetSubjectStatus = 1
+
+		CreateEventGroups = 2
+
+		SetEventDate = 3
+
+		SetItemValue = 4
+
+		EditSubmittedForm = 5
+
+		SubmitForm = 6
+
+		Authorization = 7
+
+		UnsetSubjectStatus = 8
+
+		CreateForms = 9
+
+		UpsertForms = 10
+
+		CombinationFormDataUpdate = 11
+
+		SetEventAsDidNotOccur = 12
+
+		UpsertEventGroups = 13
+	}
+
+	enum IRT_Modules_DataTransfer_Generic_Edc_Domain_ValueObjects_RepeatKey_UnscheduledVisitsStrategy {
+
+		Independent = 0
+
+		ParentSubjectVisit = 1
+	}
+}

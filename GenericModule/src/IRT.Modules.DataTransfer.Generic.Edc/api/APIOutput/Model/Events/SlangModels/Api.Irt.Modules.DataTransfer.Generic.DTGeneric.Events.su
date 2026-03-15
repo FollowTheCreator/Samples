@@ -1,0 +1,11 @@
+namespace Api.Irt.Modules.DataTransfer.Generic.Events {
+
+	// entities
+
+	entity DTGeneric {
+
+		feature Realm: DTGeneric, Events
+
+		feature UseNewRoutes: True
+	}
+}

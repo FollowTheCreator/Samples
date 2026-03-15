@@ -1,0 +1,176 @@
+namespace Api.Irt.Modules.DataTransfer.Generic.EntityReads {
+
+	// entities
+
+	entity GenericItemGroupRepeatKey {
+
+		feature Route: "irt/v1/data-transfer-generic/i-r-t/generic-item-group-repeat-keies", "IRT", "Data-transfer-generic"
+		feature EnableQuerySettings: "MaxExpansionDepth=15"
+
+		feature Realm: DTGeneric, EntityReads
+
+		feature UseNewRoutes: True
+
+		feature Subfolder: IRT
+
+		feature DbContextTableType: IRT_Modules_DataTransfer_Generic_Edc_Domain_SqlViews_RepeatKeys_ItemGroup_GenericItemGroupRepeatKeySqlView
+
+		feature DbContextTableName: GenericItemGroupRepeatKey
+
+		feature PrimaryKey: RepeatKeyId
+
+		guid RepeatKeyId
+
+		guid NotificationDefinitionId
+
+		string SiteId
+
+		optional guid SubjectId
+
+		optional guid SubjectVisitId
+
+		optional guid LogicalSubjectVisitId
+
+		string VisitId
+
+		string LogicalVisitId
+
+		string DrugUnitId
+
+		string ReplacedDrugUnitId
+
+		string DrugUnitIdToRestore
+
+		optional bool IsDrugUnitReplaced
+
+		optional bool IsSelfSupportDrugUnit
+
+		optional int RepeatKey
+
+		string TransactionType
+
+		feature AutoCommands: Read
+	}
+
+	entity GenericItemGroupRepeatKeyLastUsed {
+
+		feature Route: "irt/v1/data-transfer-generic/i-r-t/generic-item-group-repeat-key-last-useds", "IRT", "Data-transfer-generic"
+		feature EnableQuerySettings: "MaxExpansionDepth=15"
+
+		feature Realm: DTGeneric, EntityReads
+
+		feature UseNewRoutes: True
+
+		feature Subfolder: IRT
+
+		feature DbContextTableType: IRT_Modules_DataTransfer_Generic_Edc_Domain_SqlViews_RepeatKeys_ItemGroup_GenericItemGroupRepeatKeyLastUsedSqlView
+
+		feature DbContextTableName: GenericItemGroupRepeatKeyLastUsed
+
+		feature PrimaryKey: RepeatKeyLastUsedId
+
+		guid RepeatKeyLastUsedId
+
+		guid NotificationDefinitionId
+
+		string SiteId
+
+		optional guid SubjectId
+
+		optional guid SubjectVisitId
+
+		optional guid LogicalSubjectVisitId
+
+		string VisitId
+
+		string LogicalVisitId
+
+		optional int RepeatKeyLastUsed
+
+		feature AutoCommands: Read
+	}
+
+	entity GenericStudyEventRepeatKey {
+
+		feature Route: "irt/v1/data-transfer-generic/i-r-t/generic-study-event-repeat-keies", "IRT", "Data-transfer-generic"
+		feature EnableQuerySettings: "MaxExpansionDepth=15"
+
+		feature Realm: DTGeneric, EntityReads
+
+		feature UseNewRoutes: True
+
+		feature Subfolder: IRT
+
+		feature DbContextTableType: IRT_Modules_DataTransfer_Generic_Edc_Domain_SqlViews_RepeatKeys_StudyEvent_GenericStudyEventRepeatKeySqlView
+
+		feature DbContextTableName: GenericStudyEventRepeatKey
+
+		feature PrimaryKey: RepeatKeyId
+
+		guid RepeatKeyId
+
+		guid NotificationDefinitionId
+
+		string SiteId
+
+		optional guid SubjectId
+
+		optional guid SubjectVisitId
+
+		optional int RepeatKey
+
+		optional int ScheduledRepeatKey
+
+		optional int UnscheduledRepeatKey
+
+		optional int ReplacementRepeatKey
+
+		optional int ScreenFailRepeatKey
+
+		optional int InformedConsentRepeatKey
+
+		feature AutoCommands: Read
+	}
+
+	entity GenericStudyEventRepeatKeyLastUsed {
+
+		feature Route: "irt/v1/data-transfer-generic/i-r-t/generic-study-event-repeat-key-last-useds", "IRT", "Data-transfer-generic"
+		feature EnableQuerySettings: "MaxExpansionDepth=15"
+
+		feature Realm: DTGeneric, EntityReads
+
+		feature UseNewRoutes: True
+
+		feature Subfolder: IRT
+
+		feature DbContextTableType: IRT_Modules_DataTransfer_Generic_Edc_Domain_SqlViews_RepeatKeys_StudyEvent_GenericStudyEventRepeatKeyLastUsedSqlView
+
+		feature DbContextTableName: GenericStudyEventRepeatKeyLastUsed
+
+		feature PrimaryKey: RepeatKeyLastUsedId
+
+		guid RepeatKeyLastUsedId
+
+		guid NotificationDefinitionId
+
+		string SiteId
+
+		optional guid SubjectId
+
+		optional guid SubjectVisitId
+
+		optional int RepeatKeyLastUsed
+
+		optional int ScheduledRepeatKeyLastUsed
+
+		optional int UnscheduledRepeatKeyLastUsed
+
+		optional int ReplacementRepeatKeyLastUsed
+
+		optional int ScreenFailRepeatKeyLastUsed
+
+		optional int InformedConsentRepeatKeyLastUsed
+
+		feature AutoCommands: Read
+	}
+}

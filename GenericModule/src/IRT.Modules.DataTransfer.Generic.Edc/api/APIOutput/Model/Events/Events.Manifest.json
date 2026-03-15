@@ -1,0 +1,27 @@
+[
+  {
+    "EventTypeName": [
+      "IRT.Modules.DataTransfer.Generic.Edc.Domain.Aggregates.ClientNotifications.Events.DataTransferErrorNotificationCreated",
+      "IRT.Modules.DataTransfer.Generic.Edc.Domain.Aggregates.ClientNotifications.Events.Veeva.VeevaDataTransferErrorSummaryNotificationCreated",
+      "IRT.Modules.DataTransfer.Generic.Edc.Domain.Aggregates.ClientNotifications.Events.Rave.RaveDataTransferErrorSummaryNotificationCreated"
+    ],
+    "Aggregate": "DTGeneric",
+    "IsExcluded": false,
+    "Name": "DTGeneric",
+    "Namespace": "Events.DTGeneric",
+    "OpTypeName": [
+      "IRT.Modules.DataTransfer.Generic.Edc.Domain.Aggregates.ClientNotifications.Events.DataTransferErrorNotificationCreated",
+      "IRT.Modules.DataTransfer.Generic.Edc.Domain.Aggregates.ClientNotifications.Events.Veeva.VeevaDataTransferErrorSummaryNotificationCreated",
+      "IRT.Modules.DataTransfer.Generic.Edc.Domain.Aggregates.ClientNotifications.Events.Rave.RaveDataTransferErrorSummaryNotificationCreated"
+    ],
+    "Realm": "DTGeneric.Events",
+    "Part": null,
+    "Layer": 2,
+    "SlangEntityName": "DTGeneric",
+    "Subfolder": null,
+    "TypeName": "DataTransferErrorNotificationCreated",
+    "TypeFullName": "IRT.Modules.DataTransfer.Generic.Edc.Domain.Aggregates.ClientNotifications.Events.DataTransferErrorNotificationCreated",
+    "SkipProperties": [],
+    "GenericTypes": []
+  }
+]

@@ -1,0 +1,50 @@
+[
+  {
+    "Aggregate": "DTGeneric",
+    "IsExcluded": false,
+    "Name": "DynamicDataTransferSetting",
+    "Namespace": "EntityReads.DTGeneric",
+    "OpTypeName": [],
+    "Realm": "DTGeneric.EntityReads",
+    "Part": "EntityReads",
+    "Layer": 1,
+    "SlangEntityName": "DynamicDataTransferSetting",
+    "Subfolder": "IRT",
+    "TypeName": "DynamicDataTransferSettingSqlView",
+    "TypeFullName": "IRT.Modules.DataTransfer.Generic.Domain.SqlViews.DynamicDataTransferSettings.DynamicDataTransferSettingSqlView",
+    "SkipProperties": [],
+    "GenericTypes": []
+  },
+  {
+    "Aggregate": "DTGeneric",
+    "IsExcluded": false,
+    "Name": "DynamicSetting",
+    "Namespace": "EntityReads.DTGeneric",
+    "OpTypeName": [],
+    "Realm": "DTGeneric.EntityReads",
+    "Part": "EntityReads",
+    "Layer": 1,
+    "SlangEntityName": "DynamicSetting",
+    "Subfolder": "IRT",
+    "TypeName": "DynamicSettingSqlView",
+    "TypeFullName": "IRT.Modules.DataTransfer.Generic.Domain.SqlViews.DynamicSetting.DynamicSettingSqlView",
+    "SkipProperties": [],
+    "GenericTypes": []
+  },
+  {
+    "Aggregate": "DTGeneric",
+    "IsExcluded": false,
+    "Name": "NotificationDependency",
+    "Namespace": "EntityReads.DTGeneric",
+    "OpTypeName": [],
+    "Realm": "DTGeneric.EntityReads",
+    "Part": "EntityReads",
+    "Layer": 1,
+    "SlangEntityName": "NotificationDependency",
+    "Subfolder": "IRT",
+    "TypeName": "NotificationDependencySqlView",
+    "TypeFullName": "IRT.Modules.DataTransfer.Generic.Domain.SqlViews.GenericNotificationDependency.NotificationDependencySqlView",
+    "SkipProperties": [],
+    "GenericTypes": []
+  }
+]

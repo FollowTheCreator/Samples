@@ -1,0 +1,4 @@
+NO_ENTRY in ExtendedProperties: DynamicResource has no entry in the mapping table!
+UNMAPPED in ExtendedProperties: DynamicResource is not mapped to a product
+NO_ENTRY in Entities: Resource has no entry in the mapping table!
+UNMAPPED in Entities: Resource is not mapped to a product

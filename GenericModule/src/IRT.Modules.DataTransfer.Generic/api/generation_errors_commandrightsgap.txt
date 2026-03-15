@@ -1,0 +1,7 @@
+The following commands were not found in the generated RightsManifest file:
+CreateDynamicSetting	IRT.Modules.DataTransfer.Generic.Domain.Aggregates.DynamicSetting.Commands.CreateDynamicSetting, IRT.Modules.DataTransfer.Generic, Version=8.1.1.0, Culture=neutral, PublicKeyToken=null
+AcknowledgeClientNotification	IRT.Modules.DataTransfer.Generic.Domain.Aggregates.ClientNotifications.Commands.AcknowledgeClientNotification, IRT.Modules.DataTransfer.Generic, Version=8.1.1.0, Culture=neutral, PublicKeyToken=null
+CreateClientNotification	IRT.Modules.DataTransfer.Generic.Domain.Aggregates.ClientNotifications.Commands.CreateClientNotification, IRT.Modules.DataTransfer.Generic, Version=8.1.1.0, Culture=neutral, PublicKeyToken=null
+MarkNotificationsAsSent	IRT.Modules.DataTransfer.Generic.Domain.Aggregates.ClientNotifications.Commands.MarkNotificationsAsSent, IRT.Modules.DataTransfer.Generic, Version=8.1.1.0, Culture=neutral, PublicKeyToken=null
+ReceiveClientNotification	IRT.Modules.DataTransfer.Generic.Domain.Aggregates.ClientNotifications.Commands.ReceiveClientNotification, IRT.Modules.DataTransfer.Generic, Version=8.1.1.0, Culture=neutral, PublicKeyToken=null
+UpdateClientNotification	IRT.Modules.DataTransfer.Generic.Domain.Aggregates.ClientNotifications.Commands.UpdateClientNotification, IRT.Modules.DataTransfer.Generic, Version=8.1.1.0, Culture=neutral, PublicKeyToken=null
